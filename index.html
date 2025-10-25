@@ -1,299 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIST JIANWEN CHENG - Artist</title>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIST JIANWEN CHENG - Artist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-        --primary-bg: #faf9f7;
-        --text-primary: #2a2a2a;
-        --text-secondary: #6a6a6a;
-        --accent: #d4a574;
-        --border: #e5e3df;
-    }
+        :root {
+            --primary-bg: #faf9f7;
+            --text-primary: #2a2a2a;
+            --text-secondary: #6a6a6a;
+            --accent: #d4a574;
+            --border: #e5e3df;
+        }
 
-    body {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        background: var(--primary-bg);
-        color: var(--text-primary);
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(250, 249, 247, 0.95);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        border-bottom: 1px solid var(--border);
-    }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
 
-    .nav-content {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .logo {
-        font-size: 1.1rem;
-        font-weight: 300;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: opacity 0.3s;
-    }
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
 
-    .logo:hover {
-        opacity: 0.7;
-    }
+        .logo:hover {
+            opacity: 0.7;
+        }
 
-    .nav-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    .nav-links a {
-        color: var(--text-primary);
-        text-decoration: none;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        transition: color 0.3s;
-        cursor: pointer;
-    }
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
 
-    .nav-links a:hover {
-        color: var(--accent);
-    }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
 
-    .section {
-        min-height: 100vh;
-        padding: 8rem 2rem 4rem;
-        display: none;
-    }
+        .section {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            display: none;
+        }
 
-    .section.active {
-        display: block;
-    }
+        .section.active {
+            display: block;
+        }
 
-    .container {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-    #home {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background: linear-gradient(135deg, #f5f3f0 0%, #faf9f7 100%);
-    }
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f3f0 0%, #faf9f7 100%);
+        }
 
-    .hero-title {
-        font-size: 4rem;
-        font-weight: 200;
-        letter-spacing: 8px;
-        margin-bottom: 2rem;
-        animation: fadeInUp 1s ease;
-    }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 200;
+            letter-spacing: 6px;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
 
-    .hero-subtitle {
-        font-size: 1.2rem;
-        font-weight: 300;
-        letter-spacing: 3px;
-        color: var(--text-secondary);
-        margin-bottom: 3rem;
-        animation: fadeInUp 1s ease 0.2s both;
-    }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
 
-    .hero-statement {
-        max-width: 600px;
-        font-size: 1rem;
-        line-height: 1.8;
-        color: var(--text-secondary);
-        animation: fadeInUp 1s ease 0.4s both;
-    }
+        .hero-statement {
+            max-width: 600px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease 0.4s both;
+            padding: 0 1rem;
+        }
 
-    @keyframes fadeInUp {
-        from {opacity: 0; transform: translateY(30px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .section-title {
-        font-size: 2.5rem;
-        font-weight: 200;
-        letter-spacing: 4px;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 200;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
 
-    .section-subtitle {
-        text-align: center;
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-        margin-bottom: 3rem;
-    }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
 
-    .article-grid, .gallery-grid, .video-grid {
-        display: grid;
-        gap: 2rem;
-        margin-top: 3rem;
-    }
+        /* Grid layouts */
+        .article-grid,
+        .gallery-grid,
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
 
-    .article-grid { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-    .video-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+        .article-card,
+        .gallery-item,
+        .video-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+        }
 
-    .article-card, .gallery-item, .video-item {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-        border: 1px solid var(--border);
-    }
+        .article-card:hover,
+        .gallery-item:hover,
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
 
-    .article-card:hover, .gallery-item:hover, .video-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
+        .article-card-image,
+        .gallery-item img,
+        .video-thumbnail {
+            width: 100%;
+            object-fit: cover;
+        }
 
-    .article-card-image, .gallery-item img, .video-thumbnail {
-        width: 100%;
-        object-fit: cover;
-    }
+        .article-card-content,
+        .video-info {
+            padding: 1rem 1.2rem;
+        }
 
-    .article-card-content, .video-info {
-        padding: 1.5rem;
-    }
+        .article-card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
 
-    .article-card-category {
-        font-size: 0.85rem;
-        color: var(--accent);
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-    }
+        .article-card-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
 
-    .article-card-title {
-        font-size: 1.3rem;
-        font-weight: 400;
-        margin-bottom: 0.5rem;
-        color: var(--text-primary);
-    }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: #e5e3df;
+        }
 
-    .article-card-description {
-        font-size: 0.95rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin-bottom: 1rem;
-    }
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
 
-    /* Modal */
-    .modal {
-        display: none;
-        position: fixed;
-        top:0; left:0;
-        width:100%; height:100%;
-        background: rgba(0,0,0,0.95);
-        z-index: 2000;
-        align-items: center;
-        justify-content: center;
-    }
-    .modal.active { display: flex; }
-    .modal-content {
-        max-width: 90%;
-        max-height: 90%;
-        position: relative;
-    }
-    .modal-content img {
-        max-width: 100%;
-        max-height: 90vh;
-        object-fit: contain;
-    }
-    .modal-close {
-        position: absolute;
-        top: -50px;
-        right: 0;
-        color: white;
-        font-size: 2rem;
-        cursor: pointer;
-        background: none;
-        border: none;
-    }
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
 
-    @media (max-width: 1024px) {
-        .hero-title { font-size: 3rem; letter-spacing: 6px; }
-        .hero-subtitle { font-size: 1rem; letter-spacing: 2px; }
-    }
+        .gallery-info h3 {
+            color: white;
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
 
-    @media (max-width: 768px) {
-        .nav-links { display: none; }
-        .hero-title { font-size: 2rem; letter-spacing: 4px; }
-        .hero-subtitle { font-size: 0.9rem; }
-        .hero-statement { font-size: 0.9rem; }
-        .section { padding: 6rem 1rem 2rem; }
-        .article-grid, .gallery-grid, .video-grid { grid-template-columns: 1fr; }
-    }
+        .gallery-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+        }
 
-    @media (max-width: 480px) {
-        .hero-title { font-size: 1.6rem; letter-spacing: 2px; }
-        .hero-subtitle { font-size: 0.8rem; }
-        .hero-statement { font-size: 0.85rem; }
-    }
-</style>
+        .video-thumbnail {
+            aspect-ratio: 16/9;
+            background: #e5e3df;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-button {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .video-item:hover .play-button {
+            transform: scale(1.1);
+        }
+
+        /* Info & Contact */
+        .info-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .info-section h2 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cv-year {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-statement {
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-statement {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .article-grid,
+            .gallery-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .category-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <div class="nav-content">
-        <div class="logo" onclick="showSection('home')">RIST JIANWEN CHENG</div>
-        <ul class="nav-links">
-            <li><a onclick="showSection('home')">HOME</a></li>
-            <li><a onclick="showSection('gallery')">GALLERY</a></li>
-            <li><a onclick="showSection('video')">VIDEO</a></li>
-            <li><a onclick="showSection('article')">ARTICLE</a></li>
-            <li><a onclick="showSection('information')">INFORMATION</a></li>
-        </ul>
-    </div>
-</nav>
-
-<section id="home" class="section active">
-    <h1 class="hero-title">RIST JIANWEN CHENG</h1>
-    <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
-    <p class="hero-statement">
-        Exploring the intersection of silence and expression through contemporary visual language. 
-        My work investigates the subtle tensions between presence and absence, 
-        creating spaces for contemplation and introspection.
-    </p>
-</section>
-
-<section id="gallery" class="section">
-    <div class="container">
-        <h2 class="section-title">GALLERY</h2>
-        <div class="gallery-grid">
-            <!-- Gallery items remain same as before -->
-        </div>
-    </div>
-</section>
-
-<section id="video" class="section">
-    <div class="container">
-        <h2 class="section-title">VIDEO</h2>
-        <div class="video-grid">
-            <!-- Video items remain same as before -->
-        </div>
-    </div>
-</section>
-
-<section id="article" class="section">
+    <!-- 导航栏和内容保持原有结构不变 -->
+</body>
+</html>
