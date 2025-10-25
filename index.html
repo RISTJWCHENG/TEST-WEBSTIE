@@ -1,131 +1,1025 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RIST JIANWEN CHENG | VFX Artist</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Arial', sans-serif; background: #121212; color: #f0f0f0; line-height: 1.6; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIST JIANWEN CHENG - Artist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #1f1f1f; position: sticky; top: 0; z-index: 100; }
-    header h1 { font-size: 1.8rem; }
-    nav a { color: #f0f0f0; text-decoration: none; margin-left: 1.5rem; transition: 0.3s; }
-    nav a:hover { color: #00bfff; }
+        :root {
+            --primary-bg: #faf9f7;
+            --text-primary: #2a2a2a;
+            --text-secondary: #6a6a6a;
+            --accent: #d4a574;
+            --border: #e5e3df;
+        }
 
-    section { padding: 4rem 2rem; max-width: 1000px; margin: auto; }
-    section h2 { font-size: 2rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    .home { text-align: center; }
-    .home p { max-width: 700px; margin: 1rem auto; font-size: 1.1rem; color: #ccc; }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
 
-    video { width: 100%; max-width: 800px; margin: 1rem auto; display: block; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .gallery { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-    .gallery img { width: calc(33.333% - 1rem); border-radius: 10px; transition: transform 0.3s; cursor: pointer; }
-    .gallery img:hover { transform: scale(1.05); }
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
 
-    .article-filters button { margin-right: 1rem; margin-bottom: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; border: none; background: #333; color: #f0f0f0; transition: 0.2s; }
-    .article-filters button:hover { background: #00bfff; color: #fff; }
-    .article { display: none; margin-bottom: 1rem; padding: 1rem; background: #1f1f1f; border-radius: 5px; }
+        .logo:hover {
+            opacity: 0.7;
+        }
 
-    .info { max-width: 700px; margin: auto; color: #ccc; }
-    .info a { color: #00bfff; text-decoration: none; }
-  </style>
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f3f0 0%, #faf9f7 100%);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 200;
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-statement {
+            max-width: 600px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 200;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Article Blog Layout */
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .search-bar {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tag {
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .category-tag:hover, .category-tag.active {
+            background: var(--text-primary);
+            color: white;
+            border-color: var(--text-primary);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .article-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .article-card-content {
+            padding: 1.5rem;
+        }
+
+        .article-card-category {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .article-card-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .article-card-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Article Detail Page */
+        .article-detail {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: var(--accent);
+        }
+
+        .article-detail-header {
+            margin-bottom: 3rem;
+        }
+
+        .article-detail-category {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--primary-bg);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-detail-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-detail-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .article-detail-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .article-detail-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .article-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            cursor: pointer;
+            background: #e5e3df;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+
+        .gallery-info h3 {
+            color: white;
+            font-weight: 300;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .video-item {
+            background: white;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .video-item:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #e5e3df;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .video-item:hover .play-button {
+            transform: scale(1.1);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .info-content {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .info-section {
+            margin-bottom: 4rem;
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .cv-item {
+            margin-bottom: 2rem;
+        }
+
+        .cv-year {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .article-grid, .gallery-grid, .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .category-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo" onclick="showSection('home')">RIST JIANWEN CHENG</div>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')">HOME</a></li>
+                <li><a onclick="showSection('gallery')">GALLERY</a></li>
+                <li><a onclick="showSection('video')">VIDEO</a></li>
+                <li><a onclick="showSection('article')">ARTICLE</a></li>
+                <li><a onclick="showSection('information')">INFORMATION</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<header>
-  <h1>RIST JIANWEN CHENG</h1>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#video">Video</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#articles">Articles</a>
-    <a href="#info">Information</a>
-  </nav>
-</header>
+    <section id="home" class="section active">
+        <h1 class="hero-title">RIST JIANWEN CHENG</h1>
+        <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
+        <p class="hero-statement">
+            Exploring the intersection of silence and expression through contemporary visual language. 
+            My work investigates the subtle tensions between presence and absence, 
+            creating spaces for contemplation and introspection.
+        </p>
+    </section>
 
-<section id="home" class="home">
-  <h2>Welcome</h2>
-  <p>Hello, I'm <strong>RIST JIANWEN CHENG</strong>, a professional visual effects (VFX) artist.  
-     I specialize in cinematic visual effects, digital compositing, and motion graphics.  
-     Explore my work in videos, gallery, articles, and learn more about my projects and background.</p>
-</section>
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">GALLERY</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800" alt="Artwork 1">
+                    <div class="gallery-info">
+                        <h3>Silence I</h3>
+                        <p>Mixed Media on Canvas, 120×150cm, 2024</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800" alt="Artwork 2">
+                    <div class="gallery-info">
+                        <h3>Ephemeral Traces</h3>
+                        <p>Oil on Linen, 100×120cm, 2024</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=800" alt="Artwork 3">
+                    <div class="gallery-info">
+                        <h3>Liminal Space</h3>
+                        <p>Installation, Variable Dimensions, 2023</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800" alt="Artwork 4">
+                    <div class="gallery-info">
+                        <h3>Resonance</h3>
+                        <p>Photography Series, 80×100cm, 2023</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=800" alt="Artwork 5">
+                    <div class="gallery-info">
+                        <h3>Between Worlds</h3>
+                        <p>Acrylic on Canvas, 140×180cm, 2023</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800" alt="Artwork 6">
+                    <div class="gallery-info">
+                        <h3>Contemplation</h3>
+                        <p>Mixed Media, 90×120cm, 2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="video">
-  <h2>Video</h2>
-  <div id="video-container"></div>
-</section>
+    <section id="video" class="section">
+        <div class="container">
+            <h2 class="section-title">VIDEO</h2>
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Temporal Studies</h3>
+                        <p>A visual exploration of time and memory through moving images. 8'24", 2024</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Silent Narratives</h3>
+                        <p>An experimental piece examining the language of absence. 12'15", 2023</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Interstitial</h3>
+                        <p>Documentation of performance art exploring liminal spaces. 6'40", 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="gallery">
-  <h2>Gallery</h2>
-  <div class="gallery" id="gallery-container"></div>
-</section>
+    <section id="article" class="section">
+        <div class="container">
+            <div class="article-header">
+                <h2 class="section-title">ARTICLE</h2>
+                <p class="section-subtitle">Thoughts, stories, and ideas from my journey</p>
+                
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search articles..." id="searchInput" onkeyup="searchArticles()">
+                </div>
 
-<section id="articles">
-  <h2>Articles</h2>
-  <div class="article-filters">
-    <button data-type="all">All</button>
-    <button data-type="vfx">VFX</button>
-    <button data-type="tutorial">Tutorial</button>
-  </div>
-  <div class="article" data-type="vfx">VFX Article 1</div>
-  <div class="article" data-type="tutorial">Tutorial Article 1</div>
-  <div class="article" data-type="vfx">VFX Article 2</div>
-</section>
+                <div class="category-filters">
+                    <div class="category-tag active" onclick="filterCategory('all')">All</div>
+                    <div class="category-tag" onclick="filterCategory('Technical')">Technical</div>
+                    <div class="category-tag" onclick="filterCategory('Travel')">Travel</div>
+                    <div class="category-tag" onclick="filterCategory('Photography')">Photography</div>
+                </div>
+            </div>
 
-<section id="info">
-  <h2>Information</h2>
-  <div class="info">
-    <p>Name: RIST JIANWEN CHENG</p>
-    <p>Profession: Visual Effects Artist</p>
-    <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-    <p>Website: <a href="#">www.ristvfx.com</a></p>
-  </div>
-</section>
+            <div class="article-grid" id="articleGrid">
+                <div class="article-card" data-category="Technical" onclick="openArticleDetail('resetCurves')">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="Reset Curves Tool" class="article-card-image">
+                    <div class="article-card-content">
+                        <div class="article-card-category">Technical</div>
+                        <h3 class="article-card-title">Reset Curve(s) Tool - Technical Development</h3>
+                        <p class="article-card-description">Developed a Maya plugin tool for precise curve rebuilding and recreation in 3D animation workflows.</p>
+                        <div class="article-card-meta">
+                            <span>📅 Aug 01, 2025</span>
+                            <span>⏱️ 8 min read</span>
+                        </div>
+                    </div>
+                </div>
 
-<script>
-  // 自动加载视频
-  const videoContainer = document.getElementById('video-container');
-  fetch('videos.json')
-    .then(res => res.json())
-    .then(videos => {
-      videos.forEach(v => {
-        const videoEl = document.createElement('video');
-        videoEl.controls = true;
-        videoEl.width = 600;
-        videoEl.src = `videos/${v}`;
-        videoContainer.appendChild(videoEl);
-      });
-    });
+                <div class="article-card" data-category="Travel" onclick="openArticleDetail('seAsia')">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800" alt="Southeast Asia" class="article-card-image">
+                    <div class="article-card-content">
+                        <div class="article-card-category">Travel</div>
+                        <h3 class="article-card-title">Journey Through Southeast Asia</h3>
+                        <p class="article-card-description">Tales from backpacking across vibrant cultures, stunning landscapes, and unforgettable experiences.</p>
+                        <div class="article-card-meta">
+                            <span>📅 October 22, 2025</span>
+                            <span>⏱️ 6 min read</span>
+                        </div>
+                    </div>
+                </div>
 
-  // 自动加载图片
-  const galleryContainer = document.getElementById('gallery-container');
-  fetch('images.json')
-    .then(res => res.json())
-    .then(images => {
-      images.forEach(img => {
-        const imgEl = document.createElement('img');
-        imgEl.src = `images/${img}`;
-        imgEl.alt = img;
-        galleryContainer.appendChild(imgEl);
-      });
-    });
+                <div class="article-card" data-category="Photography" onclick="openArticleDetail('photography')">
+                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800" alt="Photography" class="article-card-image">
+                    <div class="article-card-content">
+                        <div class="article-card-category">Photography</div>
+                        <h3 class="article-card-title">Capturing Perfect Moments: Photography Tips</h3>
+                        <p class="article-card-description">Essential techniques for amateur photographers looking to elevate their craft and capture stunning images.</p>
+                        <div class="article-card-meta">
+                            <span>📅 September 15, 2025</span>
+                            <span>⏱️ 4 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // 文章过滤
-  const buttons = document.querySelectorAll('.article-filters button');
-  const articles = document.querySelectorAll('.article');
-  function filterArticles(type) {
-    articles.forEach(article => {
-      article.style.display = (type === 'all' || article.dataset.type === type) ? 'block' : 'none';
-    });
-  }
-  buttons.forEach(button => {
-    button.addEventListener('click', () => filterArticles(button.dataset.type));
-  });
-  filterArticles('all');
-</script>
+    <section id="articleDetail" class="section">
+        <div class="article-detail">
+            <a class="back-button" onclick="showSection('article')">← Back to Articles</a>
+            <div id="articleDetailContent"></div>
+        </div>
+    </section>
 
+    <section id="information" class="section">
+        <div class="container">
+            <h2 class="section-title">INFORMATION</h2>
+            <div style="text-align: center; margin: 0 auto 4rem; max-width: 400px;">
+                <img src="https://drive.google.com/uc?export=view&id=14-ijph6n_tawRhxnYWYfCBQ7zrjnkQwy" alt="RIST JIANWEN CHENG" style="width: 100%; max-width: 300px; border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="info-content">
+                <div class="info-section">
+                    <h2>BIOGRAPHY</h2>
+                    <p>I am passionate about art, I am curious about science. I grew up in a quiet, small, rural area, which was the starting point of my growth: In the fragrant, awakening days of early spring, I felt the vitality of life; on sweltering summer nights, I looked up at the starry sky and imagined the unknown universe; In the misty late autumn, I am immersed in my thoughts as the fallen leaves drift by; and in the bitter cold of winter, I experience the power of silence and perseverance. These vividly changing seasons sharpened my perception and imagination.</p>
+                    
+                    <p>Studying the natural sciences allowed me to understand the order and laws of the universe from a materialist perspective. This rational understanding provides a solid foundation and creative expansion for my passionate artistic practice, playing a crucial role in sustainable exploration. At the intersection of observation and creation, I strive to interpret the mysteries of nature through both the form of art and the essence of science.</p>
+                    
+                    <p>Looking back across the river of time, all of this is vividly reflected—from the timeless beauty of classical art to the avant-garde explorations of contemporary art, I have experienced the infinite possibilities of artistic expression and the profound insights that science provides into the order and laws of the world. Art inspires scientific thought, while science enriches artistic creation—like the precise and self-regulating feedback systems in living organisms, they interact and mutually reinforce one another.</p>
+                    
+                    <p>We are fortunate to live in an unprecedented era, where modern technology has expanded how art can be expressed. My studies in cinematic visual arts in Shanghai laid a solid foundation for my professional career. I was later fortunate to collaborate with creators from around the world on the production of the Hollywood animated film <em>Kung Fu Panda 3</em>, which became a significant milestone in my professional journey.</p>
+                    
+                    <p>Subsequently, I moved to Europe to continue my career. I keep learning and experimenting with new mediums and creating visually striking works of art. Over the years, bringing creativity and soul to the 3D film industry, and striving to deliver breathtaking visual experiences to audiences around the world.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>EDUCATION</h2>
+                    <div class="cv-item">
+                        <div class="cv-year">2022</div>
+                        <p>MFA in Visual Arts, Central Academy of Fine Arts, Beijing</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">2019</div>
+                        <p>BFA in Painting, China Academy of Art, Hangzhou</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>FILMOGRAPHY</h2>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: June 12, 2025</div>
+                        <p>Chickenhare and the Secret of the Groundhog — Feature Film | Brussels, Belgium / Paris, France<br>
+                        The film was produced by Belgium's nWave Digital and France's Octopolis, in association with Sony Pictures Releasing. World Premiere at Annecy International Film Festival.<br>
+                        Distributed by: SND (France) / Sony Pictures (International)</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: June 15, 2023</div>
+                        <p>The Inseparables — Feature Film | Brussels, Belgium / Paris, France / Madrid, Spain<br>
+                        The film was produced by Belgium's nWave Digital and France's Octopolis, in association with Spain's A Contracorriente Films. World Premiere at Annecy International Film Festival.<br>
+                        Distributed by: KMBO (France)</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: February 3, 2022</div>
+                        <p>Hopper et le hamster des ténèbres — Feature Film | Brussels, Belgium / Paris, France<br>
+                        The film was produced by Belgium's nWave Digital and France's Octopolis. World premiere in Russia.<br>
+                        Distributed by: Belga Films (Benelux) / Sony Pictures Releasing / Netflix (International) / Lionsgate (USA)</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: August 5, 2020</div>
+                        <p>Bigfoot Family — Feature Film | Brussels, Belgium / Paris, France<br>
+                        The film was produced by Belgium's nWave Digital and France's Octopolis. World Premiere at Annecy International Film Festival.<br>
+                        Distributed by: Belga Films (Benelux) / Apollo Films / TF1 Studio (France) / Netflix (International)</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: April 3, 2019</div>
+                        <p>The Queen's Corgi — Feature Film | Brussels, Belgium<br>
+                        The film was produced by nWave Pictures (Brussels, Belgium). World Premiere at L'Alpe d'Huez International Comedy Film Festival.<br>
+                        Distributed by: Belga Films</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: July 26, 2017</div>
+                        <p>The Son of Bigfoot — Feature Film | Paris, France / Brussels, Belgium<br>
+                        The film was produced by Belgium's nWave Digital and France's StudioCanal. World Premiere at Annecy International Film Festival.<br>
+                        Distributed by: Belga Films (Benelux) / StudioCanal (France)</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Date: January 23, 2016</div>
+                        <p>Kung Fu Panda 3 — Feature Film | California, USA / Shanghai, China<br>
+                        The film was co-produced by the Hollywood studio DreamWorks and Oriental DreamWorks in Shanghai, China, with approximately one-third of the production carried out in China. This marked the first time a U.S.-led feature film was co-produced with a Chinese company. World Premiere at China.<br>
+                        Distributed by: 20th Century Fox</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-year">Release Dates: September 19, 2013</div>
+                        <p>How to Train Your Dragon: Dragons – Defenders of Berk — TV Series | California, USA / Shanghai, China<br>
+                        The Series was produced by DreamWorks in collaboration with Oriental DreamWorks<br>
+                        Distributed by: Netflix</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>CONTACT</h2>
+                    <p>Email: rist.cheng@gmail.com</p>
+                    <p>Location: Europe & China</p>
+                    <div class="contact-links">
+                        <a href="#">INSTAGRAM</a>
+                        <a href="#">DOWNLOAD CV (PDF)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        const articles = {
+            resetCurves: {
+                category: 'Technical',
+                title: 'Reset Curve(s) Tool - Technical Development',
+                subtitle: 'A Maya plugin for precise curve rebuilding and recreation in 3D animation workflows',
+                date: 'August 01, 2025',
+                readTime: '8 min read',
+                image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
+                content: `
+                    <h2>About</h2>
+                    <div style="background: #f5f5f5; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid var(--accent);">
+                        <h3 style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;">Reset Curve(s) Tool</h3>
+                        <p><strong>By:</strong> RIST JIANWEN CHENG</p>
+                        <p><strong>Contact:</strong> rist.cheng@gmail.com</p>
+                        <p><strong>Support:</strong> MAYA 2023 - MAYA 2025</p>
+                        <p><strong>Version:</strong> 1.6</p>
+                    </div>
+
+                    <h2>What Is Useful</h2>
+                    <p>Maya's built-in Rebuild Curve Options allow you to adjust the number of spans and the degree of a curve, which works well for simple curve editing. However, it does not provide control over individual span lengths, nor does it automatically adjust parameters based on each curve's actual length.</p>
+                    
+                    <p>In contrast, the Reset Curves tool offers greater flexibility and power. It enables you to select multiple curves at once and automatically calculates rebuild parameters based on the length of each curve.</p>
+
+                    <h2>Key Features</h2>
+                    <p><strong>Thailand: Land of Smiles</strong><br>From the bustling streets of Bangkok to the serene beaches of Krabi, Thailand offered endless adventures.</p>
+                    
+                    <p><strong>Vietnam: A Culinary Paradise</strong><br>The food in Vietnam is extraordinary. From pho in Hanoi to banh mi in Ho Chi Minh City, every meal was an adventure.</p>
+                    
+                    <p><strong>Indonesia: Island Hopping</strong><br>Bali's spiritual energy and Lombok's pristine beaches made Indonesia a highlight of the trip.</p>
+                `
+            },
+            seAsia: {
+                category: 'Travel',
+                title: 'Journey Through Southeast Asia',
+                subtitle: 'Tales from backpacking across vibrant cultures, stunning landscapes, and unforgettable experiences.',
+                date: 'October 22, 2025',
+                readTime: '6 min read',
+                image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200',
+                content: `
+                    <h2>Journey Through Southeast Asia</h2>
+                    <p>My three-month journey through Southeast Asia was a transformative experience filled with incredible moments.</p>
+
+                    <h2>Thailand: Land of Smiles</h2>
+                    <p>From the bustling streets of Bangkok to the serene beaches of Krabi, Thailand offered endless adventures. The warmth of the people matched the tropical climate.</p>
+
+                    <h2>Vietnam: A Culinary Paradise</h2>
+                    <p>The food in Vietnam is extraordinary. From pho in Hanoi to banh mi in Ho Chi Minh City, every meal was an adventure.</p>
+
+                    <h2>Indonesia: Island Hopping</h2>
+                    <p>Bali's spiritual energy and Lombok's pristine beaches made Indonesia a highlight of the trip. Each island had its own unique character and charm.</p>
+                `
+            },
+            photography: {
+                category: 'Photography',
+                title: 'Capturing Perfect Moments: Photography Tips',
+                subtitle: 'Essential techniques for amateur photographers looking to elevate their craft',
+                date: 'September 15, 2025',
+                readTime: '4 min read',
+                image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1200',
+                content: `
+                    <h2>Understanding Light</h2>
+                    <p>Light is the most important element in photography. The golden hour—shortly after sunrise or before sunset—provides the most beautiful, soft light for portraits and landscapes.</p>
+
+                    <h2>Composition Rules</h2>
+                    <p>The rule of thirds is a fundamental principle. Divide your frame into a 3x3 grid and place key elements along these lines or at their intersections.</p>
+
+                    <h2>Practice and Experimentation</h2>
+                    <p>The best way to improve is through consistent practice. Don't be afraid to experiment with different angles, settings, and subjects.</p>
+                `
+            }
+        };
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function openModal(element) {
+            const img = element.querySelector('img');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modalImg.src = img.src;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        function filterCategory(category) {
+            document.querySelectorAll('.category-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.article-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchArticles() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.article-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.article-card-title').textContent.toLowerCase();
+                const description = card.querySelector('.article-card-description').textContent.toLowerCase();
+                
+                if (title.includes(input) || description.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openArticleDetail(articleId) {
+            const article = articles[articleId];
+            const content = document.getElementById('articleDetailContent');
+            
+            content.innerHTML = `
+                <div class="article-detail-header">
+                    <div class="article-detail-category">${article.category}</div>
+                    <h1 class="article-detail-title">${article.title}</h1>
+                    <p class="article-detail-subtitle">${article.subtitle}</p>
+                    <div class="article-detail-meta">
+                        <span>📅 ${article.date}</span>
+                        <span>⏱️ ${article.readTime}</span>
+                    </div>
+                </div>
+                <img src="${article.image}" alt="${article.title}" class="article-detail-image">
+                <div class="article-content">
+                    ${article.content}
+                </div>
+            `;
+            
+            showSection('articleDetail');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
