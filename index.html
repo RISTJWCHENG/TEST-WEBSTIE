@@ -5,45 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RIST JIANWEN CHENG | VFX Artist</title>
   <style>
-    /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Arial', sans-serif; background: #121212; color: #f0f0f0; line-height: 1.6; }
 
-    /* Header & Navbar */
     header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #1f1f1f; position: sticky; top: 0; z-index: 100; }
     header h1 { font-size: 1.8rem; }
     nav a { color: #f0f0f0; text-decoration: none; margin-left: 1.5rem; transition: 0.3s; }
     nav a:hover { color: #00bfff; }
 
-    /* Sections */
     section { padding: 4rem 2rem; max-width: 1000px; margin: auto; }
     section h2 { font-size: 2rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 2rem; }
 
-    /* Home Section */
     .home { text-align: center; }
     .home p { max-width: 700px; margin: 1rem auto; font-size: 1.1rem; color: #ccc; }
 
-    /* Video Section */
-    video { width: 100%; max-width: 800px; margin: auto; display: block; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    video { width: 100%; max-width: 800px; margin: 1rem auto; display: block; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 
-    /* Gallery Section */
     .gallery { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .gallery img { width: calc(33.333% - 1rem); border-radius: 10px; transition: transform 0.3s; cursor: pointer; }
     .gallery img:hover { transform: scale(1.05); }
 
-    /* Articles Section */
     .article-filters button { margin-right: 1rem; margin-bottom: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; border: none; background: #333; color: #f0f0f0; transition: 0.2s; }
     .article-filters button:hover { background: #00bfff; color: #fff; }
     .article { display: none; margin-bottom: 1rem; padding: 1rem; background: #1f1f1f; border-radius: 5px; }
 
-    /* Info Section */
     .info { max-width: 700px; margin: auto; color: #ccc; }
     .info a { color: #00bfff; text-decoration: none; }
   </style>
 </head>
 <body>
 
-<!-- Header & Navbar -->
 <header>
   <h1>RIST JIANWEN CHENG</h1>
   <nav>
@@ -55,7 +46,6 @@
   </nav>
 </header>
 
-<!-- Home Section -->
 <section id="home" class="home">
   <h2>Welcome</h2>
   <p>Hello, I'm <strong>RIST JIANWEN CHENG</strong>, a professional visual effects (VFX) artist.  
@@ -63,26 +53,16 @@
      Explore my work in videos, gallery, articles, and learn more about my projects and background.</p>
 </section>
 
-<!-- Video Section -->
 <section id="video">
   <h2>Video</h2>
-  <video controls preload="metadata">
-    <source src="https://raw.githubusercontent.com/yourname/your-repo/main/videos/sample_h264.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <div id="video-container"></div>
 </section>
 
-<!-- Gallery Section -->
 <section id="gallery">
   <h2>Gallery</h2>
-  <div class="gallery">
-    <img src="https://raw.githubusercontent.com/yourname/your-repo/main/images/image1.jpg" alt="Gallery Image 1">
-    <img src="https://raw.githubusercontent.com/yourname/your-repo/main/images/image2.jpg" alt="Gallery Image 2">
-    <img src="https://raw.githubusercontent.com/yourname/your-repo/main/images/image3.jpg" alt="Gallery Image 3">
-  </div>
+  <div class="gallery" id="gallery-container"></div>
 </section>
 
-<!-- Articles Section -->
 <section id="articles">
   <h2>Articles</h2>
   <div class="article-filters">
@@ -95,7 +75,6 @@
   <div class="article" data-type="vfx">VFX Article 2</div>
 </section>
 
-<!-- Information Section -->
 <section id="info">
   <h2>Information</h2>
   <div class="info">
@@ -106,9 +85,35 @@
   </div>
 </section>
 
-<!-- JavaScript -->
 <script>
-  // Article filter
+  // 自动加载视频
+  const videoContainer = document.getElementById('video-container');
+  fetch('videos.json')
+    .then(res => res.json())
+    .then(videos => {
+      videos.forEach(v => {
+        const videoEl = document.createElement('video');
+        videoEl.controls = true;
+        videoEl.width = 600;
+        videoEl.src = `videos/${v}`;
+        videoContainer.appendChild(videoEl);
+      });
+    });
+
+  // 自动加载图片
+  const galleryContainer = document.getElementById('gallery-container');
+  fetch('images.json')
+    .then(res => res.json())
+    .then(images => {
+      images.forEach(img => {
+        const imgEl = document.createElement('img');
+        imgEl.src = `images/${img}`;
+        imgEl.alt = img;
+        galleryContainer.appendChild(imgEl);
+      });
+    });
+
+  // 文章过滤
   const buttons = document.querySelectorAll('.article-filters button');
   const articles = document.querySelectorAll('.article');
   function filterArticles(type) {
