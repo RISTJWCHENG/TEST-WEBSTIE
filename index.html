@@ -5,13 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PersonaPort</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { display: flex; align-items: center; padding: 1rem 2rem; background: #333; color: white; }
-    header img { height: 40px; margin-right: 1rem; }
-    header h1 { margin: 0; }
-    main { padding: 2rem; }
-    .article-filters button { margin-right: 1rem; padding: 0.5rem 1rem; cursor: pointer; }
-    .article { display: none; margin-bottom: 1rem; padding: 1rem; background: #f0f0f0; border-radius: 5px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #333;
+      color: white;
+    }
+    header img {
+      height: 40px;
+      margin-right: 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .article-filters button {
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: white;
+      transition: 0.2s;
+    }
+    .article-filters button:hover {
+      background: #f2f2f2;
+    }
+    .article {
+      display: none;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #f0f0f0;
+      border-radius: 5px;
+    }
+    video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -24,10 +75,13 @@
 <main>
   <section class="videos">
     <h2>Video</h2>
-    <video controls width="600">
+    <video controls preload="metadata">
+      <!-- GitHub 仓库中的视频放在 /videos 文件夹 -->
+      <source src="videos/sample.mov" type='video/quicktime; codecs="hvc1"'>
       <source src="videos/sample.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
+    <p>If the video does not play, please try using Safari or download it directly from <a href="videos/sample.mov" target="_blank">this link</a>.</p>
   </section>
 
   <section class="articles">
@@ -50,11 +104,9 @@
 
   function filterArticles(type) {
     articles.forEach(article => {
-      if (type === 'all' || article.dataset.type === type) {
-        article.style.display = 'block';
-      } else {
-        article.style.display = 'none';
-      }
+      article.style.display = (type === 'all' || article.dataset.type === type)
+        ? 'block'
+        : 'none';
     });
   }
 
