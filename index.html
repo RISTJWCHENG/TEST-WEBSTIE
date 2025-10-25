@@ -21,50 +21,45 @@
             overflow-x: hidden;
         }
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: rgba(250, 249, 247, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            backdrop-filter: blur(10px); z-index: 1000;
             border-bottom: 1px solid var(--border);
         }
-        .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 1.1rem; font-weight: 300; letter-spacing: 2px; cursor: pointer; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; cursor: pointer; }
+        .nav-content { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.1rem; font-weight: 300; letter-spacing: 2px; cursor: pointer; transition: opacity 0.3s; }
+        .logo:hover { opacity: 0.7; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
-        .section { min-height: 100vh; padding: 6rem 2rem 4rem; display: none; }
+        .section { min-height: 100vh; padding: 8rem 2rem 4rem; display: none; }
         .section.active { display: block; }
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        /* Hero */
-        #home { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero-title { font-size: 3rem; font-weight: 200; letter-spacing: 6px; margin-bottom: 1rem; }
-        .hero-subtitle { font-size: 1.2rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 1.5rem; }
-        .hero-statement { max-width: 600px; font-size: 1rem; color: var(--text-secondary); }
-
-        /* Gallery */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
-        .gallery-item img { width: 100%; height: auto; display: block; border-radius: 8px; }
-
-        /* Video */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .video-item video { width: 100%; border-radius: 8px; }
-
-        /* Responsive */
+        .container { max-width: 1400px; margin: 0 auto; }
+        #home { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #f5f3f0 0%, #faf9f7 100%); }
+        .hero-title { font-size: 4rem; font-weight: 200; letter-spacing: 8px; margin-bottom: 2rem; animation: fadeInUp 1s ease; }
+        .hero-subtitle { font-size: 1.2rem; font-weight: 300; letter-spacing: 3px; color: var(--text-secondary); margin-bottom: 3rem; animation: fadeInUp 1s ease 0.2s both; }
+        .hero-statement { max-width: 600px; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); animation: fadeInUp 1s ease 0.4s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title { font-size: 2.5rem; font-weight: 200; letter-spacing: 4px; margin-bottom: 1rem; text-align: center; }
+        .section-subtitle { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 3rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .gallery-item { position: relative; aspect-ratio: 4/5; overflow: hidden; cursor: pointer; background: #e5e3df; transition: transform 0.4s; }
+        .gallery-item:hover { transform: translateY(-10px); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 2rem 1.5rem 1.5rem; transform: translateY(100%); transition: transform 0.4s; }
+        .gallery-item:hover .gallery-info { transform: translateY(0); }
+        .gallery-info h3 { color: white; font-weight: 300; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .gallery-info p { color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 3rem; margin-top: 3rem; }
+        .video-item { background: white; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.3s; }
+        .video-item:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .video-item video { width: 100%; height: auto; display: block; }
         @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; letter-spacing: 3px; }
-            .nav-links { gap: 1rem; }
+            .nav-links { gap: 1.5rem; }
+            .hero-title { font-size: 2rem; letter-spacing: 4px; }
             .gallery-grid, .video-grid { grid-template-columns: 1fr; }
+            .section { padding: 6rem 1rem 2rem; }
         }
     </style>
 </head>
@@ -76,42 +71,68 @@
                 <li><a onclick="showSection('home')">HOME</a></li>
                 <li><a onclick="showSection('gallery')">GALLERY</a></li>
                 <li><a onclick="showSection('video')">VIDEO</a></li>
+                <li><a onclick="showSection('article')">ARTICLE</a></li>
+                <li><a onclick="showSection('information')">INFORMATION</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- HOME -->
     <section id="home" class="section active">
         <h1 class="hero-title">RIST JIANWEN CHENG</h1>
         <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
         <p class="hero-statement">
-            Exploring the intersection of silence and expression through contemporary visual language.
+            Exploring the intersection of silence and expression through contemporary visual language. 
+            My work investigates the subtle tensions between presence and absence, 
+            creating spaces for contemplation and introspection.
         </p>
     </section>
 
+    <!-- GALLERY -->
     <section id="gallery" class="section">
         <div class="container">
-            <h2>GALLERY</h2>
+            <h2 class="section-title">GALLERY</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal(this)">
                     <img src="images/image1.JPG" alt="Artwork 1">
+                    <div class="gallery-info">
+                        <h3>Artwork 1</h3>
+                        <p>Description of Artwork 1</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- VIDEO -->
     <section id="video" class="section">
         <div class="container">
-            <h2>VIDEO</h2>
+            <h2 class="section-title">VIDEO</h2>
             <div class="video-grid">
                 <div class="video-item">
                     <video controls>
                         <source src="videos/video1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <div class="video-info">
+                        <h3>Video 1</h3>
+                        <p>Description of Video 1</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ARTICLE 和 INFORMATION 部分保持不变 -->
+    <!-- ... 你的原有 ARTICLE 和 INFORMATION HTML ... -->
+
+    <!-- Modal for gallery images -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
 
     <script>
         function showSection(sectionId) {
@@ -119,6 +140,20 @@
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo(0, 0);
         }
+
+        function openModal(element) {
+            const img = element.querySelector('img');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = img.src;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     </script>
 </body>
 </html>
