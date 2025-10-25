@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PersonaPort</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { display: flex; align-items: center; padding: 1rem 2rem; background: #333; color: white; }
+    header img { height: 40px; margin-right: 1rem; }
+    header h1 { margin: 0; }
+    main { padding: 2rem; }
+    .article-filters button { margin-right: 1rem; padding: 0.5rem 1rem; cursor: pointer; }
+    .article { display: none; margin-bottom: 1rem; padding: 1rem; background: #f0f0f0; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68f8b05a162c1736e931d099/91f5a3c69_logo.png" alt="Logo">
+  <h1>PersonaPort</h1>
+</header>
+
+<main>
+  <section class="videos">
+    <h2>Video</h2>
+    <video controls width="600">
+      <source src="videos/sample.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section class="articles">
+    <h2>Articles</h2>
+    <div class="article-filters">
+      <button data-type="all">All</button>
+      <button data-type="travel">Travel</button>
+      <button data-type="art">Art</button>
+    </div>
+
+    <div class="article" data-type="travel">Travel Article 1</div>
+    <div class="article" data-type="art">Art Article 1</div>
+    <div class="article" data-type="travel">Travel Article 2</div>
+  </section>
+</main>
+
+<script>
+  const buttons = document.querySelectorAll('.article-filters button');
+  const articles = document.querySelectorAll('.article');
+
+  function filterArticles(type) {
+    articles.forEach(article => {
+      if (type === 'all' || article.dataset.type === type) {
+        article.style.display = 'block';
+      } else {
+        article.style.display = 'none';
+      }
+    });
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterArticles(button.dataset.type);
+    });
+  });
+
+  // 默认显示全部
+  filterArticles('all');
+</script>
+
+</body>
+</html>
