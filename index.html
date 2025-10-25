@@ -1,159 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIST JIANWEN CHENG - Artist</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-bg: #faf9f7;
-            --text-primary: #2a2a2a;
-            --text-secondary: #6a6a6a;
-            --accent: #d4a574;
-            --border: #e5e3df;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(250, 249, 247, 0.95);
-            backdrop-filter: blur(10px); z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-content { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.1rem; font-weight: 300; letter-spacing: 2px; cursor: pointer; transition: opacity 0.3s; }
-        .logo:hover { opacity: 0.7; }
-        .nav-links { display: flex; gap: 3rem; list-style: none; }
-        .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; cursor: pointer; }
-        .nav-links a:hover { color: var(--accent); }
-        .section { min-height: 100vh; padding: 8rem 2rem 4rem; display: none; }
-        .section.active { display: block; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        #home { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #f5f3f0 0%, #faf9f7 100%); }
-        .hero-title { font-size: 4rem; font-weight: 200; letter-spacing: 8px; margin-bottom: 2rem; animation: fadeInUp 1s ease; }
-        .hero-subtitle { font-size: 1.2rem; font-weight: 300; letter-spacing: 3px; color: var(--text-secondary); margin-bottom: 3rem; animation: fadeInUp 1s ease 0.2s both; }
-        .hero-statement { max-width: 600px; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); animation: fadeInUp 1s ease 0.4s both; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .section-title { font-size: 2.5rem; font-weight: 200; letter-spacing: 4px; margin-bottom: 1rem; text-align: center; }
-        .section-subtitle { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 3rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .gallery-item { position: relative; aspect-ratio: 4/5; overflow: hidden; cursor: pointer; background: #e5e3df; transition: transform 0.4s; }
-        .gallery-item:hover { transform: translateY(-10px); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-        .gallery-item:hover img { transform: scale(1.05); }
-        .gallery-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 2rem 1.5rem 1.5rem; transform: translateY(100%); transition: transform 0.4s; }
-        .gallery-item:hover .gallery-info { transform: translateY(0); }
-        .gallery-info h3 { color: white; font-weight: 300; font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .gallery-info p { color: rgba(255,255,255,0.8); font-size: 0.85rem; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 3rem; margin-top: 3rem; }
-        .video-item { background: white; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.3s; }
-        .video-item:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .video-item video { width: 100%; height: auto; display: block; }
-        @media (max-width: 768px) {
-            .nav-links { gap: 1.5rem; }
-            .hero-title { font-size: 2rem; letter-spacing: 4px; }
-            .gallery-grid, .video-grid { grid-template-columns: 1fr; }
-            .section { padding: 6rem 1rem 2rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIST JIANWEN CHENG - Artist</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+        --primary-bg:#faf9f7;
+        --text-primary:#2a2a2a;
+        --text-secondary:#6a6a6a;
+        --accent:#d4a574;
+        --border:#e5e3df;
+    }
+    body { font-family:'Helvetica Neue', Arial, sans-serif; background:var(--primary-bg); color:var(--text-primary); line-height:1.6; overflow-x:hidden; }
+    nav { position:fixed; top:0; width:100%; background:rgba(250,249,247,0.95); backdrop-filter:blur(10px); z-index:1000; border-bottom:1px solid var(--border); }
+    .nav-content { max-width:1400px; margin:0 auto; padding:1.5rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:1.1rem; font-weight:300; letter-spacing:2px; cursor:pointer; transition:opacity 0.3s; }
+    .logo:hover { opacity:0.7; }
+    .nav-links { display:flex; gap:3rem; list-style:none; }
+    .nav-links a { color:var(--text-primary); text-decoration:none; font-size:0.9rem; letter-spacing:1px; transition:color 0.3s; cursor:pointer; }
+    .nav-links a:hover { color:var(--accent); }
+    .section { min-height:100vh; padding:8rem 2rem 4rem; display:none; }
+    .section.active { display:block; }
+    .container { max-width:1400px; margin:0 auto; }
+    #home { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:linear-gradient(135deg,#f5f3f0 0%,#faf9f7 100%); }
+    .hero-title { font-size:4rem; font-weight:200; letter-spacing:8px; margin-bottom:2rem; animation:fadeInUp 1s ease; }
+    .hero-subtitle { font-size:1.2rem; font-weight:300; letter-spacing:3px; color:var(--text-secondary); margin-bottom:3rem; animation:fadeInUp 1s ease 0.2s both; }
+    .hero-statement { max-width:600px; font-size:1rem; line-height:1.8; color:var(--text-secondary); animation:fadeInUp 1s ease 0.4s both; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .section-title { font-size:2.5rem; font-weight:200; letter-spacing:4px; margin-bottom:1rem; text-align:center; }
+    .section-subtitle { text-align:center; color:var(--text-secondary); font-size:1.1rem; margin-bottom:3rem; }
+
+    /* Gallery */
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-top:3rem; }
+    .gallery-item { position:relative; aspect-ratio:4/5; overflow:hidden; cursor:pointer; background:#e5e3df; transition:transform 0.4s; }
+    .gallery-item:hover { transform:translateY(-10px); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
+    .gallery-item:hover img { transform:scale(1.05); }
+    .gallery-info { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(0,0,0,0.8)); padding:2rem 1.5rem 1.5rem; transform:translateY(100%); transition:transform 0.4s; }
+    .gallery-item:hover .gallery-info { transform:translateY(0); }
+    .gallery-info h3 { color:white; font-weight:300; font-size:1.1rem; margin-bottom:0.5rem; }
+    .gallery-info p { color:rgba(255,255,255,0.8); font-size:0.85rem; }
+
+    /* Video */
+    .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-top:3rem; }
+    .video-item { background:white; border:1px solid var(--border); overflow:hidden; transition:box-shadow 0.3s; }
+    .video-item:hover { box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+    .video-thumbnail { width:100%; aspect-ratio:16/9; background:#e5e3df; display:flex; align-items:center; justify-content:center; position:relative; cursor:pointer; }
+    .video-thumbnail video { width:100%; height:100%; object-fit:cover; }
+    .play-button { width:60px; height:60px; background:rgba(255,255,255,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; transition:transform 0.3s; position:absolute; }
+    .video-item:hover .play-button { transform:scale(1.1); }
+    .video-info { padding:1.5rem; }
+    .video-info h3 { font-weight:300; font-size:1.2rem; margin-bottom:0.5rem; }
+    .video-info p { color:var(--text-secondary); font-size:0.9rem; }
+
+    /* Modal */
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:2000; align-items:center; justify-content:center; }
+    .modal.active { display:flex; }
+    .modal-content { max-width:90%; max-height:90%; position:relative; }
+    .modal-content img { max-width:100%; max-height:90vh; object-fit:contain; }
+    .modal-close { position:absolute; top:-50px; right:0; color:white; font-size:2rem; cursor:pointer; background:none; border:none; }
+
+    @media(max-width:768px){
+        .nav-links { gap:1rem; flex-wrap:wrap; }
+        .hero-title { font-size:2rem; letter-spacing:4px; }
+        .gallery-grid, .video-grid { grid-template-columns:1fr; }
+        .section { padding:6rem 1rem 2rem; }
+    }
+</style>
 </head>
 <body>
-    <nav>
-        <div class="nav-content">
-            <div class="logo" onclick="showSection('home')">RIST JIANWEN CHENG</div>
-            <ul class="nav-links">
-                <li><a onclick="showSection('home')">HOME</a></li>
-                <li><a onclick="showSection('gallery')">GALLERY</a></li>
-                <li><a onclick="showSection('video')">VIDEO</a></li>
-                <li><a onclick="showSection('article')">ARTICLE</a></li>
-                <li><a onclick="showSection('information')">INFORMATION</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- HOME -->
-    <section id="home" class="section active">
-        <h1 class="hero-title">RIST JIANWEN CHENG</h1>
-        <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
-        <p class="hero-statement">
-            Exploring the intersection of silence and expression through contemporary visual language. 
-            My work investigates the subtle tensions between presence and absence, 
-            creating spaces for contemplation and introspection.
-        </p>
-    </section>
+<nav>
+    <div class="nav-content">
+        <div class="logo" onclick="showSection('home')">RIST JIANWEN CHENG</div>
+        <ul class="nav-links">
+            <li><a onclick="showSection('home')">HOME</a></li>
+            <li><a onclick="showSection('gallery')">GALLERY</a></li>
+            <li><a onclick="showSection('video')">VIDEO</a></li>
+            <li><a onclick="showSection('article')">ARTICLE</a></li>
+            <li><a onclick="showSection('information')">INFORMATION</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <!-- GALLERY -->
-    <section id="gallery" class="section">
-        <div class="container">
-            <h2 class="section-title">GALLERY</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item" onclick="openModal(this)">
-                    <img src="images/image1.JPG" alt="Artwork 1">
-                    <div class="gallery-info">
-                        <h3>Artwork 1</h3>
-                        <p>Description of Artwork 1</p>
-                    </div>
+<section id="home" class="section active">
+    <h1 class="hero-title">RIST JIANWEN CHENG</h1>
+    <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
+    <p class="hero-statement">
+        Exploring the intersection of silence and expression through contemporary visual language. 
+        My work investigates the subtle tensions between presence and absence, 
+        creating spaces for contemplation and introspection.
+    </p>
+</section>
+
+<section id="gallery" class="section">
+    <div class="container">
+        <h2 class="section-title">GALLERY</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://raw.githubusercontent.com/username/repo/main/images/image1.JPG" alt="Artwork 1">
+                <div class="gallery-info">
+                    <h3>Featured Artwork</h3>
+                    <p>Mixed Media, 2024</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section id="video" class="section">
-        <div class="container">
-            <h2 class="section-title">VIDEO</h2>
-            <div class="video-grid">
-                <div class="video-item">
-                    <video controls>
-                        <source src="videos/video1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="video-info">
-                        <h3>Video 1</h3>
-                        <p>Description of Video 1</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ARTICLE 和 INFORMATION 部分保持不变 -->
-    <!-- ... 你的原有 ARTICLE 和 INFORMATION HTML ... -->
-
-    <!-- Modal for gallery images -->
-    <div class="modal" id="imageModal" onclick="closeModal()">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <img id="modalImage" src="" alt="">
         </div>
     </div>
+</section>
 
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
+<section id="video" class="section">
+    <div class="container">
+        <h2 class="section-title">VIDEO</h2>
+        <div class="video-grid">
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <video src="https://raw.githubusercontent.com/username/repo/main/videos/video1.mp4" controls></video>
+                </div>
+                <div class="video-info">
+                    <h3>Featured Video</h3>
+                    <p>Exploration of time and memory, 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        function openModal(element) {
-            const img = element.querySelector('img');
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modalImg.src = img.src;
-            modal.classList.add('active');
-        }
+<section id="article" class="section">
+    <div class="container">
+        <h2 class="section-title">ARTICLE</h2>
+        <p class="section-subtitle">Thoughts, stories, and ideas from my journey</p>
+    </div>
+</section>
 
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
+<section id="information" class="section">
+    <div class="container">
+        <h2 class="section-title">INFORMATION</h2>
+        <div style="text-align:center; margin:2rem 0;">
+            <img src="https://raw.githubusercontent.com/username/repo/main/images/image1.JPG" alt="RIST JIANWEN CHENG" style="width:100%; max-width:300px; border-radius:2px; box-shadow:0 4px 20px rgba(0,0,0,0.1);">
+        </div>
+        <p style="text-align:center; max-width:800px; margin:0 auto;">I am passionate about art and science...</p>
+    </div>
+</section>
 
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-    </script>
+<div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <img id="modalImage" src="" alt="">
+    </div>
+</div>
+
+<script>
+function showSection(id){ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+function openModal(el){ const img=el.querySelector('img'); const modal=document.getElementById('imageModal'); const modalImg=document.getElementById('modalImage'); modalImg.src=img.src; modal.classList.add('active'); }
+function closeModal(){ document.getElementById('imageModal').classList.remove('active'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModal(); } });
+</script>
+
 </body>
 </html>
