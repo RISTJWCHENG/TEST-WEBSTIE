@@ -20,6 +20,10 @@
             --border: #e5e3df;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background: var(--primary-bg);
@@ -78,93 +82,9 @@
             color: var(--accent);
         }
 
-        /* Mobile Navigation Dropdown */
-        .mobile-nav-toggle {
-            display: none;
-            position: relative;
-            width: 100%;
-        }
-
-        .mobile-nav-button {
-            width: 100%;
-            padding: 0.8rem 1.5rem;
-            background: white;
-            border: 2px solid #6ba3d8;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .mobile-nav-button:hover {
-            background: #f8f9fa;
-        }
-
-        .mobile-nav-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: none;
-            overflow: hidden;
-        }
-
-        .mobile-nav-dropdown.active {
-            display: block;
-        }
-
-        .mobile-nav-item {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .mobile-nav-item:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-nav-item:hover {
-            background: var(--primary-bg);
-        }
-
-        .mobile-nav-item.active {
-            background: var(--primary-bg);
-        }
-
-        .mobile-nav-item .checkmark {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            opacity: 0;
-        }
-
-        .mobile-nav-item.active .checkmark {
-            opacity: 1;
-        }
-
         .section {
             min-height: 100vh;
             padding: 8rem 2rem 4rem;
-            display: none;
-        }
-
-        .section.active {
-            display: block;
         }
 
         .container {
@@ -232,7 +152,6 @@
             margin-bottom: 3rem;
         }
 
-        /* Article Blog Layout */
         .article-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -351,81 +270,62 @@
             color: var(--text-secondary);
         }
 
-        /* Article Detail Page */
-        .article-detail {
-            max-width: 800px;
-            margin: 0 auto;
+        .document-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            overflow: hidden;
         }
 
-        .back-button {
-            display: inline-flex;
+        .document-modal.active {
+            display: block;
+        }
+
+        .document-viewer-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .document-header {
+            background: var(--primary-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .close-document {
+            background: none;
+            border: none;
+            font-size: 2rem;
             cursor: pointer;
+            color: var(--text-primary);
             transition: color 0.3s;
         }
 
-        .back-button:hover {
+        .close-document:hover {
             color: var(--accent);
         }
 
-        .article-detail-header {
-            margin-bottom: 3rem;
-        }
-
-        .article-detail-category {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: var(--primary-bg);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .article-detail-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .article-detail-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .article-detail-meta {
-            display: flex;
-            gap: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .article-detail-image {
+        .document-iframe {
+            flex: 1;
             width: 100%;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-
-        .article-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        .article-content h2 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin: 2rem 0 1rem;
-            color: var(--text-primary);
-        }
-
-        .article-content p {
-            margin-bottom: 1.5rem;
+            border: none;
+            background: white;
         }
 
         .gallery-grid {
@@ -638,7 +538,6 @@
             border: none;
         }
 
-        /* Tablet Styles */
         @media (max-width: 1024px) {
             .nav-content {
                 padding: 1.2rem 1.5rem;
@@ -671,14 +570,58 @@
             .info-content {
                 padding: 0 1rem;
             }
+
+            .document-header {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .document-title {
+                font-size: 1rem;
+            }
         }
 
-        /* Mobile Styles */
+        /* Mobile Navigation Dropdown */
+        .mobile-nav-dropdown {
+            display: none;
+            position: relative;
+        }
+
+        .mobile-nav-select {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            background: white;
+            color: var(--text-primary);
+            cursor: pointer;
+            appearance: none;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .mobile-nav-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+        }
+
+        .dropdown-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
         @media (max-width: 768px) {
             .nav-content {
                 padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
             }
 
             .logo {
@@ -687,12 +630,13 @@
             }
 
             .nav-links {
-                gap: 1rem;
-                font-size: 0.8rem;
+                display: none;
             }
 
-            .nav-links a {
-                font-size: 0.8rem;
+            .mobile-nav-dropdown {
+                display: block;
+                flex: 1;
+                max-width: 300px;
             }
 
             .hero-title {
@@ -728,7 +672,6 @@
                 margin-bottom: 2rem;
             }
 
-            /* Article Section Mobile */
             .search-bar {
                 margin-bottom: 1.5rem;
             }
@@ -777,45 +720,24 @@
                 font-size: 0.8rem;
             }
 
-            /* Article Detail Mobile */
-            .article-detail {
-                padding: 0 1rem;
-            }
-
-            .back-button {
-                margin-bottom: 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            .article-detail-title {
-                font-size: 1.8rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .article-detail-subtitle {
-                font-size: 1rem;
-            }
-
-            .article-detail-meta {
+            .document-header {
+                padding: 0.8rem 1rem;
                 flex-direction: column;
                 gap: 0.5rem;
-                font-size: 0.85rem;
+                align-items: flex-start;
             }
 
-            .article-detail-image {
-                margin: 1.5rem 0;
+            .document-title {
+                font-size: 0.95rem;
             }
 
-            .article-content {
-                font-size: 1rem;
-            }
-
-            .article-content h2 {
+            .close-document {
+                position: absolute;
+                top: 0.5rem;
+                right: 1rem;
                 font-size: 1.5rem;
-                margin: 1.5rem 0 0.8rem;
             }
 
-            /* Gallery Mobile */
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -837,7 +759,6 @@
                 font-size: 0.8rem;
             }
 
-            /* Video Mobile */
             .video-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -861,7 +782,6 @@
                 font-size: 1.2rem;
             }
 
-            /* Information Section Mobile */
             .info-content {
                 margin: 1.5rem auto;
             }
@@ -893,7 +813,6 @@
                 gap: 1rem;
             }
 
-            /* Modal Mobile */
             .modal-content {
                 max-width: 95%;
             }
@@ -904,7 +823,6 @@
             }
         }
 
-        /* Small Mobile */
         @media (max-width: 480px) {
             .nav-links {
                 flex-wrap: wrap;
@@ -931,10 +849,6 @@
                 height: 180px;
             }
 
-            .article-detail-title {
-                font-size: 1.5rem;
-            }
-
             .category-filters {
                 flex-direction: column;
                 width: 100%;
@@ -946,22 +860,6 @@
             }
         }
 
-        /* Landscape Mobile */
-        @media (max-width: 896px) and (orientation: landscape) {
-            .section {
-                padding: 5rem 1rem 2rem;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-statement {
-                max-width: 500px;
-            }
-        }
-
-        /* Large Desktop */
         @media (min-width: 1440px) {
             .container {
                 max-width: 1600px;
@@ -989,18 +887,28 @@
 <body>
     <nav>
         <div class="nav-content">
-            <div class="logo" onclick="showSection('home')">RIST JIANWEN CHENG</div>
+            <div class="logo" onclick="scrollToSection('home')">RIST JIANWEN CHENG</div>
             <ul class="nav-links">
-                <li><a onclick="showSection('home')">HOME</a></li>
-                <li><a onclick="showSection('gallery')">GALLERY</a></li>
-                <li><a onclick="showSection('video')">VIDEO</a></li>
-                <li><a onclick="showSection('article')">ARTICLE</a></li>
-                <li><a onclick="showSection('information')">INFORMATION</a></li>
+                <li><a onclick="scrollToSection('home')">HOME</a></li>
+                <li><a onclick="scrollToSection('gallery')">GALLERY</a></li>
+                <li><a onclick="scrollToSection('video')">VIDEO</a></li>
+                <li><a onclick="scrollToSection('article')">ARTICLE</a></li>
+                <li><a onclick="scrollToSection('information')">INFORMATION</a></li>
             </ul>
+            <div class="mobile-nav-dropdown">
+                <select id="mobileNav" class="mobile-nav-select" onchange="handleMobileNav()">
+                    <option value="home">HOME</option>
+                    <option value="gallery">GALLERY</option>
+                    <option value="video">VIDEO</option>
+                    <option value="article">ARTICLE</option>
+                    <option value="information">INFORMATION</option>
+                </select>
+                <span class="dropdown-icon">◆</span>
+            </div>
         </div>
     </nav>
 
-    <section id="home" class="section active">
+    <section id="home" class="section">
         <h1 class="hero-title">RIST JIANWEN CHENG</h1>
         <p class="hero-subtitle">ARTIST / VISUAL CREATOR</p>
         <p class="hero-statement">
@@ -1014,42 +922,42 @@
         <div class="container">
             <h2 class="section-title">GALLERY</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800" alt="Artwork 1">
                     <div class="gallery-info">
                         <h3>Silence I</h3>
                         <p>Mixed Media on Canvas, 120×150cm, 2024</p>
                     </div>
                 </div>
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800" alt="Artwork 2">
                     <div class="gallery-info">
                         <h3>Ephemeral Traces</h3>
                         <p>Oil on Linen, 100×120cm, 2024</p>
                     </div>
                 </div>
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=800" alt="Artwork 3">
                     <div class="gallery-info">
                         <h3>Liminal Space</h3>
                         <p>Installation, Variable Dimensions, 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800" alt="Artwork 4">
                     <div class="gallery-info">
                         <h3>Resonance</h3>
                         <p>Photography Series, 80×100cm, 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=800" alt="Artwork 5">
                     <div class="gallery-info">
                         <h3>Between Worlds</h3>
                         <p>Acrylic on Canvas, 140×180cm, 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item" onclick="openModal(this)">
+                <div class="gallery-item" onclick="openImageModal(this)">
                     <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800" alt="Artwork 6">
                     <div class="gallery-info">
                         <h3>Contemplation</h3>
@@ -1107,15 +1015,15 @@
                 </div>
 
                 <div class="category-filters">
-                    <div class="category-tag active" onclick="filterCategory('all')">All</div>
-                    <div class="category-tag" onclick="filterCategory('Technical')">Technical</div>
-                    <div class="category-tag" onclick="filterCategory('Travel')">Travel</div>
-                    <div class="category-tag" onclick="filterCategory('Photography')">Photography</div>
+                    <div class="category-tag active" data-category="all">All</div>
+                    <div class="category-tag" data-category="Technical">Technical</div>
+                    <div class="category-tag" data-category="Travel">Travel</div>
+                    <div class="category-tag" data-category="Writing">Writing</div>
                 </div>
             </div>
 
             <div class="article-grid" id="articleGrid">
-                <div class="article-card" data-category="Technical" onclick="openArticleDetail('resetCurves')">
+                <div class="article-card" data-category="Technical" onclick="openDocument('Reset Curve(s) Tool', 'https://e.pcloud.link/publink/show?code=XZUSQIZ2AbRIYw1Qw5VGGfSMWlmpmAx8IHy')">
                     <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="Reset Curves Tool" class="article-card-image">
                     <div class="article-card-content">
                         <div class="article-card-category">Technical</div>
@@ -1128,7 +1036,7 @@
                     </div>
                 </div>
 
-                <div class="article-card" data-category="Travel" onclick="openArticleDetail('seAsia')">
+                <div class="article-card" data-category="Travel" onclick="openDocument('Journey Through Southeast Asia', 'travel-sea')">
                     <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800" alt="Southeast Asia" class="article-card-image">
                     <div class="article-card-content">
                         <div class="article-card-category">Travel</div>
@@ -1141,10 +1049,10 @@
                     </div>
                 </div>
 
-                <div class="article-card" data-category="Photography" onclick="openArticleDetail('photography')">
-                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800" alt="Photography" class="article-card-image">
+                <div class="article-card" data-category="Writing" onclick="openDocument('Capturing Perfect Moments', 'writing-photo')">
+                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800" alt="Writing" class="article-card-image">
                     <div class="article-card-content">
-                        <div class="article-card-category">Photography</div>
+                        <div class="article-card-category">Writing</div>
                         <h3 class="article-card-title">Capturing Perfect Moments: Photography Tips</h3>
                         <p class="article-card-description">Essential techniques for amateur photographers looking to elevate their craft and capture stunning images.</p>
                         <div class="article-card-meta">
@@ -1154,13 +1062,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="articleDetail" class="section">
-        <div class="article-detail">
-            <a class="back-button" onclick="showSection('article')">← Back to Articles</a>
-            <div id="articleDetailContent"></div>
         </div>
     </section>
 
@@ -1261,106 +1162,69 @@
         </div>
     </section>
 
-    <div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal" id="imageModal" onclick="closeImageModal()">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
+            <button class="modal-close" onclick="closeImageModal()">×</button>
             <img id="modalImage" src="" alt="">
         </div>
     </div>
 
+    <div class="document-modal" id="documentModal">
+        <div class="document-viewer-container">
+            <div class="document-header">
+                <div class="document-title" id="documentTitle">Document Viewer</div>
+                <button class="close-document" onclick="closeDocument()">×</button>
+            </div>
+            <iframe id="documentFrame" class="document-iframe" src=""></iframe>
+        </div>
+    </div>
+
     <script>
-        const articles = {
-            resetCurves: {
-                category: 'Technical',
-                title: 'Reset Curve(s) Tool - Technical Development',
-                subtitle: 'A Maya plugin for precise curve rebuilding and recreation in 3D animation workflows',
-                date: 'August 01, 2025',
-                readTime: '8 min read',
-                image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
-                content: `
-                    <h2>About</h2>
-                    <div style="background: #f5f5f5; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid var(--accent);">
-                        <h3 style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;">Reset Curve(s) Tool</h3>
-                        <p><strong>By:</strong> RIST JIANWEN CHENG</p>
-                        <p><strong>Contact:</strong> rist.cheng@gmail.com</p>
-                        <p><strong>Support:</strong> MAYA 2023 - MAYA 2025</p>
-                        <p><strong>Version:</strong> 1.6</p>
-                    </div>
-
-                    <h2>What Is Useful</h2>
-                    <p>Maya's built-in Rebuild Curve Options allow you to adjust the number of spans and the degree of a curve, which works well for simple curve editing. However, it does not provide control over individual span lengths, nor does it automatically adjust parameters based on each curve's actual length.</p>
-                    
-                    <p>In contrast, the Reset Curves tool offers greater flexibility and power. It enables you to select multiple curves at once and automatically calculates rebuild parameters based on the length of each curve.</p>
-
-                    <h2>Key Features</h2>
-                    <p><strong>Thailand: Land of Smiles</strong><br>From the bustling streets of Bangkok to the serene beaches of Krabi, Thailand offered endless adventures.</p>
-                    
-                    <p><strong>Vietnam: A Culinary Paradise</strong><br>The food in Vietnam is extraordinary. From pho in Hanoi to banh mi in Ho Chi Minh City, every meal was an adventure.</p>
-                    
-                    <p><strong>Indonesia: Island Hopping</strong><br>Bali's spiritual energy and Lombok's pristine beaches made Indonesia a highlight of the trip.</p>
-                `
-            },
-            seAsia: {
-                category: 'Travel',
-                title: 'Journey Through Southeast Asia',
-                subtitle: 'Tales from backpacking across vibrant cultures, stunning landscapes, and unforgettable experiences.',
-                date: 'October 22, 2025',
-                readTime: '6 min read',
-                image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200',
-                content: `
-                    <h2>Journey Through Southeast Asia</h2>
-                    <p>My three-month journey through Southeast Asia was a transformative experience filled with incredible moments.</p>
-
-                    <h2>Thailand: Land of Smiles</h2>
-                    <p>From the bustling streets of Bangkok to the serene beaches of Krabi, Thailand offered endless adventures. The warmth of the people matched the tropical climate.</p>
-
-                    <h2>Vietnam: A Culinary Paradise</h2>
-                    <p>The food in Vietnam is extraordinary. From pho in Hanoi to banh mi in Ho Chi Minh City, every meal was an adventure.</p>
-
-                    <h2>Indonesia: Island Hopping</h2>
-                    <p>Bali's spiritual energy and Lombok's pristine beaches made Indonesia a highlight of the trip. Each island had its own unique character and charm.</p>
-                `
-            },
-            photography: {
-                category: 'Photography',
-                title: 'Capturing Perfect Moments: Photography Tips',
-                subtitle: 'Essential techniques for amateur photographers looking to elevate their craft',
-                date: 'September 15, 2025',
-                readTime: '4 min read',
-                image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1200',
-                content: `
-                    <h2>Understanding Light</h2>
-                    <p>Light is the most important element in photography. The golden hour—shortly after sunrise or before sunset—provides the most beautiful, soft light for portraits and landscapes.</p>
-
-                    <h2>Composition Rules</h2>
-                    <p>The rule of thirds is a fundamental principle. Divide your frame into a 3x3 grid and place key elements along these lines or at their intersections.</p>
-
-                    <h2>Practice and Experimentation</h2>
-                    <p>The best way to improve is through consistent practice. Don't be afraid to experiment with different angles, settings, and subjects.</p>
-                `
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
-        };
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-            window.scrollTo(0, 0);
         }
 
-        function openModal(element) {
-            const img = element.querySelector('img');
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
+        function handleMobileNav() {
+            const select = document.getElementById('mobileNav');
+            const sectionId = select.value;
+            scrollToSection(sectionId);
+        }
+
+        // Update mobile nav dropdown based on scroll position
+        function updateMobileNav() {
+            if (window.innerWidth > 768) return;
+
+            const sections = ['home', 'gallery', 'video', 'article', 'information'];
+            const select = document.getElementById('mobileNav');
             
-            modalImg.src = img.src;
-            modal.classList.add('active');
+            let currentSection = 'home';
+            const scrollPosition = window.scrollY + 200;
+
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section && scrollPosition >= section.offsetTop) {
+                    currentSection = sectionId;
+                }
+            }
+
+            if (select && select.value !== currentSection) {
+                select.value = currentSection;
+            }
         }
 
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
+        // Throttle scroll event for performance
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(function() {
+                updateMobileNav();
+            });
+        });
 
         function filterCategory(category) {
             document.querySelectorAll('.category-tag').forEach(tag => {
@@ -1394,32 +1258,67 @@
             });
         }
 
-        function openArticleDetail(articleId) {
-            const article = articles[articleId];
-            const content = document.getElementById('articleDetailContent');
+        function openImageModal(element) {
+            const img = element.querySelector('img');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
             
-            content.innerHTML = `
-                <div class="article-detail-header">
-                    <div class="article-detail-category">${article.category}</div>
-                    <h1 class="article-detail-title">${article.title}</h1>
-                    <p class="article-detail-subtitle">${article.subtitle}</p>
-                    <div class="article-detail-meta">
-                        <span>📅 ${article.date}</span>
-                        <span>⏱️ ${article.readTime}</span>
-                    </div>
-                </div>
-                <img src="${article.image}" alt="${article.title}" class="article-detail-image">
-                <div class="article-content">
-                    ${article.content}
-                </div>
-            `;
-            
-            showSection('articleDetail');
+            modalImg.src = img.src;
+            modal.classList.add('active');
         }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        function openDocument(title, url) {
+            const modal = document.getElementById('documentModal');
+            const titleElement = document.getElementById('documentTitle');
+            const iframe = document.getElementById('documentFrame');
+            
+            titleElement.textContent = title;
+            
+            // If it's a pCloud link, use it directly
+            if (url.includes('pcloud.link')) {
+                iframe.src = url;
+            } else {
+                // Placeholder for other document types
+                iframe.srcdoc = `
+                    <html>
+                        <body style="font-family: Arial; padding: 40px; line-height: 1.6;">
+                            <h1>${title}</h1>
+                            <p>This is a placeholder for the document content.</p>
+                        </body>
+                    </html>
+                `;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDocument() {
+            const modal = document.getElementById('documentModal');
+            const iframe = document.getElementById('documentFrame');
+            
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add click handlers for category tags
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.category-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    filterCategory(this.dataset.category);
+                });
+            });
+        });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                closeModal();
+                closeImageModal();
+                closeDocument();
             }
         });
     </script>
