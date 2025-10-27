@@ -407,31 +407,18 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .video-thumbnail {
+        .video-thumbnail-container {
             width: 100%;
             aspect-ratio: 16/9;
-            background: #e5e3df;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
+            background: #000;
+            overflow: hidden;
         }
 
-        .play-button {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .video-item:hover .play-button {
-            transform: scale(1.1);
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            object-fit: cover;
         }
 
         .video-info {
@@ -1062,27 +1049,27 @@
             <h2 class="section-title">VIDEO</h2>
             <div class="video-grid">
                 <div class="video-item">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
+                    <video class="video-thumbnail" controls>
+                        <source src="https://edef3.pcloud.com/cfZW7t3pIZWVNcB17Z7ueBZZalEL0kZ2ZZxnJZZOVDRXZx8ZyzZLpZ4HZgpZl4Zb0ZGVZ3kZw8Z28ZwJZ9LZ6JZyNlNDjt3iubbUL3tMb4F3j05mnn7/video1.mp4" type="video/mp4">
+                    </video>
                     <div class="video-info">
                         <h3>Temporal Studies</h3>
                         <p>A visual exploration of time and memory through moving images. 8'24", 2024</p>
                     </div>
                 </div>
                 <div class="video-item">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
+                    <video class="video-thumbnail" controls>
+                        <source src="https://edef9.pcloud.com/cfZ8zx3pIZgfKcB17Z7ueBZZDqEL0kZ2ZZxnJZZP9H6VZvLZ38Zf8Zk4ZeRZEFZY5Zk0ZyHZ8JZSRZE0ZHRZcVZ9X5D7gaj3U0rmN9j193cqudNmfDX/video2.mp4" type="video/mp4">
+                    </video>
                     <div class="video-info">
                         <h3>Silent Narratives</h3>
                         <p>An experimental piece examining the language of absence. 12'15", 2023</p>
                     </div>
                 </div>
                 <div class="video-item">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
+                    <video class="video-thumbnail" controls>
+                        <source src="https://edef4.pcloud.com/cfZ7KM3pIZwN9cB17Z7ueBZZ0tEL0kZ2ZZxnJZZxoLRkZn4ZtHZgLZy4Z35ZV5ZgRZypZWzZezZt4Zr0ZWJZVFZamUN6FdPVuRQrLENgrx2opt07GvX/video3.mp4" type="video/mp4">
+                    </video>
                     <div class="video-info">
                         <h3>Interstitial</h3>
                         <p>Documentation of performance art exploring liminal spaces. 6'40", 2023</p>
@@ -1113,7 +1100,7 @@
 
             <div class="article-grid" id="articleGrid">
                 <div class="article-card" data-category="Technical" onclick="openDocument('Reset Curve(s) Tool', 'https://e.pcloud.link/publink/show?code=XZUSQIZ2AbRIYw1Qw5VGGfSMWlmpmAx8IHy')">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="Reset Curves Tool" class="article-card-image">
+                    <img src="https://edef1.pcloud.com/DLZ8Q5GpIZJM1oB17Z7ueBZZfAEL0kZ2ZZxnJZZtsAZvzZu0ZzFZQO9krDNmwJBCUjXrbgB13uV29H47/Article1.jpg" alt="Reset Curves Tool" class="article-card-image">
                     <div class="article-card-content">
                         <div class="article-card-category">Technical</div>
                         <h3 class="article-card-title">Reset Curve(s) Tool - Technical Development</h3>
@@ -1158,7 +1145,7 @@
         <div class="container">
             <h2 class="section-title">INFORMATION</h2>
             <div style="text-align: center; margin: 0 auto 4rem; max-width: 400px;">
-                <img src="https://drive.google.com/uc?export=view&id=14-ijph6n_tawRhxnYWYfCBQ7zrjnkQwy" alt="RIST JIANWEN CHENG" style="width: 100%; max-width: 300px; border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <img src="https://edef1.pcloud.com/DLZ3k2KFIZ6C59u17Z7ueBZZHCEL0kZ2ZZxnJZZHmjZtFZf8ZQpZ9FOpmeYo3m8JmCFdwil31mNBTm2X/d885b1249c607feb3130862fbecf5899.jpg" alt="RIST JIANWEN CHENG" style="width: 100%; max-width: 300px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             </div>
             <div class="info-content">
                 <div class="info-section">
