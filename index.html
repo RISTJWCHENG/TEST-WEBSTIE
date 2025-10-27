@@ -36,10 +36,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(250, 249, 247, 0.95);
-            backdrop-filter: blur(10px);
+            background: transparent;
             z-index: 1000;
-            border-bottom: 1px solid var(--border);
+            border-bottom: none;
         }
 
         .nav-content {
@@ -52,15 +51,19 @@
         }
 
         .logo {
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 2px;
             cursor: pointer;
             transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
         }
 
         .logo:hover {
             opacity: 0.7;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
         }
 
         .nav-links {
@@ -631,7 +634,7 @@
 
         .mobile-nav-select {
             width: 100%;
-            padding: 1rem 3rem 1rem 1.5rem;
+            padding: 0.8rem 3rem 0.8rem 1.5rem;
             border: 2px solid var(--accent);
             border-radius: 50px;
             font-size: 1.1rem;
@@ -646,7 +649,7 @@
 
         .mobile-nav-select:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
         }
 
         .dropdown-icon {
@@ -655,21 +658,44 @@
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
-            font-size: 1.2rem;
             color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .dropdown-icon::before {
+            content: '>';
+            display: block;
+            transform: rotate(270deg);
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+
+        .dropdown-icon::after {
+            content: '>';
+            display: block;
+            transform: rotate(90deg);
+            font-size: 0.9rem;
+            line-height: 1;
         }
 
         @media (max-width: 768px) {
             .nav-content {
-                padding: 1rem;
+                padding: 0.6rem 1rem;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
             }
 
             .logo {
-                font-size: 0.9rem;
-                letter-spacing: 1px;
+                display: flex;
+                align-items: center;
+            }
+
+            .logo-image {
+                height: 35px;
             }
 
             .nav-links {
@@ -679,7 +705,25 @@
             .mobile-nav-dropdown {
                 display: block;
                 flex: 1;
-                max-width: 300px;
+                max-width: 280px;
+                margin-left: 1rem;
+            }
+
+            .mobile-nav-select {
+                padding: 0.6rem 2.5rem 0.6rem 1rem;
+                font-size: 1rem;
+                border: 2px solid #4a90e2;
+                border-radius: 40px;
+            }
+
+            .dropdown-icon {
+                right: 1rem;
+                gap: 1px;
+            }
+            
+            .dropdown-icon::before,
+            .dropdown-icon::after {
+                font-size: 0.8rem;
             }
 
             .hero-title {
@@ -930,7 +974,9 @@
 <body>
     <nav>
         <div class="nav-content">
-            <div class="logo" onclick="scrollToSection('home')">RIST JIANWEN CHENG</div>
+            <div class="logo" onclick="scrollToSection('home')">
+                <img src="https://edef1.pcloud.com/DLZFIvApIZ2Ow3B17Z7ueBZZ55EL0kZ2ZZxnJZZqE7Zo7Zc0ZozZYGMcEvLTs5ufBJ8wjiGljR46piAk/Website_LOGO.png" alt="RIST JIANWEN CHENG" class="logo-image">
+            </div>
             <ul class="nav-links">
                 <li><a onclick="scrollToSection('home')">HOME</a></li>
                 <li><a onclick="scrollToSection('gallery')">GALLERY</a></li>
@@ -946,7 +992,7 @@
                     <option value="article">ARTICLE</option>
                     <option value="information">INFORMATION</option>
                 </select>
-                <span class="dropdown-icon">◆</span>
+                <span class="dropdown-icon"></span>
             </div>
         </div>
     </nav>
