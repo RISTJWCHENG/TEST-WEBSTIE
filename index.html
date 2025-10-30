@@ -68,7 +68,7 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 3.5rem;
             list-style: none;
         }
 
@@ -79,10 +79,18 @@
             letter-spacing: 1px;
             transition: color 0.3s;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        .nav-links a svg {
+            width: 18px;
+            height: 18px;
         }
 
         .section {
@@ -506,7 +514,13 @@
         .category-tag:hover, .category-tag.active {
             background: var(--text-primary);
             color: white;
-            border-color: var(--text-primary);
+            border-color: #999;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--text-primary);
+            color: white;
+            border-color: #999;
         }
 
         .article-grid {
@@ -704,7 +718,7 @@
 
         .video-grid-featured {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -871,6 +885,78 @@
             gap: 0.5rem;
             font-size: 0.8rem;
             color: var(--text-secondary);
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #888888;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .video-item {
@@ -1128,7 +1214,7 @@
             }
 
             .video-grid-featured {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
 
@@ -1557,16 +1643,52 @@
                 <img src="https://ristjianwencheng-career.oss-cn-shanghai.aliyuncs.com/Website_LOGO.png" alt="RIST JIANWEN CHENG" class="logo-image">
             </div>
             <ul class="nav-links">
-                <li><a onclick="scrollToSection('home')">HOME</a></li>
-                <li><a onclick="scrollToSection('gallery')">GALLERY</a></li>
-                <li><a onclick="scrollToSection('video')">VIDEO</a></li>
-                <li><a onclick="scrollToSection('information')">INFORMATION</a></li>
+                <li><a onclick="scrollToSection('home')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    HOME
+                </a></li>
+                <li><a onclick="scrollToSection('gallery')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    GALLERY
+                </a></li>
+                <li><a onclick="scrollToSection('video')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                    VIDEOS
+                </a></li>
+                <li><a onclick="openArticlePage()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    ARTICLES
+                </a></li>
+                <li><a onclick="scrollToSection('information')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    INFORMATION
+                </a></li>
             </ul>
             <div class="mobile-nav-dropdown">
                 <select id="mobileNav" class="mobile-nav-select" onchange="handleMobileNav()">
                     <option value="home">HOME</option>
                     <option value="gallery">GALLERY</option>
-                    <option value="video">VIDEO</option>
+                    <option value="video">VIDEOS</option>
+                    <option value="articles">ARTICLES</option>
                     <option value="information">INFORMATION</option>
                 </select>
                 <span class="dropdown-icon"></span>
@@ -1748,7 +1870,7 @@
                     <h2 class="section-title">Featured Videos</h2>
                     <p class="video-subtitle">Watch my latest content</p>
                 </div>
-                <a class="view-all-link">View All →</a>
+                <a onclick="openVideoPage()" class="view-all-link">View All →</a>
             </div>
             <div class="video-grid-featured">
                 <div class="video-card-featured">
@@ -1789,6 +1911,26 @@
                         <div class="video-category">TRAVEL</div>
                         <h3 class="video-card-title">Travel Vlog: Exploring Hidden Gems</h3>
                         <p class="video-card-description">Join me as I discover off-the-beaten-path locations and share travel tips for adventurous souls.</p>
+                    </div>
+                </div>
+                <div class="video-card-featured">
+                    <div class="video-thumbnail-wrapper">
+                        <video class="video-thumbnail-bg">
+                            <source src="https://edef4.pcloud.com/cfZ7KM3pIZwN9cB17Z7ueBZZ0tEL0kZ2ZZxnJZZxoLRkZn4ZtHZgLZy4Z35ZV5ZgRZypZWzZezZt4Zr0ZWJZVFZamUN6FdPVuRQrLENgrx2opt07GvX/video3.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay" onclick="playVideo(this)">
+                            <div class="play-button-circle">
+                                <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="video-duration">6:40</div>
+                    </div>
+                    <div class="video-card-info">
+                        <div class="video-category">ART</div>
+                        <h3 class="video-card-title">Interstitial: Performance Art</h3>
+                        <p class="video-card-description">Documentation of performance art exploring liminal spaces and the boundaries of visual expression.</p>
                     </div>
                 </div>
             </div>
@@ -1966,12 +2108,125 @@
         </div>
     </section>
 
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-tagline">Showcasing creativity and passion through articles, images, and videos</p>
+            <div class="footer-social">
+                <a href="mailto:rist.cheng@gmail.com" class="social-icon" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="OpenChat">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3.04 1.03 4.39L2 22l5.69-1.03C9.03 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.73-.28-4-.83l-.29-.15-3.01.55.55-2.99-.16-.31A7.93 7.93 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+                        <circle cx="8" cy="12" r="1.5"/>
+                        <circle cx="12" cy="12" r="1.5"/>
+                        <circle cx="16" cy="12" r="1.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="X (Twitter)">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer-copyright">© 2025 RIST JIANWEN CHENG. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="video-full-page" class="full-gallery-page">
+        <button class="back-to-gallery-btn" onclick="closeVideoPage()">Back</button>
+        <button class="close-gallery-btn" onclick="closeVideoPage()">×</button>
+        <div class="container" style="padding-top: 2rem;">
+            <div class="article-header">
+                <h2 class="section-title" style="text-align: center;">Featured Videos</h2>
+                <p class="section-subtitle">Watch my latest video content and creations</p>
+                
+                <div class="category-filters" style="margin-top: 2rem;">
+                    <div class="category-tag active" data-category="all" onclick="filterVideoCategory('all')">All</div>
+                    <div class="category-tag" data-category="Education" onclick="filterVideoCategory('Education')">Education</div>
+                    <div class="category-tag" data-category="Lifestyle" onclick="filterVideoCategory('Lifestyle')">Lifestyle</div>
+                    <div class="category-tag" data-category="Travel" onclick="filterVideoCategory('Travel')">Travel</div>
+                </div>
+            </div>
+
+            <div class="video-grid-featured" id="videoGridFull">
+                <div class="video-card-featured" data-category="Education">
+                    <div class="video-thumbnail-wrapper">
+                        <video class="video-thumbnail-bg">
+                            <source src="https://edef4.pcloud.com/cfZ7KM3pIZwN9cB17Z7ueBZZ0tEL0kZ2ZZxnJZZxoLRkZn4ZtHZgLZy4Z35ZV5ZgRZypZWzZezZt4Zr0ZWJZVFZamUN6FdPVuRQrLENgrx2opt07GvX/video3.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay" onclick="playVideo(this)">
+                            <div class="play-button-circle">
+                                <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="video-duration">10:30</div>
+                    </div>
+                    <div class="video-card-info">
+                        <div class="video-category">Education</div>
+                        <h3 class="video-card-title">Photography Tutorial: Natural Light</h3>
+                        <p class="video-card-description">Learn how to work with natural light to create stunning portraits and landscape...</p>
+                    </div>
+                </div>
+                <div class="video-card-featured" data-category="Lifestyle">
+                    <div class="video-thumbnail-wrapper">
+                        <video class="video-thumbnail-bg">
+                            <source src="https://edef3.pcloud.com/cfZW7t3pIZWVNcB17Z7ueBZZalEL0kZ2ZZxnJZZOVDRXZx8ZyzZLpZ4HZgpZl4Zb0ZGVZ3kZw8Z28ZwJZ9LZ6JZyNlNDjt3iubbUL3tMb4F3j05mnn7/video1.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay" onclick="playVideo(this)">
+                            <div class="play-button-circle">
+                                <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="video-duration">8:42</div>
+                    </div>
+                    <div class="video-card-info">
+                        <div class="video-category">Lifestyle</div>
+                        <h3 class="video-card-title">Creative Process: Behind the Scenes</h3>
+                        <p class="video-card-description">A look into my creative workflow and daily routines that inspire productivity and...</p>
+                    </div>
+                </div>
+                <div class="video-card-featured" data-category="Travel">
+                    <div class="video-thumbnail-wrapper">
+                        <video class="video-thumbnail-bg">
+                            <source src="https://edef9.pcloud.com/cfZ8zx3pIZgfKcB17Z7ueBZZDqEL0kZ2ZZxnJZZP9H6VZvLZ38Zf8Zk4ZeRZEFZY5Zk0ZyHZ8JZSRZE0ZHRZcVZ9X5D7gaj3U0rmN9j193cqudNmfDX/video2.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay" onclick="playVideo(this)">
+                            <div class="play-button-circle">
+                                <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="video-duration">12:15</div>
+                    </div>
+                    <div class="video-card-info">
+                        <div class="video-category">Travel</div>
+                        <h3 class="video-card-title">Travel Vlog: Exploring Hidden Gems</h3>
+                        <p class="video-card-description">Join me as I discover off-the-beaten-path locations and share travel tips for adventuro...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="article-full-page" class="full-gallery-page">
         <button class="back-to-gallery-btn" onclick="closeArticlePage()">Back</button>
         <button class="close-gallery-btn" onclick="closeArticlePage()">×</button>
         <div class="container" style="padding-top: 2rem;">
             <div class="article-header">
-                <h2 class="section-title">ARTICLE</h2>
+                <h2 class="section-title" style="text-align: center;">ARTICLE</h2>
                 <p class="section-subtitle">Thoughts, stories, and ideas from my journey</p>
                 
                 <div class="search-bar">
@@ -2109,7 +2364,11 @@
         function handleMobileNav() {
             const select = document.getElementById('mobileNav');
             const sectionId = select.value;
-            scrollToSection(sectionId);
+            if (sectionId === 'articles') {
+                openArticlePage();
+            } else {
+                scrollToSection(sectionId);
+            }
         }
 
         // Update mobile nav dropdown based on scroll position
@@ -2258,6 +2517,34 @@
             const articlePage = document.getElementById('article-full-page');
             articlePage.classList.remove('active');
             document.body.style.overflow = 'auto';
+        }
+
+        function openVideoPage() {
+            const videoPage = document.getElementById('video-full-page');
+            videoPage.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoPage() {
+            const videoPage = document.getElementById('video-full-page');
+            videoPage.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function filterVideoCategory(category) {
+            document.querySelectorAll('#video-full-page .category-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('#videoGridFull .video-card-featured');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         function filterCategoryFull(category) {
