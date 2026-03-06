@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walking in Brussels, Belgium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Microsoft Himalaya';
+      src: local('Microsoft Himalaya');
+    }
+  </style>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #0f0f0f;
+      --mid: #6b6b6b;
+      --faint: #d4d4d4;
+      --accent: #a07850;
+      --line: #ebebeb;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 64px 24px 100px;
+    }
+
+    article {
+      max-width: 660px;
+      width: 100%;
+      animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Category ── */
+    .category {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-family: 'Microsoft Himalaya', 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1.18;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      margin-bottom: 22px;
+    }
+
+    h1 span.plain {
+      color: #222;
+    }
+
+    h1 span.city {
+      color: var(--accent);
+    }
+
+    /* ── Meta row ── */
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 0;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+    }
+
+    .meta-item svg { opacity: 0.55; flex-shrink: 0; }
+
+    .sep {
+      width: 1px;
+      height: 11px;
+      background: var(--faint);
+    }
+
+    /* ── Hero image ── */
+    .hero-wrap {
+      margin: 32px 0 36px;
+    }
+
+    .hero-img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      object-fit: cover;
+      max-height: 440px;
+      transition: transform 0.8s ease;
+    }
+
+    .hero-img:hover { transform: scale(1.004); }
+
+    /* ── Body ── */
+    .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: #1c1c1c;
+      font-weight: 300;
+    }
+
+    .body-text p {
+      margin-bottom: 1.5em;
+    }
+
+    /* First letter drop cap */
+    .body-text p:first-child::first-letter {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.6em;
+      font-weight: 400;
+      color: var(--ink);
+      float: left;
+      line-height: 0.82;
+      margin: 3px 7px 0 0;
+    }
+
+    /* ── Quote block — Comic Sans MS ── */
+    .pull-quote {
+      margin: 36px 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .pull-quote__bar {
+      width: 2px;
+      flex-shrink: 0;
+      background: var(--ink);
+      border-radius: 2px;
+      align-self: stretch;
+    }
+
+    .pull-quote__text {
+      font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', cursive;
+      font-style: normal;
+      font-size: clamp(0.88rem, 1.9vw, 0.97rem);
+      line-height: 1.75;
+      color: #2a2a2a;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    /* Artistic color classes */
+    .c-gold  { color: #b07d3a; }
+    .c-sage  { color: #4e7c6a; }
+    .c-slate { color: #3d5f82; }
+    .c-rose  { color: #9b5060; }
+    .c-em    { font-style: italic; }
+
+    /* ── Author section ── */
+    .author-section {
+      margin-top: 52px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-initial {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-initial img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .author-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .author-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c0c0c0;
+    }
+
+    /* ── Mute button ── */
+    .mute-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--line);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.15s;
+      backdrop-filter: blur(6px);
+    }
+
+    .mute-btn:hover {
+      background: #fff;
+      transform: scale(1.08);
+    }
+
+    .mute-btn svg {
+      width: 18px;
+      height: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+  <article>
+
+    <div class="header">
+      <span class="category">Travel</span>
+
+      <h1>
+        <span class="plain">Walking Through the Layers of Brussels, </span><span class="city">Belgium</span>
+      </h1>
+
+      <div class="byline">
+        <div class="meta-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          2022
+        </div>
+        <div class="sep"></div>
+        <div class="meta-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          2 min read
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-wrap">
+      <img
+        class="hero-img"
+        src="https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_04/brussels_02.jpg"
+        alt="Streets of Brussels, Belgium"
+      />
+    </div>
+
+    <div class="body-text">
+      <p>
+        <span class="c-slate">Rationality, institutions, order, negotiation, decision-making</span>—when these <span class="c-gold c-em">grand narratives</span> unfold, what people first perceive is the outline of <span class="c-em">power</span> and well-ordered structure. Together, they shape the external imagination of this city: it is precisely Belgium's capital, <span class="c-sage">Brussels</span>, and also the <span class="c-rose">"capital"</span> of the European Union in both political and geographical senses.
+      </p>
+
+      <div class="pull-quote">
+        <span class="pull-quote__bar"></span>
+        <p class="pull-quote__text">When I walk through this city, in those wonderful moments—sunlight pouring down on a summer afternoon—I move among the lines of sculptures, the textures of marble, and the domes of buildings, feeling the past glory and the wisdom of civilization, while harboring endless respect for those fearless pioneers and tireless creators.</p>
+      </div>
+
+      <p>
+        However, as residents, people are often more attuned to the city's <span class="c-slate c-em">multiple facets</span>. <span class="c-gold">Power and everyday life</span> coexist, reason and sensibility clash; institutions can be both rigidly structured and, at times, inefficient or loosely organized. Acknowledging this complexity does not mean avoiding the problems. On the contrary, candidly reflecting on the city's <span class="c-rose">"less-than-ideal"</span> aspects should not be overshadowed by the halo of being the <span class="c-sage c-em">"Capital of Europe."</span> Such reflection is a form of self-correction and a prerequisite for maintaining the city's vitality.
+      </p>
+
+      <p>
+        For travelers, however, another perspective emerges: every street and alleyway exudes its own unique charm. Belgium is renowned for its <span class="c-gold">beer</span>—the golden liquid shimmering in glasses, foam gently rolling, carrying <span class="c-em">centuries of brewing wisdom</span>. From the dark, rich abbey beers to the crisp lagers of corner pubs, every sip is a continuation of history and storytelling. Cafés fill the air with the rich aroma of <span class="c-rose">coffee</span>, like a warm mist gently embracing every passerby, while the city's signature <span class="c-gold">chocolate</span> releases deep cocoa scents, its sweetness and richness intertwining, letting time flow slowly across the tongue, inviting one to pause. <span class="c-slate">Colorful comics</span> leap from walls, narrating tales of humor and creativity. The <span class="c-sage">Grand Place</span>, centered around the magnificent Town Hall and surrounded by historic buildings, unfolds like an open-air gallery: sculpted façades and spires glimmer under golden sunlight, echoing <span class="c-gold c-em">past wealth and splendor</span>; the cobblestones reflect light and shadow, letting history and laughter intermingle in the air. Every step reveals the city's glory and the weight of time. <span class="c-slate">Classical carvings</span> juxtapose with modern glass façades, church domes shimmer in shifting light, and streets, coffee aromas, beer foam, and comic colors converge, composing the <span class="c-sage c-em">unique warmth and rhythm of Brussels</span>.
+      </p>
+
+      <p>
+        When you walk through the city, your gaze follows the tram tracks stretching toward the street's end, where the 19th-century Roman-Byzantine <span class="c-sage">Église Royale Sainte-Marie</span> rises prominently. Its dome <span class="c-em">solemnly and silently</span> watches over the city, serving not only as a <span class="c-rose">religious symbol</span> but also as a witness to <span class="c-gold">historical brilliance</span>—reminding modern observers that past courage and creativity forged the enduring, and inspiring future generations to pursue higher values and achievements with passion and wisdom.
+      </p>
+
+      <p>
+        What we face is not the city itself, but our own <span class="c-slate c-em">stance and actions</span>. Just as with any topic of discussion, we need both <span class="c-gold">reason</span>—to analyze structures and logic—and <span class="c-rose">sensibility</span>—to perceive what is worthy of appreciation. The city's multiplicity cannot be erased, and its contradictions and complexities cannot be entirely resolved. Yet we can choose where to linger, where to focus our attention, and how to respond through action to the values we recognize. As modern citizens, we are not merely shaped by our environment; we are <span class="c-sage c-em">agents capable of imbuing it with meaning</span>.
+      </p>
+
+      <p>
+        We are not mere spectators. A city is not an abstract political symbol, but a <span class="c-gold c-em">living community</span> composed of countless individuals. The civility of public spaces, the conscious respect for rules, and the ongoing pursuit of technological and cultural progress all depend on <span class="c-slate">stable and sustained participation</span> from individuals. While institutional design is important, without everyday, subtle <span class="c-sage">civic practices</span>, even the grandest structures cannot truly take root. A single act of following rules, a moment of <span class="c-rose">respect toward others</span>, a participation in public affairs—each is a concrete contribution to the city's quality. In other words, the city's character arises both from macro-level structures and from <span class="c-gold c-em">micro-level individual actions</span>. Each person is part of the city, and each is a shaper of its future form.
+      </p>
+    </div>
+
+    <div class="author-section">
+      <div class="author-initial">
+        <img src="https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/p1.jpg" alt="Rist JianWen.CHENG" />
+      </div>
+      <div class="author-text">
+        <span class="author-label">Written by</span>
+        <span class="author-name">Rist JianWen.CHENG</span>
+      </div>
+    </div>
+
+  </article>
+  </div>
+
+  <!-- Background audio -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_04/Astra%20Club%20-%20Landing%20ft%20Julietta.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Mute toggle button -->
+  <button class="mute-btn" id="muteBtn" title="Toggle sound" onclick="toggleMute()">
+    <svg id="iconMuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+    <svg id="iconSound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+  </button>
+
+  <script>
+    const audio = document.getElementById('bgAudio');
+    let hasTriggered = false;
+
+    window.addEventListener('scroll', function () {
+      if (!hasTriggered && window.scrollY > 0) {
+        hasTriggered = true;
+        audio.play().then(() => {
+          // Successfully playing with sound
+          document.getElementById('iconMuted').style.display = 'none';
+          document.getElementById('iconSound').style.display = 'block';
+        }).catch(() => {
+          // Browser blocked — stay muted state
+        });
+      }
+    }, { passive: true });
+
+    function toggleMute() {
+      if (audio.paused) {
+        audio.play();
+        audio.muted = false;
+        document.getElementById('iconMuted').style.display = 'none';
+        document.getElementById('iconSound').style.display = 'block';
+      } else {
+        audio.muted = !audio.muted;
+        document.getElementById('iconMuted').style.display = audio.muted ? 'block' : 'none';
+        document.getElementById('iconSound').style.display = audio.muted ? 'none' : 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
