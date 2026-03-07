@@ -1489,6 +1489,36 @@
             background: color-mix(in srgb, var(--modal-cat-color, #7c6fcd) 12%, transparent) !important;
         }
 
+        /* Download & Link buttons in video modal – rainbow → category color on hover */
+        #videoModalDownloadBtn,
+        #videoModalLinkBtn {
+            background: linear-gradient(90deg,
+                #a78bfa, #38bdf8, #86efac, #94a3b8, #4ade80, #38bdf8, #a78bfa);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: btn-rainbow 3s linear infinite;
+        }
+        #videoModalDownloadBtn svg,
+        #videoModalLinkBtn svg {
+            stroke: #a78bfa;
+            animation: svgHue 3s linear infinite;
+        }
+        #videoModalDownloadBtn:hover,
+        #videoModalLinkBtn:hover {
+            animation: none;
+            background: var(--modal-cat-color, #7c6fcd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #videoModalDownloadBtn:hover svg,
+        #videoModalLinkBtn:hover svg {
+            animation: none;
+            stroke: var(--modal-cat-color, #7c6fcd);
+        }
+
         .featured-articles-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1669,6 +1699,16 @@
             margin: 3rem auto;
         }
 
+        .profile-image-wrap {
+            margin: 0 0 3rem 0;
+        }
+        .profile-image-wrap img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+        }
+
         .info-section {
             margin-bottom: 4rem;
         }
@@ -1686,6 +1726,10 @@
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1rem;
+        }
+
+        .cv-item p {
+            margin-bottom: 0.25rem;
         }
 
         .cv-item {
@@ -2293,6 +2337,22 @@
 
             .info-content {
                 margin: 1.5rem auto;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .profile-image-wrap {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 0 2rem 0;
+                box-sizing: border-box;
+            }
+            .profile-image-wrap img {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 8px;
+                display: block;
             }
 
             .info-section {
@@ -2307,6 +2367,10 @@
             .info-section p {
                 font-size: 0.95rem;
                 margin-bottom: 0.8rem;
+            }
+
+            .cv-item p {
+                margin-bottom: 0.25rem;
             }
 
             .cv-item {
@@ -2473,7 +2537,11 @@
             if (catEl) {
                 const catName = category || 'Work';
                 catEl.textContent = catName;
-                catEl.style.color = getVideoCategoryColor(catName);
+                const catColor = getVideoCategoryColor(catName);
+                catEl.style.color = catColor;
+                // Propagate category color to all modal action buttons via CSS var
+                const descArea = document.getElementById('videoModalDescArea');
+                if (descArea) descArea.style.setProperty('--modal-cat-color', catColor);
             }
 
             // Set watchTime
@@ -2851,10 +2919,10 @@
     <section id="information" class="section">
         <div class="container">
             <h2 class="section-title">Information</h2>
-            <div style="text-align: center; margin: 0 auto 4rem; max-width: 400px;">
-                <img src="https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/p1.jpg" alt="RIST JIANWEN CHENG" style="width: 100%; max-width: 300px; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-            </div>
             <div class="info-content">
+                <div class="profile-image-wrap">
+                    <img id="profileImage" src="https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/p1.jpg" alt="RIST JIANWEN CHENG" style="width: 100%; max-width: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: block;">
+                </div>
                 <div class="info-section">
                     <h2>BIOGRAPHY <span style="color: var(--primary-bg); user-select: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0;">程鉴闻 程鉴文 程健文</span></h2>
                     <p>I am passionate about art, I am curious about science. I grew up in a quiet, small, natural area, which was the starting point of my growth: In the fragrant, awakening days of early spring, I felt the vitality of life; on sweltering summer nights, I looked up at the starry sky and imagined the unknown universe; In the misty late autumn, I am immersed in my thoughts as the fallen leaves drift by; and in the bitter cold of winter, I experience the power of silence and perseverance. These vividly changing seasons sharpened my perception and imagination.</p>
@@ -2911,54 +2979,63 @@
                         <p>Chickenhare and the Secret of the Groundhog — Feature Film | Brussels, Belgium / Paris, France<br>
                         The film was produced by Belgium's nWave Digital and France's Octopolis, in association with Sony Pictures Releasing. World Premiere at Annecy International Film Festival.<br>
                         Distributed by: SND (France) / Sony Pictures (International)</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: June 15, 2023</div>
                         <p>The Inseparables — Feature Film | Brussels, Belgium / Paris, France / Madrid, Spain<br>
                         The film was produced by Belgium's nWave Digital and France's Octopolis, in association with Spain's A Contracorriente Films. World Premiere at Annecy International Film Festival.<br>
                         Distributed by: KMBO (France)</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: February 3, 2022</div>
                         <p>Hopper et le hamster des ténèbres — Feature Film | Brussels, Belgium / Paris, France<br>
                         The film was produced by Belgium's nWave Digital and France's Octopolis. World premiere in Russia.<br>
                         Distributed by: Belga Films (Benelux) / Sony Pictures Releasing / Netflix (International) / Lionsgate (USA)</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: August 5, 2020</div>
                         <p>Bigfoot Family — Feature Film | Brussels, Belgium / Paris, France<br>
                         The film was produced by Belgium's nWave Digital and France's Octopolis. World Premiere at Annecy International Film Festival.<br>
                         Distributed by: Belga Films (Benelux) / Apollo Films / TF1 Studio (France) / Netflix (International)</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: April 3, 2019</div>
                         <p>The Queen's Corgi — Feature Film | Brussels, Belgium<br>
                         The film was produced by nWave Pictures (Brussels, Belgium). World Premiere at L'Alpe d'Huez International Comedy Film Festival.<br>
                         Distributed by: Belga Films</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: July 26, 2017</div>
                         <p>The Son of Bigfoot — Feature Film | Paris, France / Brussels, Belgium<br>
                         The film was produced by Belgium's nWave Digital and France's StudioCanal. World Premiere at Annecy International Film Festival.<br>
                         Distributed by: Belga Films (Benelux) / StudioCanal (France)</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Date: January 23, 2016</div>
                         <p>Kung Fu Panda 3 — Feature Film | California, USA / Shanghai, China<br>
                         The film was co-produced by the Hollywood studio DreamWorks and Oriental DreamWorks, a Shanghai-based joint venture between DreamWorks and Chinese partners. It marked the first time a U.S.-led feature film was co-produced with China, and the film held its world premiere in China.<br>
                         Distributed by: 20th Century Fox</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Dates: November 11, 2014</div>
                         <p>How to Train Your Dragon: Dragons - Dawn of the Dragon Racers — TV Series | California, USA / Shanghai, China<br>
                         The Series was produced by DreamWorks in collaboration with Oriental DreamWorks<br>
                         Distributed by: Netflix</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                     <div class="cv-item">
                         <div class="cv-year">Release Dates: September 19, 2013</div>
                         <p>How to Train Your Dragon: Dragons – Defenders of Berk — TV Series | California, USA / Shanghai, China<br>
                         The Series was produced by DreamWorks in collaboration with Oriental DreamWorks<br>
                         Distributed by: Netflix</p>
+                        <div style="margin-top:0.25rem; margin-left:-0.4rem;"><a class="video-share-btn video-download-btn" href="https://www.imdb.com/name/nm15024113/" target="_blank" rel="noopener noreferrer" title="Open IMDb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IMDb</a></div>
                     </div>
                 </div>
 
@@ -4471,7 +4548,8 @@
 
             // Seeded fallback aspects
             images.forEach(function(item, idx) {
-                window._GALLERY_ITEM_ASPECTS[idx] = 0.75 + seededRand() * 0.8;
+                var rawAsp = 0.7 + seededRand() * 0.6;
+                window._GALLERY_ITEM_ASPECTS[idx] = Math.min(rawAsp, 1.5);
             });
 
             images.forEach(function(item, idx) {
@@ -4529,77 +4607,76 @@
             var items = window._GALLERY_ITEMS_ELS || [];
             if (!items.length) return;
 
-            // Only layout visible items
             var visible = items.filter(function(el) { return el.style.display !== 'none'; });
             if (!visible.length) { grid.style.height = '0'; return; }
 
-            var GAP = 10;
+            var GAP = 12;
             var containerW = grid.getBoundingClientRect().width || grid.offsetWidth;
             if (!containerW) return;
 
-            // Row heights cycle — variety
-            var rowHeightOptions = [170, 200, 220, 190, 240, 180, 210, 230];
-            var rowHIdx = 0;
+            // Responsive column count
+            var COLS = containerW < 480 ? 2
+                     : containerW < 768 ? 3
+                     : containerW < 1100 ? 4
+                     : 5;
 
-            // Left-to-right packing:
-            // Fill each row: pick a target height, compute each image's width = height / aspectRatio
-            // Scale widths to fill containerW exactly
-            var curY = 0;
-            var i = 0;
+            var colW = (containerW - GAP * (COLS - 1)) / COLS;
 
-            while (i < visible.length) {
-                var targetH = rowHeightOptions[rowHIdx % rowHeightOptions.length];
-                rowHIdx++;
+            // Column height trackers
+            var colHeights = [];
+            for (var c = 0; c < COLS; c++) colHeights.push(0);
 
-                // Collect items for this row until width is filled
-                var rowItems = [];
-                var totalW = 0;
-                var j = i;
-                while (j < visible.length) {
-                    var el = visible[j];
-                    var aspect = parseFloat(el.dataset.idx) >= 0 && window._GALLERY_ASPECTS
-                        ? (window._GALLERY_ASPECTS[el.dataset.idx] || 0.75)
-                        : 0.75;
-                    // Use stored aspect from itemAspects array via data-idx
-                    var idxVal = parseInt(el.dataset.idx);
-                    var asp = (window._GALLERY_ITEM_ASPECTS && window._GALLERY_ITEM_ASPECTS[idxVal]) || 0.75;
-                    var w = targetH / asp;
-                    totalW += w;
-                    rowItems.push({ el: el, naturalW: w, asp: asp });
-                    j++;
-                    // Stop if this row would be comfortably filled
-                    if (totalW >= containerW - GAP * (rowItems.length - 1)) break;
-                }
-
-                // Scale to fit container width exactly
-                var totalGap = GAP * (rowItems.length - 1);
-                var scale = (containerW - totalGap) / (totalW || 1);
-                // If last row and not full, don't stretch — keep natural size capped at container
-                var isLastRow = (j >= visible.length);
-                if (isLastRow && totalW < containerW * 0.6) {
-                    scale = Math.min(1, (containerW - totalGap) / (totalW || 1));
-                }
-                var rowH = targetH * scale;
-
-                // Position each item in this row
-                var curX = 0;
-                for (var k = 0; k < rowItems.length; k++) {
-                    var ri = rowItems[k];
-                    var itemW = ri.naturalW * scale;
-                    // Last item fills remaining space to avoid rounding gaps
-                    if (k === rowItems.length - 1) itemW = containerW - curX;
-                    ri.el.style.left   = curX + 'px';
-                    ri.el.style.top    = curY + 'px';
-                    ri.el.style.width  = itemW + 'px';
-                    ri.el.style.height = rowH + 'px';
-                    curX += itemW + GAP;
-                }
-
-                curY += rowH + GAP;
-                i = j;
+            // Seeded random for consistent layout per session
+            var _seed = 7;
+            function sr() {
+                _seed = (_seed * 1664525 + 1013904223) & 0xffffffff;
+                return (_seed >>> 0) / 0xffffffff;
             }
 
-            grid.style.height = (curY - GAP) + 'px';
+            visible.forEach(function(el) {
+                var idxVal = parseInt(el.dataset.idx);
+                var asp = (window._GALLERY_ITEM_ASPECTS && window._GALLERY_ITEM_ASPECTS[idxVal]);
+
+                // If real aspect not loaded yet, use seeded random (portrait-biased like Pinterest)
+                if (!asp || asp <= 0) asp = 0.7 + sr() * 0.6; // height/width ratio 0.7–1.3
+                // Cap: never taller than 1.5× column width
+                if (asp > 1.5) asp = 1.5;
+
+                // Occasionally give an item double width (25% chance, only if not last col)
+                var useDouble = (sr() < 0.22) && (COLS >= 3);
+
+                // Find shortest column
+                var shortestCol = 0;
+                for (var c2 = 1; c2 < COLS; c2++) {
+                    if (colHeights[c2] < colHeights[shortestCol]) shortestCol = c2;
+                }
+
+                // Double-wide only if it fits without overflowing
+                if (useDouble && shortestCol < COLS - 1) {
+                    var itemW = colW * 2 + GAP;
+                    var itemH = itemW * asp;
+                    var x = shortestCol * (colW + GAP);
+                    var y = Math.max(colHeights[shortestCol], colHeights[shortestCol + 1]);
+                    el.style.left   = x + 'px';
+                    el.style.top    = y + 'px';
+                    el.style.width  = itemW + 'px';
+                    el.style.height = itemH + 'px';
+                    colHeights[shortestCol]     = y + itemH + GAP;
+                    colHeights[shortestCol + 1] = y + itemH + GAP;
+                } else {
+                    var itemW2 = colW;
+                    var itemH2 = itemW2 * asp;
+                    var x2 = shortestCol * (colW + GAP);
+                    var y2 = colHeights[shortestCol];
+                    el.style.left   = x2 + 'px';
+                    el.style.top    = y2 + 'px';
+                    el.style.width  = itemW2 + 'px';
+                    el.style.height = itemH2 + 'px';
+                    colHeights[shortestCol] = y2 + itemH2 + GAP;
+                }
+            });
+
+            grid.style.height = (Math.max.apply(null, colHeights) - GAP) + 'px';
         }
 
         function getVideoCategoryColor(category) {
@@ -4925,7 +5002,38 @@
 
         // ───────────────────────────────────────────────────────────────────
 
+        // ── Load site config from index.json ──
+        function loadSiteConfig() {
+            fetch('index.json')
+                .then(function(res) { return res.json(); })
+                .then(function(cfg) {
+                    var assets = cfg.assets || [];
+                    assets.forEach(function(asset) {
+                        var t = (asset.title || '').toLowerCase();
+                        if (t === 'website movie' && asset.type === 'video' && asset.movie_url) {
+                            var src = document.querySelector('#heroLogoVideo source');
+                            if (src) {
+                                src.src = asset.movie_url;
+                                document.getElementById('heroLogoVideo').load();
+                            }
+                        } else if (t === 'website icon' && asset.type === 'image' && asset.image_url) {
+                            var favicon = document.querySelector('link[rel="icon"]');
+                            var appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+                            if (favicon) favicon.href = asset.image_url;
+                            if (appleIcon) appleIcon.href = asset.image_url;
+                        } else if (t === 'profile image' && asset.type === 'image' && asset.image_url) {
+                            var profileImg = document.getElementById('profileImage');
+                            if (profileImg) profileImg.src = asset.image_url;
+                        }
+                    });
+                })
+                .catch(function(err) { console.warn('Could not load index.json:', err); });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Load site config (hero video, icon, profile image) from index.json
+            loadSiteConfig();
+
             // Load videos from Videos/videos_index.json
             loadVideos();
 
@@ -4939,17 +5047,23 @@
             if (heroVideo) {
                 heroVideo.muted = true;
 
+                // Track whether the video is currently visible in viewport
+                var _heroVisible = false;
+                var _hasScrolled = false; // first scroll triggers play attempt
+
                 function tryPlay() {
+                    if (!_heroVisible) return; // never play when off-screen
                     heroVideo.play().catch(function() {
                         heroVideo.addEventListener('canplay', function onReady() {
                             heroVideo.removeEventListener('canplay', onReady);
-                            heroVideo.play().catch(function(){});
+                            if (_heroVisible) heroVideo.play().catch(function(){});
                         });
                     });
                 }
 
-                // Unmute on first user interaction (browser autoplay policy requires muted start)
+                // Unmute on first user interaction — only if video is visible
                 function restoreSound() {
+                    if (!_heroVisible) return; // ignore clicks when video is off-screen
                     heroVideo.muted = false;
                     heroVideo.volume = 1;
                     document.removeEventListener('click', restoreSound);
@@ -4964,6 +5078,7 @@
                 // threshold: 0.5 = video must be at least 50% visible to play
                 const videoObs = new IntersectionObserver(function(entries) {
                     entries.forEach(function(entry) {
+                        _heroVisible = entry.isIntersecting;
                         if (entry.isIntersecting) {
                             tryPlay();
                         } else {
@@ -4973,20 +5088,33 @@
                 }, { threshold: 0.5 });
                 videoObs.observe(heroVideo);
 
-                // Also pause when page scrolls video mostly out of view
+                // Also pause/play when page scrolls video in or out of view
                 window.addEventListener('scroll', function() {
                     var rect = heroVideo.getBoundingClientRect();
                     var visibleH = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-                    var ratio = visibleH / rect.height;
-                    if (ratio < 0.5) {
+                    var ratio = rect.height > 0 ? visibleH / rect.height : 0;
+                    _heroVisible = ratio >= 0.5;
+
+                    // First scroll: attempt play (satisfies browser autoplay policy for muted video)
+                    if (!_hasScrolled) {
+                        _hasScrolled = true;
+                        if (_heroVisible) tryPlay();
+                    }
+
+                    if (!_heroVisible) {
                         heroVideo.pause();
                     } else if (heroVideo.paused) {
                         tryPlay();
                     }
                 }, { passive: true });
 
-                // Immediate play attempt on page load (video starts in view)
-                tryPlay();
+                // Immediate play attempt on page load — only if video starts in view
+                (function() {
+                    var rect = heroVideo.getBoundingClientRect();
+                    var visibleH = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+                    _heroVisible = rect.height > 0 && (visibleH / rect.height) >= 0.5;
+                    tryPlay();
+                })();
             }
 
             document.querySelectorAll('.filter-tag').forEach(function(tag) {
