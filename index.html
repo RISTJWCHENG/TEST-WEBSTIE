@@ -1703,10 +1703,10 @@
             margin: 0 0 3rem 0;
         }
         .profile-image-wrap img {
-            display: block;
-            width: auto;
-            height: auto;
-            max-width: 100%;
+            display: block !important;
+            width: auto !important;
+            max-width: 300px !important;
+            height: auto !important;
         }
 
         .info-section {
@@ -1843,6 +1843,13 @@
             border: none;
         }
 
+        /* Disable download + cast overlay on ALL videos */
+        video::-webkit-media-controls-download-button     { display: none !important; }
+        video::-webkit-media-controls-cast-button         { display: none !important; }
+        video::-webkit-media-controls-overlay-cast-button { display: none !important; }
+        video::-internal-media-controls-download-button   { display: none !important; }
+        video::-webkit-media-controls-overflow-button     { display: none !important; }
+
         /* Hero logo video - no browser controls or hover UI */
         #heroLogoVideo {
             pointer-events: none;
@@ -1851,7 +1858,7 @@
         #heroLogoVideo::-webkit-media-controls { display: none !important; }
         #heroLogoVideo::-webkit-media-controls-enclosure { display: none !important; }
         #heroLogoVideo::-webkit-media-controls-overlay-cast-button { display: none !important; }
-        #heroLogoVideo::--webkit-media-controls-download-button { display: none !important; }
+        #heroLogoVideo::-webkit-media-controls-download-button { display: none !important; }
 
 
         .video-modal {
@@ -2349,10 +2356,10 @@
                 box-sizing: border-box;
             }
             .profile-image-wrap img {
-                width: 100%;
-                max-width: 100%;
+                width: 100% !important;
+                max-width: 100% !important;
                 border-radius: 8px;
-                display: block;
+                display: block !important;
             }
 
             .info-section {
@@ -2517,6 +2524,11 @@
             const player = document.getElementById('videoModalPlayer');
             const source = document.getElementById('videoModalSource');
             const titleEl = document.getElementById('videoModalTitle');
+
+            // Always enforce no-download on the player
+            player.setAttribute('controlslist', 'nodownload noremoteplayback');
+            player.setAttribute('disablepictureinpicture', '');
+            player.oncontextmenu = function() { return false; };
 
             titleEl.textContent = title || '';
             source.src = videoUrl;
@@ -3283,7 +3295,7 @@
                     <button class="video-modal-btn" onclick="closeVideoModal()" title="关闭">×</button>
                 </div>
             </div>
-            <video id="videoModalPlayer" controls playsinline style="flex:1;">
+            <video id="videoModalPlayer" controls playsinline controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false;" style="flex:1;">
                 <source id="videoModalSource" src="" type="video/mp4">
             </video>
             <div class="video-modal-desc-area" id="videoModalDescArea" style="display:none;">
