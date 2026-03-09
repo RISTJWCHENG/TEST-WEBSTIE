@@ -839,14 +839,32 @@
                 max-width: 98vw;
                 border-radius: 12px;
             }
+            /* Image area: padding so image aligns with text, rounded to clip image corners */
+            .img-modal-left {
+                padding: 0.75rem 0.75rem 0 0.75rem;
+                background: #111;
+                border-radius: 10px 10px 0 0; /* top corners of card */
+                overflow: visible;             /* let child's own border-radius show */
+            }
+            .img-modal-slider {
+                border-radius: 10px;
+                overflow: hidden;              /* clip image to rounded slider */
+            }
+            /* Image itself: fill the slider, corners clipped by slider */
+            .img-modal-left img {
+                max-height: 52vw;
+                width: 100%;
+                border-radius: 10px !important;
+                object-fit: cover;
+            }
+            /* Info panel: same horizontal padding as image area for alignment */
             .img-modal-right {
                 width: 100%;
-                padding: 1rem 1.2rem;
+                padding: 0.75rem 0.75rem 1rem 0.75rem;
                 max-height: 40vh;
                 max-height: calc(var(--vh, 1vh) * 40);
                 background: #111;
             }
-            .img-modal-left img { max-height: 52vw; }
 
             /* ── Full-card swipe track (mobile only) ── */
             /* Hide the original static card when track is active */
@@ -3333,7 +3351,7 @@
             <button class="modal-close" onclick="closeImageModal()">×</button>
             <div class="img-modal-left">
                 <div class="img-modal-slider" id="imgModalSlider">
-                    <img id="modalImage" src="" alt="">
+                    <img id="modalImage" src="" alt="" class="modal-img-rounded">
                 </div>
                 <div class="img-share-toast" id="imgShareToast">🔗 Image link copied!</div>
                 <button class="img-modal-maximize-btn" onclick="event.stopPropagation();openImageFullscreen()" ontouchend="event.stopPropagation();event.preventDefault();openImageFullscreen();" title="Maximize">
@@ -3881,7 +3899,7 @@
             // Create new img that slides in
             var newImg = document.createElement('img');
             newImg.src = item.image_url;
-            newImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;max-width:100%;max-height:88vh;object-fit:contain;';
+            newImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;max-width:100%;max-height:88vh;object-fit:cover;border-radius:10px;';
 
             var dur = 320; // ms — match animation duration
             var enterClass = dir > 0 ? 'slide-enter-right' : 'slide-enter-left';
@@ -3919,6 +3937,7 @@
                 newImg.style.position   = '';
                 newImg.style.top = ''; newImg.style.left = '';
                 newImg.style.width = ''; newImg.style.height = '';
+                newImg.style.borderRadius = '10px';  /* keep corners after style reset */
                 // Remove old img
                 if (oldImg.parentNode) oldImg.parentNode.removeChild(oldImg);
                 // Reset slider
