@@ -418,7 +418,7 @@
             transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
         }
         .gallery-card-btn:nth-child(2) {
-            animation-delay: 1s;
+            animation-delay: 0s;
         }
         .gallery-card-btn:hover {
             animation: none;
@@ -702,7 +702,6 @@
             font-family: inherit;
             cursor: pointer;
             animation: modalBtnColorCycle 4s ease-in-out infinite;
-            animation-delay: 1s;
             transition: color 0.3s;
         }
         .img-modal-link-btn:hover {
@@ -899,9 +898,22 @@
             #imageModal .modal-content.img-modal-content:not(.img-card-track .img-modal-content) {
                 display: none !important;
             }
-            /* On mobile, align modal to top so card sits flush at top */
+            /* On mobile: modal bg transparent, card has its own bg, no black void */
             #imageModal {
                 align-items: flex-start !important;
+                background: transparent !important;
+            }
+            /* Dim overlay behind the card — only fills what's needed */
+            #imageModal::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.85);
+                z-index: -1;
+            }
+            /* Card itself must be fully opaque with its own background */
+            .img-card-track .img-modal-content {
+                background: #111 !important;
             }
             .img-card-track-wrap {
                 overflow-x: hidden;
@@ -909,8 +921,9 @@
                 -webkit-overflow-scrolling: touch;
                 overscroll-behavior-y: contain;
                 width: 100vw;
-                height: 100vh;
-                height: calc(var(--vh, 1vh) * 100);
+                /* height = card content, capped at viewport — no black void */
+                height: auto;
+                max-height: 100dvh;
                 position: relative;
                 touch-action: pan-y;
                 background: transparent;
@@ -921,12 +934,12 @@
                 width: 300vw;
                 transform: translateX(-100vw);
                 will-change: transform;
+                align-items: flex-start;
             }
             .img-card-track .img-modal-content {
                 flex: 0 0 100vw;
                 width: 100vw;
                 max-width: 100vw;
-                /* Height = exactly content height, no forced min */
                 min-height: unset;
                 height: auto;
                 flex-direction: column;
@@ -1045,6 +1058,7 @@
             height: auto;
             aspect-ratio: 509/248;
             object-fit: cover;
+            display: block;
         }
 
         .article-card-content {
@@ -2600,13 +2614,25 @@
             .close-gallery-btn, .close-gallery-btn:hover,
             .back-to-gallery-btn, .back-to-gallery-btn:hover,
             .btn-rainbow-text,
-            .gallery-card-btn, .gallery-card-btn:nth-child(2),
-            .img-modal-share-btn, .img-modal-link-btn,
             .video-share-btn, .video-share-btn svg,
             #videoModalShareBtn span, #videoModalShareBtn svg,
             #videoModalDownloadBtn, #videoModalDownloadBtn svg,
             #videoModalLinkBtn, #videoModalLinkBtn svg {
                 animation: none !important;
+            }
+
+            /* gallery-card-btn keeps color cycle animation on mobile */
+            .gallery-card-btn,
+            .gallery-card-btn:nth-child(2) {
+                animation: cardBtnColorCycle 4s ease-in-out infinite !important;
+                animation-delay: 0s !important;
+            }
+
+            /* img card Article + Share buttons — keep color cycle animation on mobile */
+            .img-modal-share-btn,
+            .img-modal-link-btn {
+                animation: modalBtnColorCycle 4s ease-in-out infinite !important;
+                animation-delay: 0s !important;
             }
 
             /* 2. Replace animated gradient text with static purple color */
@@ -4490,17 +4516,6 @@
                 if (nav) modal.insertBefore(wrap, nav);
                 else modal.appendChild(wrap);
 
-                // After paint: set wrap height = card content height (capped at vh)
-                // so scroll stops exactly at Article/Share buttons, no black void below
-                requestAnimationFrame(function() {
-                    var vh = window.innerHeight;
-                    var currentCard = track.children[1]; // middle card is current
-                    if (currentCard) {
-                        var cardH = currentCard.scrollHeight;
-                        wrap.style.height = Math.min(cardH, vh) + 'px';
-                    }
-                });
-
                 // Attach swipe + scroll listeners to this wrap instance
                 if (typeof window._attachCardSwipeListeners === 'function') {
                     window._attachCardSwipeListeners(wrap);
@@ -4537,19 +4552,6 @@
                 img.src = item.image_url;
                 img.alt = item.title || '';
                 if (isCurrent) img.id = 'modalImage';
-                // After image loads, recalculate wrap height accurately
-                if (isCurrent) {
-                    img.addEventListener('load', function() {
-                        var modal = document.getElementById('imageModal');
-                        var wrap = modal && modal.querySelector('.img-card-track-wrap');
-                        var track = wrap && wrap.querySelector('.img-card-track');
-                        var currentCard = track && track.children[1];
-                        if (wrap && currentCard) {
-                            var vh = window.innerHeight;
-                            wrap.style.height = Math.min(currentCard.scrollHeight, vh) + 'px';
-                        }
-                    });
-                }
                 slider.appendChild(img);
                 left.appendChild(slider);
 
@@ -4622,17 +4624,35 @@
                 var linksEl = document.createElement('div');
                 linksEl.className = 'img-modal-links';
                 if (isCurrent) linksEl.id = 'imgModalLinks';
+
+                // Touch flash helper for img card buttons
+                function attachModalBtnFlash(btn) {
+                    btn.addEventListener('touchstart', function() {
+                        var svg = btn.querySelector('svg');
+                        btn.style.setProperty('animation', 'none', 'important');
+                        btn.style.setProperty('color', catColor, 'important');
+                        if (svg) svg.style.setProperty('stroke', catColor, 'important');
+                        setTimeout(function() {
+                            btn.style.removeProperty('animation');
+                            btn.style.removeProperty('color');
+                            if (svg) svg.style.removeProperty('stroke');
+                        }, 400);
+                    }, { passive: true });
+                }
+
                 if (item.link && item.link[0] && item.link[1]) {
                     var a = document.createElement('a');
                     a.className = 'img-modal-link-btn';
                     a.href = item.link[1]; a.target = '_blank'; a.rel = 'noopener noreferrer';
                     a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' + item.link[0];
+                    attachModalBtnFlash(a);
                     linksEl.appendChild(a);
                 }
                 var shareBtn = document.createElement('button');
                 shareBtn.className = 'img-modal-share-btn';
                 shareBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share';
                 if (isCurrent) shareBtn.onclick = function() { shareCurrentImage(); };
+                attachModalBtnFlash(shareBtn);
                 linksEl.appendChild(shareBtn);
 
                 right.appendChild(catEl);
@@ -4716,26 +4736,38 @@
 
                     if (!swiping && !swipeLocked) {
                         var absDx = Math.abs(dx), absDy = Math.abs(dy);
-                        // Need minimum movement to determine direction
                         if (absDx < 5 && absDy < 5) return;
 
                         if (absDy > absDx) {
-                            // Clearly vertical — let the wrap scroll naturally
                             swipeLocked = true;
                             return;
                         }
                         if (absDx > absDy) {
-                            // Clearly horizontal — start swipe, block vertical
                             swiping = true;
                             _navLocked = true;
                         }
                     }
 
-                    if (swipeLocked) return; // vertical scroll: do nothing, let browser handle
+                    if (swipeLocked) {
+                        // Clamp scroll to card content height — stop exactly at Article/Share buttons
+                        var modal2 = document.getElementById('imageModal');
+                        var track2 = modal2 && modal2.querySelector('.img-card-track');
+                        var currentCard = track2 && track2.children[1];
+                        if (currentCard) {
+                            var cardH = currentCard.scrollHeight;
+                            var vh = window.innerHeight;
+                            // Max scroll = how much card overflows the viewport
+                            var maxScroll = Math.max(0, cardH - vh);
+                            if (dy < 0 && wrap.scrollTop >= maxScroll) {
+                                e.preventDefault(); // block scrolling past card bottom
+                                wrap.scrollTop = maxScroll; // clamp position
+                            }
+                        }
+                        return;
+                    }
 
                     if (!swiping) return;
 
-                    // Horizontal swipe confirmed — prevent vertical scroll
                     e.preventDefault();
 
                     var modal = document.getElementById('imageModal');
@@ -5152,6 +5184,26 @@
             actions.className = 'gallery-card-actions';
             actions.style.setProperty('--card-cat-color', catColor || '#7c6fcd');
 
+            // Helper: touch flash to catColor then restore animation
+            function attachTouchFlash(btn) {
+                btn.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                    var svg = btn.querySelector('svg');
+                    // Pause animation and flash catColor
+                    btn.style.setProperty('animation', 'none', 'important');
+                    btn.style.setProperty('color', catColor || '#7c6fcd', 'important');
+                    btn.style.setProperty('border-color', catColor || '#7c6fcd', 'important');
+                    if (svg) svg.style.setProperty('stroke', catColor || '#7c6fcd', 'important');
+                    // Restore animation after flash
+                    setTimeout(function() {
+                        btn.style.removeProperty('animation');
+                        btn.style.removeProperty('color');
+                        btn.style.removeProperty('border-color');
+                        if (svg) svg.style.removeProperty('stroke');
+                    }, 400);
+                }, { passive: true });
+            }
+
             if (item.link && item.link[0] && item.link[1]) {
                 var linkBtn = document.createElement('a');
                 linkBtn.className = 'gallery-card-btn';
@@ -5160,6 +5212,7 @@
                 linkBtn.rel = 'noopener';
                 linkBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Article';
                 linkBtn.onclick = function(e) { e.stopPropagation(); };
+                attachTouchFlash(linkBtn);
                 actions.appendChild(linkBtn);
             }
 
@@ -5169,6 +5222,7 @@
             shareBtn.onclick = (function(iu, cat, el) {
                 return function(e) { e.stopPropagation(); shareGalleryCard(iu, cat, el); };
             })(item.image_url, item.category || '', cardEl);
+            attachTouchFlash(shareBtn);
             actions.appendChild(shareBtn);
 
             return actions;
