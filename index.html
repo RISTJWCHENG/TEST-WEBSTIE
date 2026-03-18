@@ -2663,6 +2663,12 @@
             *, *::before, *::after {
                 transition: none !important;
             }
+            /* Exception: keep transform transition for press feedback on buttons */
+            .gallery-card-btn,
+            .img-modal-share-btn,
+            .img-modal-link-btn {
+                transition: transform 0.12s ease !important;
+            }
 
             /* 6. Disable hover transform/shadow on cards */
             .full-gallery-item:hover,
@@ -4625,18 +4631,29 @@
                 linksEl.className = 'img-modal-links';
                 if (isCurrent) linksEl.id = 'imgModalLinks';
 
-                // Touch flash helper for img card buttons
+                // Touch press: scale down + catColor → bounce → restore animation
                 function attachModalBtnFlash(btn) {
                     btn.addEventListener('touchstart', function() {
                         var svg = btn.querySelector('svg');
+                        var cc = catColor || '#7c6fcd';
                         btn.style.setProperty('animation', 'none', 'important');
-                        btn.style.setProperty('color', catColor, 'important');
-                        if (svg) svg.style.setProperty('stroke', catColor, 'important');
+                        btn.style.setProperty('color', cc, 'important');
+                        btn.style.setProperty('transform', 'scale(0.88)', 'important');
+                        if (svg) svg.style.setProperty('stroke', cc, 'important');
+                    }, { passive: true });
+
+                    btn.addEventListener('touchend', function() {
+                        var svg = btn.querySelector('svg');
+                        btn.style.setProperty('transform', 'scale(1.08)', 'important');
+                        setTimeout(function() {
+                            btn.style.setProperty('transform', 'scale(1)', 'important');
+                        }, 120);
                         setTimeout(function() {
                             btn.style.removeProperty('animation');
                             btn.style.removeProperty('color');
+                            btn.style.removeProperty('transform');
                             if (svg) svg.style.removeProperty('stroke');
-                        }, 400);
+                        }, 350);
                     }, { passive: true });
                 }
 
@@ -5184,23 +5201,37 @@
             actions.className = 'gallery-card-actions';
             actions.style.setProperty('--card-cat-color', catColor || '#7c6fcd');
 
-            // Helper: touch flash to catColor then restore animation
+            // Touch press: scale down + catColor → restore animation
             function attachTouchFlash(btn) {
                 btn.addEventListener('touchstart', function(e) {
                     e.stopPropagation();
                     var svg = btn.querySelector('svg');
-                    // Pause animation and flash catColor
+                    var cc = catColor || '#7c6fcd';
+                    // Pause animation, flash catColor, press scale
                     btn.style.setProperty('animation', 'none', 'important');
-                    btn.style.setProperty('color', catColor || '#7c6fcd', 'important');
-                    btn.style.setProperty('border-color', catColor || '#7c6fcd', 'important');
-                    if (svg) svg.style.setProperty('stroke', catColor || '#7c6fcd', 'important');
-                    // Restore animation after flash
+                    btn.style.setProperty('color', cc, 'important');
+                    btn.style.setProperty('border-color', cc, 'important');
+                    btn.style.setProperty('transform', 'scale(0.88)', 'important');
+                    btn.style.setProperty('background', 'rgba(255,255,255,0.55)', 'important');
+                    if (svg) svg.style.setProperty('stroke', cc, 'important');
+                }, { passive: true });
+
+                btn.addEventListener('touchend', function() {
+                    var svg = btn.querySelector('svg');
+                    // Release: bounce back
+                    btn.style.setProperty('transform', 'scale(1.08)', 'important');
+                    setTimeout(function() {
+                        btn.style.setProperty('transform', 'scale(1)', 'important');
+                    }, 120);
+                    // Restore animation after bounce
                     setTimeout(function() {
                         btn.style.removeProperty('animation');
                         btn.style.removeProperty('color');
                         btn.style.removeProperty('border-color');
+                        btn.style.removeProperty('transform');
+                        btn.style.removeProperty('background');
                         if (svg) svg.style.removeProperty('stroke');
-                    }, 400);
+                    }, 350);
                 }, { passive: true });
             }
 
