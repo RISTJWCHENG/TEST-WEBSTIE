@@ -2009,6 +2009,44 @@
         #heroLogoVideo::-webkit-media-controls-overlay-cast-button { display: none !important; }
         #heroLogoVideo::-webkit-media-controls-download-button { display: none !important; }
 
+        /* ── Video modal prev/next nav buttons ── */
+        .video-nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3100;
+            transition: background 0.2s, transform 0.2s;
+            padding: 0;
+        }
+        .video-nav-btn:hover {
+            background: rgba(255,255,255,0.28);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .video-nav-prev { left: 1.2rem; }
+        .video-nav-next { right: 1.2rem; }
+        .video-modal.active .video-nav-btn { display: flex; }
+        @media (max-width: 768px) {
+            .video-nav-btn {
+                width: 36px;
+                height: 36px;
+                top: auto;
+                bottom: 5rem;
+                transform: none;
+            }
+            .video-nav-btn:hover { transform: scale(1.1); }
+            .video-nav-prev { left: 0.6rem; }
+            .video-nav-next { right: 0.6rem; }
+        }
 
         .video-modal {
             display: none;
@@ -2930,6 +2968,11 @@
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Build nav list only on fresh open (not during navigation)
+            if (window._videoNavIndex < 0) {
+                _buildVideoNavList(videoUrl, category);
+            }
         }
 
         function closeVideoModal() {
@@ -2938,9 +2981,138 @@
             player.pause();
             player.currentTime = 0;
             modal.classList.remove('active');
-            // Only restore scroll if no full-screen page is still open
             const anyFullPage = document.querySelector('.full-gallery-page.active');
             document.body.style.overflow = anyFullPage ? 'hidden' : 'auto';
+            window._videoNavIndex = -1;
+        }
+
+        // ── Video navigation state ──
+        window._videoNavList  = [];
+        window._videoNavIndex = -1;
+
+        function _buildVideoNavList(currentVideoUrl, currentCategory) {
+            var all = window._VIDEOS_CACHE || [];
+            if (!all.length) return;
+
+            // Use filename only for URL comparison (avoids absolute vs relative issues)
+            function fname(url) { return (url || '').split('?')[0].split('/').pop(); }
+            var curName = fname(currentVideoUrl);
+
+            // Same category first (preserving JSON order), then others
+            var same  = all.filter(function(v) {
+                return (v.category || 'Work').toLowerCase() === (currentCategory || 'Work').toLowerCase();
+            });
+            var other = all.filter(function(v) {
+                return (v.category || 'Work').toLowerCase() !== (currentCategory || 'Work').toLowerCase();
+            });
+            var ordered = same.concat(other);
+            window._videoNavList = ordered;
+
+            // Point index at current video
+            var idx = 0;
+            for (var i = 0; i < ordered.length; i++) {
+                if (fname(ordered[i].video_url) === curName) { idx = i; break; }
+            }
+            window._videoNavIndex = idx;
+        }
+
+        // Lightweight modal update used when navigating (no modal reopen)
+        function _updateVideoModal(v) {
+            var player  = document.getElementById('videoModalPlayer');
+            var source  = document.getElementById('videoModalSource');
+            var titleEl = document.getElementById('videoModalTitle');
+            var catEl   = document.getElementById('videoModalCategory');
+            var descEl  = document.getElementById('videoModalDesc');
+            var moreBtn = document.getElementById('videoModalMoreBtn');
+            var timeEl  = document.getElementById('videoModalTime');
+            var watchEl = document.getElementById('videoModalWatchTime');
+            var descArea= document.getElementById('videoModalDescArea');
+
+            // Update video source
+            source.src = v.video_url;
+            player.load();
+            player.play().catch(function(){});
+
+            // Update title
+            if (titleEl) titleEl.textContent = v.title || '';
+
+            // Update category + color
+            var catColor = getVideoCategoryColor(v.category || 'Work');
+            if (catEl) { catEl.textContent = v.category || 'Work'; catEl.style.color = catColor; }
+            if (descArea) descArea.style.setProperty('--modal-cat-color', catColor);
+
+            // Update description
+            if (descEl) {
+                descEl.textContent = v.description || '';
+                descEl.classList.remove('expanded');
+            }
+            if (moreBtn) {
+                moreBtn.style.display = 'none';
+                moreBtn.textContent = 'more';
+                if (v.description && v.description.trim()) {
+                    setTimeout(function() {
+                        if (descEl.scrollHeight > descEl.clientHeight + 2) moreBtn.style.display = 'inline-block';
+                    }, 100);
+                }
+            }
+
+            // Update time
+            if (timeEl) timeEl.textContent = v.updated_time ? '📅 ' + v.updated_time : '';
+            if (watchEl) {
+                if (v.watchTime) { watchEl.textContent = '⏱️ ' + v.watchTime; watchEl.style.display = ''; }
+                else { watchEl.style.display = 'none'; }
+            }
+
+            // Show/hide desc area
+            var hasDesc = v.description && v.description.trim();
+            var hasExtra = (v.download && v.download[1]) || (v.link && v.link[1]) || v.updated_time;
+            if (descArea) descArea.style.display = (hasDesc || hasExtra) ? '' : 'none';
+
+            // Update download/link buttons
+            var dlBtn = document.getElementById('videoModalDownloadBtn');
+            if (dlBtn) {
+                if (v.download && v.download[0] && v.download[1]) {
+                    dlBtn.href = v.download[1]; dlBtn.setAttribute('download', '');
+                    dlBtn.querySelector('.modal-btn-label').textContent = v.download[0];
+                    dlBtn.style.display = 'flex';
+                } else { dlBtn.style.display = 'none'; }
+            }
+            var lkBtn = document.getElementById('videoModalLinkBtn');
+            if (lkBtn) {
+                if (v.link && v.link[0] && v.link[1]) {
+                    lkBtn.href = v.link[1];
+                    lkBtn.querySelector('.modal-btn-label').textContent = v.link[0];
+                    lkBtn.style.display = 'flex';
+                } else { lkBtn.style.display = 'none'; }
+            }
+
+            // Re-wire share button
+            var shareBtn = document.getElementById('videoModalShareBtn');
+            if (shareBtn) {
+                shareBtn.onclick = function(e) {
+                    if (e.pointerType === 'touch') return;
+                    var rect = player.getBoundingClientRect();
+                    _showToastAt(rect.left + rect.width/2, rect.top + rect.height/2, catColor, '🔗 Video link copied!');
+                    var shareUrl = window.location.href.split('?')[0] + '?play=' + btoa(encodeURIComponent(v.video_url));
+                    navigator.clipboard.writeText(shareUrl).catch(function() { fallbackCopy(shareUrl, function(){}); });
+                };
+            }
+        }
+
+        function navigateVideo(dir) {
+            var list = window._videoNavList;
+            if (!list || list.length < 2) return;
+            var newIdx = (window._videoNavIndex + dir + list.length) % list.length;
+            window._videoNavIndex = newIdx;
+            var v = list[newIdx];
+            if (!v) return;
+            var player = document.getElementById('videoModalPlayer');
+            player.style.transition = 'opacity 0.15s';
+            player.style.opacity = '0';
+            setTimeout(function() {
+                _updateVideoModal(v);
+                player.style.opacity = '1';
+            }, 150);
         }
 
         function handleVideoModalBgClick(e) {
@@ -2989,7 +3161,10 @@
             const link = card && card.dataset.linkLabel ? [card.dataset.linkLabel, card.dataset.linkUrl] : null;
             const category = card ? card.dataset.category : 'Work';
             const watchTime = card && card.dataset.watchTime ? card.dataset.watchTime : null;
-            openVideoModal(source.src, title, desc, time, download, link, category, watchTime);
+            // Use raw src attribute (not source.src which browser converts to absolute URL)
+            const videoUrl = source.getAttribute('src') || source.src;
+            window._videoNavIndex = -1;
+            openVideoModal(videoUrl, title, desc, time, download, link, category, watchTime);
         }
 
         function playVideoWithThumb(overlay) {
@@ -3004,7 +3179,10 @@
             const link = card && card.dataset.linkLabel ? [card.dataset.linkLabel, card.dataset.linkUrl] : null;
             const category = card ? card.dataset.category : 'Work';
             const watchTime = card && card.dataset.watchTime ? card.dataset.watchTime : null;
-            openVideoModal(source.src, title, desc, time, download, link, category, watchTime);
+            // Use raw src attribute (not source.src which browser converts to absolute URL)
+            const videoUrl = source.getAttribute('src') || source.src;
+            window._videoNavIndex = -1;
+            openVideoModal(videoUrl, title, desc, time, download, link, category, watchTime);
         }
         function filterCategory(category) {
             document.querySelectorAll('.category-tag').forEach(tag => {
@@ -3694,6 +3872,9 @@
 
     <!-- Video Player Modal -->
     <div class="video-modal" id="videoPlayerModal" onclick="handleVideoModalBgClick(event)">
+        <button class="video-nav-btn video-nav-prev" id="videoNavPrev" onclick="event.stopPropagation();navigateVideo(-1)" title="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
         <div class="video-modal-box" id="videoModalBox" style="display:flex;flex-direction:column;">
             <div class="video-modal-topbar">
                 <span class="video-modal-title" id="videoModalTitle"></span>
@@ -3749,6 +3930,9 @@
                 </div>
             </div>
         </div>
+        <button class="video-nav-btn video-nav-next" id="videoNavNext" onclick="event.stopPropagation();navigateVideo(1)" title="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
     </div>
 
     <!-- Share toast notification -->
@@ -5096,8 +5280,15 @@
         }
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight') { navigateImage(1); return; }
-            if (e.key === 'ArrowLeft')  { navigateImage(-1); return; }
+            var videoModalActive = document.getElementById('videoPlayerModal').classList.contains('active');
+            if (e.key === 'ArrowRight') {
+                if (videoModalActive) { navigateVideo(1); return; }
+                navigateImage(1); return;
+            }
+            if (e.key === 'ArrowLeft') {
+                if (videoModalActive) { navigateVideo(-1); return; }
+                navigateImage(-1); return;
+            }
             if (e.key === 'Escape') {
                 closeImageModal();
                 closeImageFullscreen();
@@ -5976,6 +6167,7 @@
                 const sec = document.getElementById('video');
                 if (sec) sec.scrollIntoView({ behavior: 'smooth' });
                 setTimeout(function() {
+                    window._videoNavIndex = -1;
                     openVideoModal(videoUrl, title, desc, time, download, link, category, watchTime);
                 }, 600);
             } catch(e) {}
