@@ -1470,14 +1470,12 @@
         /* ── Article card buttons: breathing sky-blue → grey-blue → lavender ── */
         @keyframes articleBtnBreath {
             0%   { color: #38bdf8; }
-            40%  { color: #94a3b8; }
-            70%  { color: #a78bfa; }
+            50%  { color: #a78bfa; }
             100% { color: #38bdf8; }
         }
         @keyframes articleSvgBreath {
             0%   { stroke: #38bdf8; }
-            40%  { stroke: #94a3b8; }
-            70%  { stroke: #a78bfa; }
+            50%  { stroke: #a78bfa; }
             100% { stroke: #38bdf8; }
         }
         .article-share-btn {
@@ -5383,9 +5381,16 @@
             document.body.style.overflow = 'hidden';
             window._heroPageBlocked = true;
             var hv = document.getElementById('heroLogoVideo'); if (hv) hv.pause();
-            // Reset filters
+            // Reset filters to All
             _articleCategoryFilter = 'all';
             _articleSearchQuery = '';
+            // Reset all category tag styles back to default, activate All
+            document.querySelectorAll('#article-full-page .category-tag').forEach(function(tag) {
+                tag.classList.toggle('active', tag.dataset.category === 'all');
+                tag.style.removeProperty('background');
+                tag.style.removeProperty('border-color');
+                tag.style.removeProperty('color');
+            });
             if (window._ARTICLES_CACHE) {
                 _allArticles = window._ARTICLES_CACHE.filter(function(a) { return a.display !== 'off'; });
                 _articlePage = 1;
@@ -5421,7 +5426,17 @@
                 _articleCategoryFilter = cat;
                 _articleSearchQuery = '';
                 document.querySelectorAll('#article-full-page .category-tag').forEach(function(tag) {
-                    tag.classList.toggle('active', tag.dataset.category === cat);
+                    var isActive = tag.dataset.category === cat;
+                    tag.classList.toggle('active', isActive);
+                    tag.style.removeProperty('background');
+                    tag.style.removeProperty('border-color');
+                    tag.style.removeProperty('color');
+                    if (isActive && cat !== 'all') {
+                        var catColor = getCategoryColor(cat);
+                        tag.style.background = catColor;
+                        tag.style.borderColor = catColor;
+                        tag.style.color = '#fff';
+                    }
                 });
                 _applyArticleFilters();
             }, 80);
@@ -5433,9 +5448,16 @@
             document.body.style.overflow = 'hidden';
             window._heroPageBlocked = true;
             var hv = document.getElementById('heroLogoVideo'); if (hv) hv.pause();
-            // Reset filters and re-render from cache
+            // Reset filters to All
             _videoCategoryFilter = 'all';
             _videoSearchQuery = '';
+            // Reset all category tag styles back to default, activate All
+            document.querySelectorAll('#video-full-page .category-tag').forEach(function(tag) {
+                tag.classList.toggle('active', tag.dataset.category === 'all');
+                tag.style.removeProperty('background');
+                tag.style.removeProperty('border-color');
+                tag.style.removeProperty('color');
+            });
             if (window._VIDEOS_CACHE) {
                 _allVideos = Array.isArray(window._VIDEOS_CACHE)
                     ? window._VIDEOS_CACHE
@@ -5468,13 +5490,22 @@
             setTimeout(function() {
                 openVideoPage();
                 setTimeout(function() {
-                    // Apply category filter
                     var cat = (category || 'all').trim();
                     _videoCategoryFilter = cat;
                     _videoSearchQuery = '';
-                    // Update active tag UI
+                    // Update active tag UI with category color
                     document.querySelectorAll('#video-full-page .category-tag').forEach(function(tag) {
-                        tag.classList.toggle('active', tag.dataset.category === cat);
+                        var isActive = tag.dataset.category === cat;
+                        tag.classList.toggle('active', isActive);
+                        tag.style.removeProperty('background');
+                        tag.style.removeProperty('border-color');
+                        tag.style.removeProperty('color');
+                        if (isActive && cat !== 'all') {
+                            var catColor = getVideoCategoryColor(cat);
+                            tag.style.background = catColor;
+                            tag.style.borderColor = catColor;
+                            tag.style.color = '#fff';
+                        }
                     });
                     _applyVideoFilters();
                 }, 80);
@@ -5485,8 +5516,22 @@
         var _videoSearchQuery = '';
 
         function filterVideoCategory(category) {
-            document.querySelectorAll('#video-full-page .category-tag').forEach(tag => tag.classList.remove('active'));
-            event.target.classList.add('active');
+            // Reset all tags to default style
+            document.querySelectorAll('#video-full-page .category-tag').forEach(function(tag) {
+                tag.classList.remove('active');
+                tag.style.removeProperty('background');
+                tag.style.removeProperty('border-color');
+                tag.style.removeProperty('color');
+            });
+            var activeTag = event.target;
+            activeTag.classList.add('active');
+            // Apply category color only for non-All tags
+            if (category !== 'all') {
+                var catColor = getVideoCategoryColor(category);
+                activeTag.style.background = catColor;
+                activeTag.style.borderColor = catColor;
+                activeTag.style.color = '#fff';
+            }
             _videoCategoryFilter = category;
             _applyVideoFilters();
         }
@@ -5520,10 +5565,22 @@
         var _articleSearchQuery = '';
 
         function filterCategoryFull(category) {
+            // Reset all tags to default style
             document.querySelectorAll('#article-full-page .category-tag').forEach(function(tag) {
                 tag.classList.remove('active');
+                tag.style.removeProperty('background');
+                tag.style.removeProperty('border-color');
+                tag.style.removeProperty('color');
             });
-            event.target.classList.add('active');
+            var activeTag = event.target;
+            activeTag.classList.add('active');
+            // Apply category color only for non-All tags
+            if (category !== 'all') {
+                var catColor = getCategoryColor(category);
+                activeTag.style.background = catColor;
+                activeTag.style.borderColor = catColor;
+                activeTag.style.color = '#fff';
+            }
             _articleCategoryFilter = category;
             _applyArticleFilters();
         }
