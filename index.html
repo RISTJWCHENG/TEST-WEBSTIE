@@ -3866,6 +3866,10 @@
                     <p class="img-modal-desc" id="imgModalDesc"></p>
                 </div>
                 <div class="img-modal-links" id="imgModalLinks">
+                    <button class="img-modal-share-btn img-modal-dl-btn" id="imgModalDlBtn" onclick="(function(){var u=document.getElementById('modalImage').src;if(u)downloadImage(u);})()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download
+                    </button>
                     <button class="img-modal-share-btn" onclick="shareCurrentImage()">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                         Share
@@ -4184,6 +4188,7 @@
             var modalImg = document.getElementById('modalImage');
             modalImg.src = url;
             var data  = window._GALLERY_DATA[url] || {};
+            if (!data.image_url) data = Object.assign({ image_url: url }, data);
             var cat   = document.getElementById('imgModalCategory');
             var title = document.getElementById('imgModalTitle');
             var date  = document.getElementById('imgModalDate');
@@ -4207,10 +4212,23 @@
             if (date)  date.textContent  = data.updated_time || '';
             if (desc)  desc.textContent  = data.description  || '';
 
+            // Update desktop download button URL (static card, identified by id)
+            var dlBtnStatic = document.getElementById('imgModalDlBtn');
+            if (dlBtnStatic && url) {
+                dlBtnStatic.onclick = (function(u) { return function() { downloadImage(u); }; })(url);
+            }
+
             if (links) {
-                // Keep share button, rebuild link buttons before it
-                var shareBtn = links.querySelector('.img-modal-share-btn');
+                // Preserve download button if already created by buildCard,
+                // clear everything else and rebuild link + share buttons
+                var existingDl = links.querySelector('.img-modal-dl-btn');
+                var shareBtn   = links.querySelector('.img-modal-share-btn');
                 links.innerHTML = '';
+
+                // Re-append download button (already created by buildCard on mobile,
+                // or by static HTML on desktop — do not create a second one here)
+                if (existingDl) links.appendChild(existingDl);
+
                 if (data.link && data.link[0] && data.link[1]) {
                     var a = document.createElement('a');
                     a.className = 'img-modal-link-btn';
@@ -4233,6 +4251,26 @@
                 var hasInfo = data.title || data.description || (data.link && data.link[1]);
                 right.style.display = hasInfo ? 'flex' : 'none';
             }
+        }
+
+        // Download image directly from image_url in images_index.json
+        function downloadImage(imageUrl) {
+            if (!imageUrl) return;
+            var filename = decodeURIComponent(imageUrl.split('/').pop().split('?')[0]) || 'image.jpg';
+            fetch(imageUrl)
+                .then(function(res) { return res.blob(); })
+                .then(function(blob) {
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(function() {
+                        URL.revokeObjectURL(a.href);
+                        document.body.removeChild(a);
+                    }, 200);
+                })
+                .catch(function() { window.open(imageUrl, '_blank'); });
         }
 
         function shareGalleryCard(imageUrl, category, cardEl) {
@@ -5124,6 +5162,19 @@
                         }
                     }, { passive: false });
                 }
+
+                // Download button — always present, uses image_url from JSON
+                (function(imgUrl) {
+                    var dlBtn = document.createElement('button');
+                    dlBtn.className = 'img-modal-share-btn img-modal-dl-btn';
+                    dlBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download';
+                    dlBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        downloadImage(imgUrl);
+                    });
+                    attachModalBtnFlash(dlBtn, false, false);
+                    linksEl.appendChild(dlBtn);
+                })(item.image_url);
 
                 if (item.link && item.link[0] && item.link[1]) {
                     var a = document.createElement('a');
