@@ -1,7 +1,6 @@
 [
   {
     "id": "article_01",
-    "file": "Articles/article_01.html",
     "title": "N Hair Setup Tool — Technical Documentation",
     "category": "Technical",
     "date": "2022-2025",
@@ -10,13 +9,12 @@
     "cover": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_01/H%20HAIR%20SETUP_Tool_Thumbnail.png",
     "featured": true,
     "type": "html",
-    "link": [],
-    "download": [],
-    "display": "off"
+    "link": ["PDF", "https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/N%20HAIR%20SETUP_Document.pdf"],
+    "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/N_HAIR_SETUP/cm_n_hair_setup.py"],
+    "display": "on"
   },
   {
     "id": "article_02",
-    "file": "Articles/article_02.html",
     "title": "Reset Curve(s) Tool — Technical Documentation",
     "category": "Technical",
     "date": "2016-2025",
@@ -25,13 +23,12 @@
     "cover": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_02/Rest%20Curve_Tool_Thumbnail.png",
     "featured": true,
     "type": "html",
-    "link": [],
+    "link": ["PDF", "https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/Reset%20Curves_Document.pdf"],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
     "display": "on"
   },
   {
     "id": "article_03",
-    "file": "Articles/article_03.html",
     "title": "Search And BlendShape For Curves Tool — Technical Documentation",
     "category": "Technical",
     "date": "2017-2023",
@@ -40,7 +37,7 @@
     "cover": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_03/Search%20And%20BlendShape%20For%20Curves_Tool_Thumbnail.png",
     "featured": true,
     "type": "html",
-    "link": [],
+    "link": ["PDF", "https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/Search%20And%20BlendShape%20For%20Curves_Document.pdf"],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Search_And_BlendShape_For_Curves/search_and_blendShape_for_curves.py"],
     "display": "on"
   },
@@ -63,7 +60,7 @@
     "id": "article_05",
     "file": "Articles/article_05.html",
     "title": "Gemstone-Blue Waters of the French Riviera",
-    "category": "Writing",
+    "category": "Travel",
     "date": "2022-07-23",
     "readTime": "3 min read",
     "description": "Capturing the Mediterranean’s blue shimmer, each moment frozen into eternity.",
@@ -76,16 +73,16 @@
   },
     {
     "id": "article_06",
-    "file": "Articles/article_01.html",
-    "title": "fdgdfN Hair Setup Tool — Technical Documentation",
-    "category": "Technical",
-    "date": "2022-2025",
+    "file": "Articles/article_06.html",
+    "title": "The Beauty Of Architecture",
+    "category": "Writing",
+    "date": "2022",
     "readTime": "10 min read",
-    "description": "A comprehensive technical guide covering the process, workflow, and implementation details of the N Hair Setup Tool.",
-    "cover": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_01/H%20HAIR%20SETUP_Tool_Thumbnail.png",
-    "featured": true,
+    "description": "This is a visual design work exploring the “beauty of architecture,” attempting to narrate the long journey of human civilization from primitiveness to order through minimalist and abstract visual language.",
+    "cover": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Articles/article_06/The%20Beauty%20Of%20Architecture_Thumbnail_RISTJIANWENCHENG.jpg",
+    "featured": false,
     "type": "html",
-    "link": [],
+    "link": ["https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/THE%20BEAUTY%20OF%20ARCHITECTURE.mp4"],
     "download": [],
     "display": "on"
   },
@@ -102,7 +99,7 @@
     "type": "html",
     "link": [],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_08",
@@ -117,7 +114,7 @@
     "type": "html",
     "link": [],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Search_And_BlendShape_For_Curves/search_and_blendShape_for_curves.py"],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_09",
@@ -132,7 +129,7 @@
     "type": "html",
     "link": [],
     "download": [],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_10",
@@ -147,7 +144,7 @@
     "type": "html",
     "link": ["IMDb", "https://vimeo.com/features/video-player"],
     "download": [],
-    "display": "on"
+    "display": "off"
   },
     {
     "id": "article_11",
@@ -162,7 +159,7 @@
     "type": "html",
     "link": [],
     "download": [],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_12",
@@ -177,7 +174,7 @@
     "type": "html",
     "link": [],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_13",
@@ -192,7 +189,7 @@
     "type": "html",
     "link": [],
     "download": ["Python Code", "https://pub-06bd961174f94348a6d424261543b763.r2.dev/Search_And_BlendShape_For_Curves/search_and_blendShape_for_curves.py"],
-    "display": "on"
+    "display": "off"
   },
   {
     "id": "article_04",
@@ -207,12 +204,12 @@
     "type": "html",
     "link": [],
     "download": [],
-    "display": "on"
+    "display": "off"
   },
   {
-    "id": "article_05",
-    "file": "Articles/article_05.html",
-    "title": "WWWWWWWW-Gemstone-Blue Waters of the French Riviera",
+    "id": "article_06",
+    "file": "Articles/NCLOTHSETUP_Document.html",
+    "title": "TEST",
     "category": "Travel",
     "date": "2022-07-23",
     "readTime": "3 min read",
