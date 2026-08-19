@@ -8,7 +8,19 @@
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/N%20HAIR%20SETUP_Tool_Thumbnail_RISTJIANWENCHENG.png",
     "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production. It replaces tedious, error-prone manual node construction with a deterministic, pipeline-compliant setup, enforcing strict naming conventions and predictable node architecture. By ensuring stable connections and eliminating structural inconsistencies, it improves efficiency, simulation stability, and scalability—allowing reliable, repeatable setups across shots, assets, and large-scale productions while enhancing overall CFX workflow quality.",
     "link": ["PDF","https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/N%20HAIR%20SETUP_Document.pdf"],
-    "download": ["Python Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
+    "download": ["Python Code",["ui_n_hair_setup.py","https://pub-06bd961174f94348a6d424261543b763.r2.dev/N_HAIR_SETUP/ui_n_hair_setup.py"],["cm_n_hair_setup.py","https://pub-06bd961174f94348a6d424261543b763.r2.dev/N_HAIR_SETUP/cm_n_hair_setup.py"]],
+    "display": "on"
+  },
+    {
+    "title": "Joint On Surface Setup Tool",
+    "category": "Work",
+    "updated_time": "2017-2022",
+    "watchTime": "2.00 min watch",
+    "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/Joint%20On%20Surface%20Setup_Tool_RISTJIANWENCHENG.mp4",
+    "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/Joint%20On%20Surface%20Setup_Thumbnail_RIST%20JIANWEN%20CHENG.png",
+    "description": "Compared to Maya's Follicle-based workflow, this system is implemented entirely through native node networks, providing an alternative Joint-on-Surface solution with improved stability, controllability, scalability, and extensibility. Although it introduces a higher level of setup complexity than a standard Follicle implementation, the resulting framework delivers more predictable behavior, greater artistic control, and more flexible, controllable, and reliable deformation results.",
+    "link": ["PDF","https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/Joint%20On%20Surface%20Setup_Document.pdf"],
+    "download": ["Python Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Joint_On_Surface_Setup/joint_on_surface_setup.py"],
     "display": "on"
   },
   {
@@ -30,19 +42,19 @@
     "watchTime": "1.22 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/Reset%20Curves_Tool_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/Reset%20Curves_Tool_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "A production-oriented tool for safely resetting curve states in complex scenes.",
+    "description": "Maya’s built-in Rebuild Curve tool allows simple curve adjustments but lacks control over individual span lengths and doesn’t account for each curve’s actual length, making complex curves harder to manage. The Reset Curves tool addresses these limitations by enabling multiple curve selection and automatically calculating rebuild parameters based on each curve’s length. It allows precise control over segment lengths, maintains consistent distances between CVs, and includes options to display EPs and CVs for easy visual inspection and editing. This enhances workflow efficiency and ensures uniform, coherent curve structures. By improving precision, consistency, and flexibility, the tool is especially valuable in complex scenes with multiple or intricate curves, and careful CV management helps achieve accurate dynamics simulations and animation outcomes.",
     "link": ["PDF","https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/Reset%20Curves_Document.pdf"],
     "download": ["Python Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
     "display": "on"
   },
   {
-    "title": "2025 Updated CFX SHOWREEL",
+    "title": "2024 Updated | CFX SHOWREEL",
     "category": "Work",
-    "updated_time": "2025",
+    "updated_time": "2016-2024",
     "watchTime": "2.34 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2025_Updated_CFX%20SHOWREEL_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2025_Updated_CFX%20SHOWREEL_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Latest CFX showreel highlighting production experience.",
+    "description": "Selected CFX shots from feature films (2016–2024). Responsible for CFX setup and simulation, including interacting props and environment elements.",
     "link": ["IMDb","https://www.imdb.com/name/nm15024113"],
     "download": [],
     "display": "on"
@@ -51,10 +63,10 @@
     "title": "CFX Setup for Feature Film",
     "category": "Work",
     "updated_time": "2024",
-    "watchTime": "2.01 min watch",
+    "watchTime": "2.34 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/CFX%20SETUP%20FOR%20FEATURE%20FILM_RISTJIANWENCHENG.mp4",
-    "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/CFX%20SETUP%20FOR%20FEATURE%20FILM_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "CFX setup workflows developed for feature film production.",
+    "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/CFX%20SETUP%20FOR%20FEATURE%20FILM_Thumbnail_RISTJIANWENCHENG.jpg",
+    "description": "A selection of CFX setups I created for main characters in feature films, created using the Maya Nucleus system to ensure stable simulations and reliable results even during fast character movements, making them fully suitable for feature film production.",
     "link": ["IMDb","https://www.imdb.com/name/nm15024113"],
     "download": [],
     "display": "on"
@@ -66,57 +78,69 @@
     "watchTime": "0.51 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2022_CFX%20SHOWREEL_Stromae%20-%20Multitude%2C%20le%20film%20-%20The%20concert_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2022_CFX%20SHOWREEL_Stromae%20-%20Multitude%2C%20le%20film%20-%20The%20concert_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "CFX work contributed to concert film production.",
+    "description": "CFX work contributed to the unique artistic project Multitude, le film. At the 2022 Victoires de la Musique in France, Stromae’s fans encountered his animated alter ego through an interactive performance. Multitude, le film captures a montage of unforgettable moments from his world tour, seamlessly blending animation with live footage—from iconic concert halls to major music festivals.",
     "link": ["YouTube","https://youtu.be/l5WgAr4B8Vo?si=hX7VEhxTct3YeR_p"],
     "download": [],
     "display": "on"
   },
   {
-    "title": "2015 Updated Rigging Demo Reel",
+    "title": "RIGGING DEMO REEL | 2015 N01",
+    "category": "Work",
+    "updated_time": "2015",
+    "watchTime": "3.27 min watch",
+    "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/RIGGING%20DEMO%20REEL%202015%20N01_RIST%20JIANWEN%20CHENG.mp4",
+    "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/RIGGING%20DEMO%20REEL%202015%20N01_thumbnail_RIST%20JIANWEN%20CHENG.jpg",
+    "description": "The character rigging setup was created manually in 2015. The rig was created to provide intuitive controls and stable deformation for expressive character animation. If you would like to check the Maya file, you can download it here.",
+    "link": ["LinkedIn","www.linkedin.com/in/rist-jw-cheng"],
+    "download": ["Maya File","https://pub-be55520ef38745d6bdd2347de9cfa440.r2.dev/N%20HAIR%20SETUP_Document.pdf"],
+    "display": "on"
+  },
+  {
+    "title": "RIGGING DEMO REEL | 2015 N02",
     "category": "Work",
     "updated_time": "2015",
     "watchTime": "1.39 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2015_Updated_Rigging%20Demo%20Reel_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2015_Updated_Rigging%20Demo%20Reel_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Character rigging demo reel showcasing setup and deformation systems.",
+    "description": "Character rigging setup and deformation testing.",
     "link": ["LinkedIn","www.linkedin.com/in/rist-jw-cheng"],
     "download": [],
-    "display": "on"
+    "display": "off"
   },
   {
-    "title": "2015 Updated CFX SHOWREEL",
+    "title": "2015 Updated | CFX SHOWREEL",
     "category": "Work",
-    "updated_time": "2015",
+    "updated_time": "2013-2015",
     "watchTime": "3.13 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2015_Updated_CFX%20SHOWREEL_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2015_Updated_CFX%20SHOWREEL_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Earlier CFX work compiled into updated showreel.",
+    "description": "Selected CFX shots from different projects (2013–2015). Responsible for CFX setup and simulation, including interacting props and environment elements.",
     "link": ["IMDb","https://www.imdb.com/name/nm15024113"],
     "download": [],
     "display": "on"
   },
   {
-    "title": "2014 Updated Character Rigging Setup Demo Reel",
+    "title": "2014 Updated | Character Rigging Setup Demo Reel",
     "category": "Work",
     "updated_time": "2014",
     "watchTime": "1.15 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2014_Updated_Rigging%20Demo%20Reel_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2014_Updated_Character%20Rigging%20Setup%20Demo%20Reel_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Character rigging setup demonstration reel.",
+    "description": "Character rigging setup I created for the How to Train Your Dragon — TV Series projects.",
     "link": ["LinkedIn","www.linkedin.com/in/rist-jw-cheng"],
     "download": [],
     "display": "on"
   },
   {
-    "title": "N Dynamic Curves Rigging Setup Tool",
+    "title": "Classic nDynamic Curve Rigging Setup",
     "category": "Work",
     "updated_time": "2013",
     "watchTime": "3.20 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2013_N%20DYNAMIC%20CURVES%20RIGGING%20SETUP_%20Tool_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2013_N%20DYNAMIC%20CURVES%20RIGGING%20SETUP_%20Tool_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Dynamic curve rigging automation tool for production use.",
+    "description": "This was the first Maya tool I created using MEL script, and it was used in How to Train Your Dragon: Dragons — TV Series, demonstrating both stability and productivity improvements. The tool creates dynamic curve rigging based on the hair system. It supports customizing the number of FK and secondary controllers, and provides advanced features such as force attenuation, squash and stretch. Ideal for animating flexible objects like tails, tentacles, and hair.",
     "link": ["LinkedIn","www.linkedin.com/in/rist-jw-cheng"],
-    "download": ["MEL Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
+    "download": ["MEL Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Classic_nDynamic_Curve_Rigging_Setup/Classic_nDynamic_Curve_Rigging_Setup.mel"],
     "display": "on"
   },
   {
@@ -126,9 +150,9 @@
     "watchTime": "0.36 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/2010_Animation%20Showreel_Student%20Animation%20Work_RISTJIANWENCHENG.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/2010_Animation%20Showreel_Student%20Animation%20Work_Thumbnail_RISTJIANWENCHENG.png",
-    "description": "Student animation showreel demonstrating foundational animation skills.",
+    "description": "This is an animation showreel I created as a student. Practicing animation helped me develop a deeper understanding of the principles and considerations essential for rigging, and it has sharpened my sensitivity to motion in CFX simulations.",
     "link": ["IMDb","https://www.imdb.com/name/nm15024113"],
-    "download": ["Maya File",""],
+    "download": ["Maya File","..."],
     "display": "on"
   },
   {
@@ -138,8 +162,8 @@
     "watchTime": "0.45 min watch",
     "video_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Videos/THE%20BEAUTY%20OF%20ARCHITECTURE.mp4",
     "thumbnail_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Video%20Thumbnails/x0.00_00_31_29.Still007.bmp",
-    "description": "Architecture is the carrier of human civilization.",
-    "link": ["Article","https://ristjianwencheng.com/Articles/article_05.html"],
+    "description": "This is a visual design work exploring the “beauty of architecture,” attempting to narrate the long journey of human civilization from primitiveness to order through minimalist and abstract visual language.",
+    "link": ["Article","https://ristjianwencheng.com/Articles/article_06.html"],
     "download": [],
     "display": "on"
   },
@@ -165,6 +189,6 @@
     "description": "Search And BlendShape For Curves enables fast automatic curve matching. You can define a maximum world-space search radius for the first CV (Base CV) of target curves relative to base curves. The tool uses this threshold to automatically pair curves and generate the corresponding BlendShapes.",
     "link": ["IMDb","https://www.imdb.com/name/nm15024113"],
     "download": ["Python Code","https://pub-06bd961174f94348a6d424261543b763.r2.dev/Reset_Curves/reset_curves.py"],
-    "display": "on"
+    "display": "off"
   }
 ]
