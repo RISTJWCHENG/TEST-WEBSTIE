@@ -403,19 +403,24 @@
             font-weight: 500;
             color: var(--text-primary);
             line-height: 1.35;
+            overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
-            overflow: hidden;
             margin: 0;
             word-break: break-word;
         }
+        /* Ensure empty title still takes 1 line height */
+        .gallery-card-title:empty::before {
+            content: '\00a0';
+            display: block;
+        }
 
-        /* Dots button — right side */
+        /* Dots button — right side, vertically aligned with title first line */
         .gallery-dots-btn {
             flex-shrink: 0;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: transparent;
             border: none;
@@ -428,6 +433,8 @@
             padding: 0;
             -webkit-tap-highlight-color: transparent;
             transition: background 0.15s;
+            align-self: flex-start;
+            margin-top: 1px;
         }
         .gallery-dots-btn:hover { background: rgba(0,0,0,0.07); }
 
@@ -471,52 +478,7 @@
         .gallery-dots-menu-item:hover { background: rgba(0,0,0,0.05); }
         .gallery-dots-menu-item svg { flex-shrink: 0; color: var(--text-secondary); }
 
-        @keyframes cardBtnColorCycle {
-            0%   { color: #e8a87c; border-color: #e8a87c; }
-            25%  { color: #85c1e9; border-color: #85c1e9; }
-            50%  { color: #a29bfe; border-color: #a29bfe; }
-            75%  { color: #81ecec; border-color: #81ecec; }
-            100% { color: #e8a87c; border-color: #e8a87c; }
-        }
-        .gallery-card-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            width: 72px;
-            height: 24px;
-            border-radius: 12px;
-            font-size: 0.65rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            cursor: pointer;
-            border: 1.5px solid;
-            background: rgba(255,255,255,0.88);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: 0 1px 6px rgba(0,0,0,0.15);
-            text-decoration: none;
-            white-space: nowrap;
-            box-sizing: border-box;
-            animation: cardBtnColorCycle 4s ease-in-out infinite;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-        }
-        .gallery-card-btn:nth-child(2) {
-            animation-delay: 0s;
-        }
-        .gallery-card-btn:hover {
-            animation: none;
-            color: var(--card-cat-color, #7c6fcd);
-            border-color: var(--card-cat-color, #7c6fcd);
-            background: rgba(255,255,255,0.97);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        .gallery-card-btn svg {
-            flex-shrink: 0;
-            width: 10px;
-            height: 10px;
-        }
+
 
         .close-gallery-btn {
             position: fixed;
@@ -709,6 +671,12 @@
             gap: 0.5rem;
             overflow-y: auto;
         }
+        /* Links row and desc-wrap must stretch full width for divider to span correctly */
+        .img-modal-links,
+        .img-modal-desc-wrap {
+            width: 100%;
+            align-self: stretch;
+        }
         .img-modal-category {
             font-size: 0.72rem;
             font-weight: 400;
@@ -730,9 +698,7 @@
             margin-bottom: 0.5rem;
         }
         .img-modal-desc-wrap {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
+            overflow-y: visible;
         }
         .img-modal-desc {
             font-size: 0.82rem;
@@ -747,7 +713,7 @@
             gap: 1.2rem;
             padding-top: 0.75rem;
             border-top: 1px solid rgba(255,255,255,0.15);
-            margin-top: auto;
+            margin-top: 1rem;
             flex-shrink: 0;
         }
         @keyframes modalBtnColorCycle {
@@ -975,6 +941,7 @@
                 box-sizing: border-box;
                 line-height: normal;
                 font-size: initial;
+                align-items: stretch; /* ensure links divider spans full width */
             }
 
             /* ── Full-card swipe track (mobile only) ── */
@@ -1016,7 +983,7 @@
                 flex-direction: row;
                 width: 300vw;
                 transform: translateX(-100vw) translateY(0px);
-                will-change: transform;
+                /* will-change removed — permanent GPU layer wastes mobile memory */
                 align-items: flex-start;
             }
             .img-card-track .img-modal-content {
@@ -1882,6 +1849,18 @@
         .social-icon:hover {
             background: rgba(255,255,255,0.2);
             transform: translateY(-3px);
+            color: #ffffff;
+        }
+        .social-icon, .social-icon:link, .social-icon:visited, .social-icon:hover, .social-icon:active, .social-icon:focus {
+            color: #ffffff;
+            text-decoration: none;
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .social-icon:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
         }
 
         .footer-copyright {
@@ -2461,6 +2440,12 @@
                 min-height: auto;
             }
 
+            /* Reset desktop spacing overrides back to compact mobile values */
+            #gallery         { padding-bottom: 4rem !important; }
+            #video           { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            #featured-articles { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            #information     { padding-top: 4rem !important; }
+
             #home {
                 padding: 1rem 0 2rem;
             }
@@ -2816,12 +2801,7 @@
                 animation: gradient-flow 3s linear infinite !important;
             }
 
-            /* gallery-card-btn keeps color cycle animation on mobile */
-            .gallery-card-btn,
-            .gallery-card-btn:nth-child(2) {
-                animation: cardBtnColorCycle 4s ease-in-out infinite !important;
-                animation-delay: 0s !important;
-            }
+
 
             /* img card Article + Share buttons — keep color cycle animation on mobile */
             .img-modal-share-btn,
@@ -2858,7 +2838,6 @@
                 transition: none !important;
             }
             /* Exception: keep transform transition for press feedback on buttons */
-            .gallery-card-btn,
             .img-modal-share-btn,
             .img-modal-link-btn {
                 transition: transform 0.12s ease !important;
@@ -2889,6 +2868,7 @@
             window._heroPageBlocked = true;
             var hv = document.getElementById('heroLogoVideo'); if (hv) hv.pause();
             // Reset filter tags: deactivate all, activate All
+            window._galleryContainerW = 0; // invalidate width cache on open
             requestAnimationFrame(function() {
                 document.querySelectorAll('#fullGalleryPage .filter-tag').forEach(function(tag) {
                     tag.classList.remove('active');
@@ -2914,16 +2894,7 @@
         }
         // Open video in modal (medium size), stop any previously playing video
         function openVideoModal(videoUrl, title, description, time, download, link, category, watchTime) {
-            // Stop all inline card videos
-            document.querySelectorAll('.video-thumbnail-bg').forEach(function(v) {
-                v.pause();
-                v.currentTime = 0;
-                v.removeAttribute('controls');
-            });
-            // Restore all overlays and thumbnails
-            document.querySelectorAll('.video-overlay').forEach(function(o) { o.style.display = 'flex'; });
-            document.querySelectorAll('.video-thumbnail-wrapper img').forEach(function(img) { img.style.display = ''; });
-            document.querySelectorAll('.video-thumbnail-bg').forEach(function(v) { v.style.opacity = '0'; });
+            // No inline card videos to stop — cards use thumbnail images only
 
             const modal = document.getElementById('videoPlayerModal');
             const player = document.getElementById('videoModalPlayer');
@@ -2937,7 +2908,8 @@
 
             titleEl.textContent = title || '';
             source.src = videoUrl;
-            player.preload = 'auto';
+            // metadata only until user explicitly plays — reduces mobile data/heat
+            player.preload = 'metadata';
             player.load();
             player.play().catch(function(){});
 
@@ -3104,6 +3076,10 @@
             const player = document.getElementById('videoModalPlayer');
             player.pause();
             player.currentTime = 0;
+            // Remove src entirely so browser stops all buffering/decoding (key for mobile heat)
+            var src = document.getElementById('videoModalSource');
+            if (src) src.src = '';
+            player.load(); // flush buffers
             modal.classList.remove('active');
             const anyFullPage = document.querySelector('.full-gallery-page.active');
             document.body.style.overflow = anyFullPage ? 'hidden' : 'auto';
@@ -3154,6 +3130,7 @@
 
             // Update video source
             source.src = v.video_url;
+            player.preload = 'metadata';
             player.load();
             player.play().catch(function(){});
 
@@ -3275,8 +3252,6 @@
 
         function playVideo(overlay) {
             const wrapper = overlay.parentElement;
-            const video = wrapper.querySelector('.video-thumbnail-bg');
-            const source = video.querySelector('source');
             const card = wrapper.closest('.video-card-featured');
             const title = card ? card.querySelector('.video-card-title').textContent : '';
             const desc = card ? card.querySelector('.video-card-description').textContent.trim() : '';
@@ -3285,16 +3260,14 @@
             const link = card && card.dataset.linkLabel ? [card.dataset.linkLabel, card.dataset.linkUrl] : null;
             const category = card ? card.dataset.category : 'Work';
             const watchTime = card && card.dataset.watchTime ? card.dataset.watchTime : null;
-            // Use raw src attribute (not source.src which browser converts to absolute URL)
-            const videoUrl = source.getAttribute('src') || source.src;
+            // Read video URL from data attribute (no <video> element in DOM)
+            const videoUrl = wrapper.dataset.videoUrl || '';
             window._videoNavIndex = -1;
             openVideoModal(videoUrl, title, desc, time, download, link, category, watchTime);
         }
 
         function playVideoWithThumb(overlay) {
             const wrapper = overlay.parentElement;
-            const video = wrapper.querySelector('.video-thumbnail-bg');
-            const source = video.querySelector('source');
             const card = wrapper.closest('.video-card-featured');
             const title = card ? card.querySelector('.video-card-title').textContent : '';
             const desc = card ? card.querySelector('.video-card-description').textContent.trim() : '';
@@ -3303,8 +3276,8 @@
             const link = card && card.dataset.linkLabel ? [card.dataset.linkLabel, card.dataset.linkUrl] : null;
             const category = card ? card.dataset.category : 'Work';
             const watchTime = card && card.dataset.watchTime ? card.dataset.watchTime : null;
-            // Use raw src attribute (not source.src which browser converts to absolute URL)
-            const videoUrl = source.getAttribute('src') || source.src;
+            // Read video URL from data attribute (no <video> element in DOM until modal opens)
+            const videoUrl = wrapper.dataset.videoUrl || '';
             window._videoNavIndex = -1;
             openVideoModal(videoUrl, title, desc, time, download, link, category, watchTime);
         }
@@ -3592,7 +3565,7 @@
         </p>
     </section>
 
-    <section id="gallery" class="section" style="padding-bottom: 0;">
+    <section id="gallery" class="section" style="padding-bottom: 8rem;">
         <div class="container">
             <div class="gallery-header">
                 <div class="gallery-header-left">
@@ -3607,7 +3580,7 @@
         </div>
     </section>
 
-    <section id="video" class="section">
+    <section id="video" class="section" style="min-height: auto; padding-top: 8rem; padding-bottom: 8rem;">
         <div class="container">
             <div class="video-header">
                 <div>
@@ -3622,7 +3595,7 @@
         </div>
     </section>
 
-    <section id="featured-articles" class="section" style="min-height: auto;">
+    <section id="featured-articles" class="section" style="min-height: auto; padding-top: 8rem; padding-bottom: 8rem;">
         <div class="container">
             <div class="gallery-header">
                 <div class="gallery-header-left">
@@ -3637,7 +3610,7 @@
         </div>
     </section>
 
-    <section id="information" class="section">
+    <section id="information" class="section" style="padding-top: 8rem;">
         <div class="container">
             <h2 class="section-title">Information</h2>
             <div class="info-content">
@@ -3801,12 +3774,12 @@
         <div class="footer-container">
             <p class="footer-tagline">Showcasing creativity and passion through images, videos, and articles.</p>
             <div class="footer-social">
-                <a href="/cdn-cgi/l/email-protection#681a011b1c460b000d060f280f05090104460b0705" class="social-icon" aria-label="Email">
+                <a class="social-icon" aria-label="Email" id="footerEmailLink" style="pointer-events:none;cursor:default;">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
                 </a>
-                <a href="https://t.me/dxdydzC" target="_blank" class="social-icon" aria-label="Telegram">
+                <a class="social-icon" aria-label="Message" id="footerMessageLink" style="pointer-events:none;cursor:default;">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3.04 1.03 4.39L2 22l5.69-1.03C9.03 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.73-.28-4-.83l-.29-.15-3.01.55.55-2.99-.16-.31A7.93 7.93 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
                         <circle cx="8" cy="12" r="1.5"/>
@@ -3814,17 +3787,17 @@
                         <circle cx="16" cy="12" r="1.5"/>
                     </svg>
                 </a>
-                <a href="https://www.linkedin.com/in/rist-jw-cheng/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <a class="social-icon" aria-label="LinkedIn" id="footerLinkedInLink" style="pointer-events:none;cursor:default;">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
                     </svg>
                 </a>
-                <a href="#" class="social-icon" aria-label="X (Twitter)">
+                <a class="social-icon" aria-label="X (Twitter)" id="footerXLink" style="pointer-events:none;cursor:default;">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
-                <a href="https://www.imdb.com/" target="_blank" class="social-icon" aria-label="IMDb" id="footerImdbLink">
+                <a class="social-icon" aria-label="IMDb" id="footerImdbLink" style="pointer-events:none;cursor:default;">
                     <svg viewBox="0 0 36 18" width="26" height="13">
                         <rect x="0" y="0" width="36" height="18" rx="3" ry="3" fill="white"/>
                         <text x="18" y="13" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="10.5" fill="#000000" letter-spacing="0.3">IMDb</text>
@@ -3942,8 +3915,8 @@
             </div>
             <div class="img-modal-right" id="imgModalInfo">
                 <div class="img-modal-category" id="imgModalCategory"></div>
-                <h3 class="img-modal-title" id="imgModalTitle"></h3>
                 <div class="img-modal-date" id="imgModalDate"></div>
+                <h3 class="img-modal-title" id="imgModalTitle"></h3>
                 <div class="img-modal-desc-wrap">
                     <p class="img-modal-desc" id="imgModalDesc"></p>
                 </div>
@@ -4206,6 +4179,25 @@
             nav.classList.toggle('nav-dark', isDark);
         }
 
+        // Prevent footer social icons from receiving or passing focus on click
+        document.addEventListener('mousedown', function(e) {
+            var el = e.target;
+            while (el && el !== document.body) {
+                if (el.classList && el.classList.contains('footer-social')) {
+                    // Prevent focus from being assigned to any footer icon on mousedown
+                    e.preventDefault();
+                    return;
+                }
+                el = el.parentElement;
+            }
+        });
+        document.addEventListener('focusin', function(e) {
+            var el = e.target;
+            if (el && el.classList && el.classList.contains('social-icon')) {
+                el.blur();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() { updateNavColor(); });
 
         function filterCategory(category) {
@@ -4297,7 +4289,7 @@
                 }; })(data.category || '');
             }
             if (title) title.textContent = data.title        || '';
-            if (date)  date.textContent  = data.updated_time || '';
+            if (date)  date.textContent  = data.created_time || data.updated_time || '';
             if (desc)  desc.textContent  = data.description  || '';
 
             // Update desktop download button URL (static card, identified by id)
@@ -5215,7 +5207,7 @@
 
                 var dateEl = document.createElement('div');
                 dateEl.className = 'img-modal-date';
-                dateEl.textContent = item.updated_time || '';
+                dateEl.textContent = item.created_time || item.updated_time || '';
                 if (isCurrent) dateEl.id = 'imgModalDate';
 
                 var descWrap = document.createElement('div');
@@ -5336,8 +5328,8 @@
                 linksEl.appendChild(shareBtn);
 
                 right.appendChild(catEl);
-                right.appendChild(titleEl);
                 right.appendChild(dateEl);
+                right.appendChild(titleEl);
                 right.appendChild(descWrap);
                 right.appendChild(linksEl);
                 card.appendChild(right);
@@ -5749,15 +5741,7 @@
                 _currentPage = 1;
                 renderVideoPage(1);
             }
-            // Check more buttons after page is visible
-            requestAnimationFrame(function() {
-                document.querySelectorAll('#videoGridFull .desc-clamp').forEach(function(descEl) {
-                    const moreBtn = document.getElementById('btn-' + descEl.id);
-                    if (moreBtn && descEl.scrollHeight > descEl.clientHeight + 2) {
-                        moreBtn.style.display = 'inline-block';
-                    }
-                });
-            });
+            // desc-clamp check is handled inside renderVideoPage with setTimeout
         }
 
         function closeVideoPage() {
@@ -5881,7 +5865,7 @@
         // ── Article pagination state ──────────────────────────────────────────
         var _allArticles = [];
         var _articlePage = 1;
-        var _articlesPerPage = 12;
+        var _articlesPerPage = 12; // 9 on mobile (see renderArticlePage)
         var _articleCategoryFilter = 'all';
         var _articleSearchQuery = '';
 
@@ -5929,13 +5913,15 @@
             var grid = document.getElementById('articleGridFull');
             if (!grid) return;
 
-            var start = (page - 1) * _articlesPerPage;
-            var pageArticles = _allArticles.slice(start, start + _articlesPerPage);
+            // Fewer cards on mobile = less DOM + less image loading heat
+            var artPerPage = (window.innerWidth <= 768) ? 9 : _articlesPerPage;
+            var start = (page - 1) * artPerPage;
+            var pageArticles = _allArticles.slice(start, start + artPerPage);
 
             grid.innerHTML = pageArticles.map(function(article) {
                 var coverHTML = article.type === 'pdf'
                     ? '<div class="article-card-image" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#0f3460);"><svg viewBox="0 0 48 48" width="40" height="40" fill="none"><rect x="8" y="4" width="32" height="40" rx="3" stroke="#fff" stroke-width="1.5" opacity="0.6"/><text x="24" y="38" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="7" fill="#e8b84b">PDF</text></svg></div>'
-                    : '<img src="' + article.cover + '" alt="' + article.title + '" class="article-card-image" onerror="this.style.background=\'#e5e3df\'">';
+                    : '<img src="' + article.cover + '" alt="' + article.title + '" class="article-card-image" loading="lazy" decoding="async" onerror="this.style.background=\'#e5e3df\'">';
                 var metaDate = article.type === 'pdf' ? '📄 PDF' : formatArticleDate(article.date);
                 var metaRead = article.readTime ? '⏱️ ' + article.readTime : '';
                 var articleJson = JSON.stringify(article).replace(/'/g, '&#39;');
@@ -5961,13 +5947,14 @@
 
             renderArticlePagination();
             var pageEl = document.getElementById('article-full-page');
-            if (pageEl) pageEl.scrollTop = 0;
+            if (pageEl) pageEl.scrollTo(0, 0);
         }
 
         function renderArticlePagination() {
             var pagination = document.getElementById('articlePagination');
             if (!pagination) return;
-            var totalPages = Math.ceil(_allArticles.length / _articlesPerPage);
+            var artPerPage = (window.innerWidth <= 768) ? 9 : _articlesPerPage;
+            var totalPages = Math.ceil(_allArticles.length / artPerPage);
             if (totalPages <= 1) { pagination.style.display = 'none'; return; }
             pagination.style.display = 'flex';
 
@@ -6009,11 +5996,12 @@
         function filterGallery(category) {
             var input = (document.getElementById('searchInputGallery') ? document.getElementById('searchInputGallery').value : '').toLowerCase();
             var catLower = (category || '').toLowerCase();
-            var items = document.querySelectorAll('.full-gallery-item');
+            // Use cached elements — avoids live DOM querySelectorAll on every filter
+            var items = window._GALLERY_ITEMS_ELS || document.querySelectorAll('.full-gallery-item');
             items.forEach(function(item) {
-                // Case-insensitive category match so original-case data-filter works
                 var matchCat = catLower === 'all' || (item.dataset.category || '').toLowerCase() === catLower;
-                var altText = (item.querySelector('img') ? item.querySelector('img').alt : '').toLowerCase();
+                // Use cached alt from dataset to avoid querySelector('img') per item
+                var altText = (item.dataset.alt || item.dataset.imageUrl || '').toLowerCase();
                 var matchSearch = !input || altText.includes(input) || (item.dataset.category || '').toLowerCase().includes(input);
                 item.style.display = (matchCat && matchSearch) ? '' : 'none';
             });
@@ -6021,14 +6009,14 @@
         }
 
         function searchGallery() {
-            const input = document.getElementById('searchInputGallery').value.toLowerCase();
-            const activeFilter = document.querySelector('#fullGalleryPage .filter-tag.active');
-            const category = activeFilter ? activeFilter.dataset.filter : 'all';
-            const items = document.querySelectorAll('.full-gallery-item');
-            items.forEach(item => {
-                const matchCat = category === 'all' || item.dataset.category === category;
-                const altText = (item.querySelector('img') ? item.querySelector('img').alt : '').toLowerCase();
-                const matchSearch = !input || altText.includes(input) || (item.dataset.category || '').toLowerCase().includes(input);
+            var input = document.getElementById('searchInputGallery').value.toLowerCase();
+            var activeFilter = document.querySelector('#fullGalleryPage .filter-tag.active');
+            var catLower = activeFilter ? (activeFilter.dataset.filter || 'all').toLowerCase() : 'all';
+            var items = window._GALLERY_ITEMS_ELS || document.querySelectorAll('.full-gallery-item');
+            items.forEach(function(item) {
+                var matchCat = catLower === 'all' || (item.dataset.category || '').toLowerCase() === catLower;
+                var altText = (item.dataset.alt || item.dataset.imageUrl || '').toLowerCase();
+                var matchSearch = !input || altText.includes(input) || (item.dataset.category || '').toLowerCase().includes(input);
                 item.style.display = (matchCat && matchSearch) ? '' : 'none';
             });
             layoutGallery();
@@ -6090,13 +6078,35 @@
             } catch(e) {}
         }
 
-        // Close all open dots menus except the given one
+        // Close all open dots menus except the given one (listener bound once)
         function closeAllDotsMenus(except) {
             document.querySelectorAll('.gallery-dots-menu.open').forEach(function(m) {
                 if (m !== except) m.classList.remove('open');
             });
         }
-        document.addEventListener('click', function() { closeAllDotsMenus(null); });
+        // Bind once — not inside buildCardFooter to avoid duplicate listeners
+        (function() {
+            var _dotsBound = false;
+            window._bindDotsClose = function() {
+                if (_dotsBound) return;
+                _dotsBound = true;
+                document.addEventListener('click', function() { closeAllDotsMenus(null); }, { passive: true });
+                document.addEventListener('touchend', function(e) {
+                    // Only close menus if touch was outside any open menu
+                    setTimeout(function() {
+                        var open = document.querySelector('.gallery-dots-menu.open');
+                        if (!open) return;
+                        // Check if the touch target is inside an open menu or dots button
+                        var t = e.target;
+                        while (t) {
+                            if (t.classList && (t.classList.contains('gallery-dots-menu') || t.classList.contains('gallery-dots-btn'))) return;
+                            t = t.parentElement;
+                        }
+                        closeAllDotsMenus(null);
+                    }, 100);
+                }, { passive: true });
+            };
+        })();
 
         function buildCardFooter(item, catColor, cardEl) {
             var footer = document.createElement('div');
@@ -6128,6 +6138,16 @@
             dlItem.onclick = (function(u) { return function(e) {
                 e.stopPropagation(); menu.classList.remove('open'); downloadImage(u);
             }; })(item.image_url);
+            (function(u) {
+                var _mv = false;
+                dlItem.addEventListener('touchstart', function() { _mv = false; }, { passive: true });
+                dlItem.addEventListener('touchmove',  function() { _mv = true;  }, { passive: true });
+                dlItem.addEventListener('touchend', function(e) {
+                    if (_mv) return;
+                    e.stopPropagation(); e.preventDefault();
+                    menu.classList.remove('open'); downloadImage(u);
+                }, { passive: false });
+            })(item.image_url);
             menu.appendChild(dlItem);
 
             // Article link item (only if link exists)
@@ -6149,14 +6169,40 @@
             shareItem.onclick = (function(iu, cat, el) { return function(e) {
                 e.stopPropagation(); menu.classList.remove('open'); shareGalleryCard(iu, cat, el);
             }; })(item.image_url, item.category || '', cardEl);
+            (function(iu, cat, el) {
+                var _mv = false;
+                shareItem.addEventListener('touchstart', function() { _mv = false; }, { passive: true });
+                shareItem.addEventListener('touchmove',  function() { _mv = true;  }, { passive: true });
+                shareItem.addEventListener('touchend', function(e) {
+                    if (_mv) return;
+                    e.stopPropagation(); e.preventDefault();
+                    menu.classList.remove('open'); shareGalleryCard(iu, cat, el);
+                }, { passive: false });
+            })(item.image_url, item.category || '', cardEl);
             menu.appendChild(shareItem);
 
             dotsBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 var isOpen = menu.classList.contains('open');
-                closeAllDotsMenus(null);
+                closeAllDotsMenus(isOpen ? null : menu); // close others, keep this one
                 if (!isOpen) menu.classList.add('open');
             });
+            // Mobile: touchend on dotsBtn — open menu and stop propagation
+            var _dotsTouchMoved = false;
+            dotsBtn.addEventListener('touchstart', function() {
+                _dotsTouchMoved = false;
+            }, { passive: true });
+            dotsBtn.addEventListener('touchmove', function() {
+                _dotsTouchMoved = true;
+            }, { passive: true });
+            dotsBtn.addEventListener('touchend', function(e) {
+                if (_dotsTouchMoved) return;
+                e.stopPropagation();
+                e.preventDefault();
+                var isOpen = menu.classList.contains('open');
+                closeAllDotsMenus(isOpen ? null : menu);
+                if (!isOpen) menu.classList.add('open');
+            }, { passive: false });
 
             dotsWrap.appendChild(dotsBtn);
             dotsWrap.appendChild(menu);
@@ -6308,18 +6354,25 @@
                 img.loading = 'lazy';
                 img.decoding = 'async';
                 img.src = item.image_url;
+                // Cache searchable text in dataset to avoid querySelector in filter/search
+                div.dataset.alt = (item.title || '').toLowerCase();
 
                 img.addEventListener('load', function() {
                     if (img.naturalWidth && img.naturalHeight) {
                         window._GALLERY_ITEM_ASPECTS[idx] = img.naturalHeight / img.naturalWidth;
                     }
                     clearTimeout(window._layoutDebounce);
-                    window._layoutDebounce = setTimeout(layoutGallery, 150);
+                    // Longer debounce on mobile — images load slower, reduces repeated layouts
+                    var debounceMs = window.innerWidth <= 768 ? 300 : 150;
+                    window._layoutDebounce = setTimeout(layoutGallery, debounceMs);
                 });
 
                 imgWrap.appendChild(img);
                 div.appendChild(imgWrap);
-                div.appendChild(buildCardFooter(item, catColor, div));
+                div._imgWrap = imgWrap; // cache ref to avoid querySelector in layoutGallery
+                var footerNode = buildCardFooter(item, catColor, div);
+                div._footer = footerNode;
+                div.appendChild(footerNode);
 
                 div.onclick = (function(el) { return function(e) {
                     if (e.target.closest('.gallery-card-footer')) return;
@@ -6330,16 +6383,27 @@
                 window._GALLERY_ITEMS_ELS.push(div);
             });
 
+            // Bind dots-menu close listener (once only)
+            if (window._bindDotsClose) window._bindDotsClose();
             // Initial layout
             layoutGallery();
 
-            // Re-layout on resize
-            var _layoutTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(_layoutTimer);
-                _layoutTimer = setTimeout(layoutGallery, 100);
-            });
+            // Re-layout on resize — register only once globally
+            if (!window._galleryResizeBound) {
+                window._galleryResizeBound = true;
+                var _layoutTimer;
+                window.addEventListener('resize', function() {
+                    var galleryPage = document.getElementById('fullGalleryPage');
+                    if (!galleryPage || !galleryPage.classList.contains('active')) return;
+                    window._galleryContainerW = 0;
+                    clearTimeout(_layoutTimer);
+                    _layoutTimer = setTimeout(layoutGallery, 300);
+                }, { passive: true });
+            }
         }
+
+        // Cache last known container width — avoids getBoundingClientRect on every layout
+        window._galleryContainerW = 0;
 
         function layoutGallery() {
             var grid = document.getElementById('fullGalleryGrid');
@@ -6351,7 +6415,11 @@
             if (!visible.length) { grid.style.height = '0'; return; }
 
             var GAP = 12;
-            var containerW = grid.getBoundingClientRect().width || grid.offsetWidth;
+            // Only measure width when it may have changed (resize clears cache)
+            if (!window._galleryContainerW) {
+                window._galleryContainerW = grid.getBoundingClientRect().width || grid.offsetWidth;
+            }
+            var containerW = window._galleryContainerW;
             if (!containerW) return;
 
             // Responsive column count
@@ -6378,41 +6446,48 @@
             var ASP_MIN = 0.45;
             var ASP_MAX = 1.6;
 
+            // ── Pass 1: set width + img height on all items so footer text can reflow ──
+            var aspList = [];
             visible.forEach(function(el) {
                 var idxVal = parseInt(el.dataset.idx);
                 var rawAsp = (window._GALLERY_ITEM_ASPECTS && window._GALLERY_ITEM_ASPECTS[idxVal]);
-
-                // If real aspect not loaded yet, use seeded random (portrait-biased)
                 if (!rawAsp || rawAsp <= 0) rawAsp = 0.7 + sr() * 0.6;
-
-                // ── Proportional scale-down for extreme aspect ratios ──
-                // If image is too tall (asp > ASP_MAX): keep width = colW, height = colW * ASP_MAX
-                // If image is too wide (asp < ASP_MIN): keep height = colW * ASP_MIN, width stays colW
-                // In both cases the image is displayed proportionally inside the card via object-fit:cover
                 var asp = rawAsp;
                 if (asp > ASP_MAX) asp = ASP_MAX;
                 if (asp < ASP_MIN) asp = ASP_MIN;
+                aspList.push(asp);
 
-                // Find shortest column — place every item in single-column width
+                var imgH = colW * asp;
+                el.style.cssText = 'position:absolute;width:' + colW + 'px;height:auto;left:-9999px;top:0;';
+                var wrapEl = el._imgWrap || el.querySelector('.gallery-card-img-wrap');
+                if (wrapEl) wrapEl.style.height = imgH + 'px';
+            });
+
+            // ── Force synchronous reflow so footer.offsetHeight is accurate ──
+            void grid.offsetHeight;
+
+            // ── Pass 2: read real footer heights, then position ──
+            visible.forEach(function(el, i) {
+                var asp = aspList[i];
+                var imgH = colW * asp;
+
+                var footerEl = el._footer || el.querySelector('.gallery-card-footer');
+                if (!el._footer && footerEl) el._footer = footerEl;
+                var FOOTER_H = footerEl ? footerEl.offsetHeight : 32;
+
+                // Find shortest column
                 var shortestCol = 0;
                 for (var c2 = 1; c2 < COLS; c2++) {
                     if (colHeights[c2] < colHeights[shortestCol]) shortestCol = c2;
                 }
 
-                var FOOTER_H = 56; // approx footer height (title + padding)
-                var imgW = colW;
-                var imgH = imgW * asp;
-                var totalH = imgH + FOOTER_H;
                 var x2 = shortestCol * (colW + GAP);
                 var y2 = colHeights[shortestCol];
-                el.style.left  = x2 + 'px';
-                el.style.top   = y2 + 'px';
-                el.style.width = imgW + 'px';
-                el.style.height = 'auto'; // height determined by img-wrap + footer
-                // Set img-wrap height explicitly
-                var wrap = el.querySelector('.gallery-card-img-wrap');
-                if (wrap) wrap.style.height = imgH + 'px';
-                colHeights[shortestCol] = y2 + totalH + GAP;
+                el.style.cssText = 'position:absolute;left:' + x2 + 'px;top:' + y2 + 'px;width:' + colW + 'px;height:auto;';
+                var wrapEl = el._imgWrap || el.querySelector('.gallery-card-img-wrap');
+                if (wrapEl) wrapEl.style.height = imgH + 'px';
+
+                colHeights[shortestCol] = y2 + imgH + FOOTER_H + GAP;
             });
 
             grid.style.height = (Math.max.apply(null, colHeights) - GAP) + 'px';
@@ -6450,18 +6525,19 @@
                 card.dataset.time = video.updated_time;
             }
             const thumbUrl = video.thumbnail_url || '';
-            const thumbHTML = thumbUrl
-                ? `<img src="${thumbUrl}" alt="${video.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.querySelector('.video-thumbnail-bg').style.opacity='1';">`
-                : '';
             const descId = 'desc-' + Math.random().toString(36).substr(2, 8);
             const descText = video.description && video.description.trim() ? video.description : '';
+            // Thumbnail-only card: no <video> element in DOM until user taps play.
+            // This prevents mobile from preloading/buffering video data on scroll,
+            // which is the main cause of device heating.
+            const thumbHTML = thumbUrl
+                ? `<img src="${thumbUrl}" alt="${video.title}" loading="lazy" decoding="async" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">`
+                : `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#111;">
+                       <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" width="40" height="40"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                   </div>`;
             card.innerHTML = `
-                <div class="video-thumbnail-wrapper">
+                <div class="video-thumbnail-wrapper" data-video-url="${video.video_url}">
                     ${thumbHTML}
-                    <video class="video-thumbnail-bg" preload="none" style="${thumbUrl ? 'opacity:0;' : ''}">
-                        <source src="${video.video_url}" type="video/mp4">
-                        <source src="${video.video_url}" type="video/quicktime">
-                    </video>
                     <div class="video-overlay" onclick="playVideoWithThumb(this)">
                         <div class="play-button-circle">
                             <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
@@ -6517,7 +6593,7 @@
         // ── Pagination state ──────────────────────────────────────────────────
         var _allVideos = [];
         var _currentPage = 1;
-        var _videosPerPage = 12;
+        var _videosPerPage = 12; // reduced to 9 on mobile (see renderVideoPage)
 
         function renderVideoPage(page) {
             _currentPage = page;
@@ -6525,8 +6601,10 @@
             if (!fullGrid) return;
             fullGrid.innerHTML = '';
 
-            const start = (page - 1) * _videosPerPage;
-            const pageVideos = _allVideos.slice(start, start + _videosPerPage);
+            // Fewer cards per page on mobile = less DOM, less GPU work, less heat
+            var perPage = (window.innerWidth <= 768) ? 9 : _videosPerPage;
+            const start = (page - 1) * perPage;
+            const pageVideos = _allVideos.slice(start, start + perPage);
             const descIds = [];
 
             pageVideos.forEach(function(video) {
@@ -6534,40 +6612,33 @@
                 fullGrid.appendChild(card);
                 descIds.push(descId);
 
-                // Preload video on hover so it starts faster when clicked
-                var bgVid = card.querySelector('.video-thumbnail-bg');
-                if (bgVid) {
-                    card.addEventListener('mouseenter', function() {
-                        if (bgVid.preload === 'none') bgVid.preload = 'metadata';
-                    }, { once: true, passive: true });
-                    card.addEventListener('touchstart', function() {
-                        if (bgVid.preload === 'none') bgVid.preload = 'metadata';
-                    }, { once: true, passive: true });
-                }
-
+                // No preload on mobile — video element is created only when user taps play.
                 // Press effect handled by applyBtnPressEffect() inside shareVideo()
             });
 
             renderPagination();
 
-            const pageEl = document.getElementById('video-full-page');
-            if (pageEl) pageEl.scrollTop = 0;
+            // Scroll page to top on pagination — use scrollTo for smoother behavior
+            var pageEl = document.getElementById('video-full-page');
+            if (pageEl) pageEl.scrollTo(0, 0);
 
-            requestAnimationFrame(function() {
+            // Defer desc-clamp check: setTimeout avoids forced reflow on paint frame
+            setTimeout(function() {
                 descIds.forEach(function(descId) {
-                    const descEl = document.getElementById(descId);
-                    const moreBtn = document.getElementById('btn-' + descId);
+                    var descEl = document.getElementById(descId);
+                    var moreBtn = document.getElementById('btn-' + descId);
                     if (descEl && moreBtn && descEl.scrollHeight > descEl.clientHeight + 2) {
                         moreBtn.style.display = 'inline-block';
                     }
                 });
-            });
+            }, 200);
         }
 
         function renderPagination() {
             const pagination = document.getElementById('videoPagination');
             if (!pagination) return;
-            const totalPages = Math.ceil(_allVideos.length / _videosPerPage);
+            var perPage = (window.innerWidth <= 768) ? 9 : _videosPerPage;
+            const totalPages = Math.ceil(_allVideos.length / perPage);
             if (totalPages <= 1) { pagination.style.display = 'none'; return; }
             pagination.style.display = 'flex';
 
@@ -6690,16 +6761,8 @@
         }
 
         function openArticleFile(article) {
-            if (article.type === 'pdf') {
-                var pdfSrc = article.pdfUrl || getArticlePath(article);
-                openPdfModal(article.title, pdfSrc);
-            } else {
-                var modal = document.getElementById('documentModal');
-                document.getElementById('documentTitle').textContent = article.title;
-                document.getElementById('documentFrame').src = getArticlePath(article);
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            var path = article.pdfUrl || getArticlePath(article);
+            if (path) window.open(path, '_blank', 'noopener,noreferrer');
         }
 
         function makePdfCoverHTML(article) {
@@ -6791,9 +6854,36 @@
                         } else if (t === 'profile image' && asset.type === 'image' && asset.image_url) {
                             var profileImg = document.getElementById('profileImage');
                             if (profileImg) profileImg.src = asset.image_url;
-                        } else if (t === 'footer imdb' && asset.type === 'html' && asset.website_url) {
-                            var imdbLink = document.getElementById('footerImdbLink');
-                            if (imdbLink) imdbLink.href = asset.website_url;
+                        } else if (t === 'footer email') {
+                            var el = document.getElementById('footerEmailLink');
+                            if (el && asset.website_url) {
+                                el.href = asset.website_url.startsWith('mailto:') ? asset.website_url : 'mailto:' + asset.website_url;
+                                el.style.pointerEvents = ''; el.style.cursor = ''; el.setAttribute('tabindex', '-1'); el.setAttribute('tabindex', '-1');
+                            }
+                        } else if (t === 'footer message') {
+                            var el = document.getElementById('footerMessageLink');
+                            if (el && asset.website_url) {
+                                el.href = asset.website_url; el.target = '_blank';
+                                el.style.pointerEvents = ''; el.style.cursor = ''; el.setAttribute('tabindex', '-1'); el.setAttribute('tabindex', '-1');
+                            }
+                        } else if (t === 'footer linkedin') {
+                            var el = document.getElementById('footerLinkedInLink');
+                            if (el && asset.website_url) {
+                                el.href = asset.website_url; el.target = '_blank';
+                                el.style.pointerEvents = ''; el.style.cursor = ''; el.setAttribute('tabindex', '-1'); el.setAttribute('tabindex', '-1');
+                            }
+                        } else if (t === 'footer x') {
+                            var el = document.getElementById('footerXLink');
+                            if (el && asset.website_url) {
+                                el.href = asset.website_url; el.target = '_blank';
+                                el.style.pointerEvents = ''; el.style.cursor = ''; el.setAttribute('tabindex', '-1'); el.setAttribute('tabindex', '-1');
+                            }
+                        } else if (t === 'footer imdb') {
+                            var el = document.getElementById('footerImdbLink');
+                            if (el && asset.website_url) {
+                                el.href = asset.website_url; el.target = '_blank';
+                                el.style.pointerEvents = ''; el.style.cursor = ''; el.setAttribute('tabindex', '-1'); el.setAttribute('tabindex', '-1');
+                            }
                         } else if (t === 'download cv' && asset.type === 'pdf' && asset.pdf_url) {
                             var cvLink = document.getElementById('downloadCvLink');
                             if (cvLink) cvLink.href = asset.pdf_url;
