@@ -3,62 +3,180 @@
     "Drawing & Painting": "rgb(160,135,250)",
     "Sculpture": "rgb(197,124,181)",
     "Visual Arts": "rgb(160,238,76)",
+    "Travel": "rgb(80,150,102)",
     "Momentary": "rgb(115,215,240)"
   },
   "items": [
     {
-      "title": "MOMENTARY",
+      "title": "Work-2020-08-01_Transient | Painting from Life",
       "category": "Drawing & Painting",
-      "updated_time": "Aug 15, 2020",
-      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_01.jpg",
-      "description": "N HAIR SETUP Tool isETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates andETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations  standardizes dynamic curve simulations ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations  a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "created_time": "Aug 15, 2020",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2020-08-01_Transient.jpg",
+      "description": "As I strolled through Bois de la Cambre on a summer day in August, sunlight filtered through the leaves, casting dappled light that danced and flickered across the ground and branches. Shadows of the trees layered like curtains, while sharply contrasted spots of light shimmered through the forest with the rhythm of life. Using digital painting, I captured this fleeting moment of light and atmosphere in Bois de la Cambre during the summer of 2020 on my canvas.",
+      "link": ["Article", "https://pin.it/7qCK6TXXA"],
       "display": "on"
     },
     {
-      "title": "Summer afternoon",
+      "title": "Work-2013-07-06 | Drawing from Life",
       "category": "Drawing & Painting",
-      "updated_time": "2019",
+      "created_time": "2013",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2013-07-06.jpg",
+      "description": "Sketches created using colored pencils.",
+      "link": ["Article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2009-07-28 | Painting from Life",
+      "category": "Drawing & Painting",
+      "created_time": "2009",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2009-07-28.jpg",
+      "description": "This is an observational study created in 2019, using gouache as the medium. One summer afternoon, at a friend’s home, I was deeply captivated by a scene backlit by sunlight. I picked up my brush and attempted to let the forms of objects nearly disappear in the painting, replacing them with a blurred sense of space shaped by light and color. Through this exploratory approach, I completed this painting.",
+      "link": ["Article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2013-03-17",
+      "category": "Drawing & Painting",
+      "created_time": "2013",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2013-03-17.jpg",
+      "description": "This is an observational sketch created in 2013, using charcoal pencil as the medium.",
+      "link": ["Article", "https://pin.it/7qCK6TXXA"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2010-04-16_Broken | Created from imagination",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2010-04-16_Broken.jpg",
+      "description": "Digital Art work",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work – 2010-08-27 | Drawing from Life | Insect Sketch",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2010-08-27_Observational%20Sketch%20of%20Insects_N1.jpg",
+      "description": "It’s an interesting memory from when I was a student. One summer in 2010, I was thinking about finding a beetle to draw and even considered going to the forest to look for one. Unexpectedly, at that very moment, I found a huge insect on the floor right by my feet at home. I really enjoyed drawing its details.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work – 2010-08-27 | Drawing from Life | Insect Sketch",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2010-08-27_Observational%20Sketch%20of%20Insects_N2.jpg",
+      "description": "It’s an interesting memory from when I was a student. One summer in 2010, I was thinking about finding a beetle to draw and even considered going to the forest to look for one. Unexpectedly, at that very moment, I found a huge insect on the floor right by my feet at home. I really enjoyed drawing its details.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work – 2010-08-27 | Drawing from Life | Insect Sketch",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2010-08-27_Observational%20Sketch%20of%20Insects_N3.jpg",
+      "description": "It’s an interesting memory from when I was a student. One summer in 2010, I was thinking about finding a beetle to draw and even considered going to the forest to look for one. Unexpectedly, at that very moment, I found a huge insect on the floor right by my feet at home. I really enjoyed drawing its details.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2008-01-27_N1 | Drawing from Life | X05",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2008-01-27_N1.jpg",
+      "description": "A sketch of the plants on my balcony during a winter day. Using charcoal pencil.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2008-01-27_N2 | Drawing from Life | X04",
+      "category": "Drawing & Painting",
+      "created_time": "2010",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2008-01-27_N2.jpg",
+      "description": "A sketch of the plants on my balcony during a winter day. Using charcoal pencil.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2008-01-14 | Painting from Life | X03",
+      "category": "Drawing & Painting",
+      "created_time": "2008",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2008-01-14.jpg",
+      "description": "A gouache painting created at 4 a.m. on a winter night in 2008, capturing the quiet stillness of the scene.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2014-07-17 | Imaginative drawing | X01",
+      "category": "Drawing & Painting",
+      "created_time": "2014",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2014-07-17.jpg",
+      "description": "Sketch from imaginative, using charcoal pencil as the medium.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Work-2007-10-14 | Drawing from Life | The Lying Old Man",
+      "category": "Drawing & Painting",
+      "created_time": "2014",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/Work-2007-10-14.jpg",
+      "description": "These are two sketches I created from different angles during my high school years. using charcoal pencil as the medium.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Augustin-Daniel Comte Belliard",
+      "category": "Sculpture",
+      "created_time": "2022",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_05.jpg",
+      "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Summertime",
+      "category": "Visual Arts",
+      "created_time": "2018",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_01.jpg",
+      "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "on"
+    },
+    {
+      "title": "Centro Congressi · Genoa",
+      "category": "Travel",
+      "created_time": "2018",
       "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_02.jpg",
       "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "link": ["Article", "https://pin.it/3266VVzCf"],
       "display": "on"
     },
     {
-      "title": "Draw frofdm life",
-      "category": "Sculpture",
-      "updated_time": "2013",
+      "title": "Techno Music Festival · Voodoo Village",
+      "category": "Momentary",
+      "created_time": "2023",
       "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_03.jpg",
       "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "link": ["Article", "https://pin.it/3266VVzCf"],
       "display": "on"
     },
     {
-      "title": "dfsdfsdfsdf",
-      "category": "Visual Arts",
-      "updated_time": "2022-2025",
+      "title": "Techno Music Festival · Voodoo Village",
+      "category": "Momentary",
+      "created_time": "2023",
       "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_04.jpg",
       "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
+      "link": ["Article", "https://pin.it/3266VVzCf"],
       "display": "on"
     },
     {
-      "title": "Scsdfsdfsdf",
-      "category": "Drawing & Painting",
-      "updated_time": "2022-2025",
-      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/image_05.jpg",
-      "description": "N HAIR SETUP Tool is a technical utility for Maya chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and chnical utility for Maya that automates and that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
-      "display": "on"
-    },
-    {
-      "title": "DDFSSDGD",
+      "title": "TDFASDFASDFASDFASDFSDFASDFADFAFA",
       "category": "Momentary",
-      "updated_time": "2022-2025",
-      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/a8.jpg",
-      "description": "N HAIR SETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.",
-      "link": ["article", "https://www.pinterest.com/pin/245305510948528413/"],
-      "display": "on"
+      "created_time": "2023",
+      "image_url": "https://pub-8231e5ac90c04ce199d0a2879d3ea6ec.r2.dev/Images/test.jpg",
+      "description": "N HAIR SETUP Tool is a technical utiETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.ETUP Tool is a technical utility for Maya that automates and standardizes dynamic curve simulations in production.lity for Maya that automates and standardizes dynamic curve simulations in production.",
+      "link": ["Article", "https://pin.it/3266VVzCf"],
+      "display": "off"
     }
   ]
 }
